@@ -125,7 +125,7 @@ public class Airplane  implements GenericEntity{
 
     @Override
     public String toString() {
-        return "Airplane{" + "airplaneID=" + airplaneID + ", airplaneName=" + airplaneName + ", airplaneType=" + airplaneType + ", description=" + description + ", noPlacesEconomyClass=" + noPlacesEconomyClass + ", noPlacesBusinessClass=" + noPlacesBusinessClass + '}';
+        return airplaneName;
     }
 
     @Override
@@ -169,7 +169,7 @@ public class Airplane  implements GenericEntity{
     }
 
     @Override
-    public String returnJoinConditionIwo() {
+    public String returnJoinConditionTwo() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -179,7 +179,7 @@ public class Airplane  implements GenericEntity{
     }
 
     @Override
-    public String returnJoinTableIwo() {
+    public String returnJoinTableTwo() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 //"airportFrom LIKE "+"'%"+searchCriteriaSrc+"%'"+ "OR airportTo LIKE"+"'%"+searchCriteriaDest+"%'";
@@ -195,6 +195,56 @@ public class Airplane  implements GenericEntity{
 
     @Override
     public String returnUpdateCondition() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String returnJoinConditionThree() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String returnJoinConditionFour() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String returnJoinTableThree() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String returnJoinTableFour() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String returnJoinConditionFive() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String returnJoinConditionSix() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String returnJoinConditionSeven() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String returnJoinTableFive() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String returnJoinTableSix() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String returnJoinTableSeven() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

@@ -28,10 +28,19 @@ public interface GenericEntity extends Serializable {
 
     public String getDeleteCondition();
     public String returnJoinConditionOne();
-    public String returnJoinConditionIwo();
+    public String returnJoinConditionTwo();
+    public String returnJoinConditionThree();
+    public String returnJoinConditionFour();
+    public String returnJoinConditionFive();
+    public String returnJoinConditionSix();
+    public String returnJoinConditionSeven();
     public String returnJoinTableOne();
-    public String returnJoinTableIwo();
-
+    public String returnJoinTableTwo();
+    public String returnJoinTableThree();
+     public String returnJoinTableFour();
+     public String returnJoinTableFive();
+     public String returnJoinTableSix();
+     public String returnJoinTableSeven();
     public String returnSearchCondition();
     
     public String returnUpdateValues();

@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Date;
 import java.sql.Time;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,7 +20,7 @@ import java.util.Objects;
 public class Flight implements GenericEntity {
     private Long flightID;
     private Date date;
-    private Time time;//OBAVEZNO PREGLEDAJ
+    private Time time;
     private String note;
     private String airline;
     private Line line;
@@ -168,7 +169,52 @@ public class Flight implements GenericEntity {
 
     @Override
     public List<GenericEntity> getList(ResultSet rs) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<GenericEntity> flights= new LinkedList<>();
+       while (rs.next()){
+           Flight flight=new Flight();
+           flight.setFlightID(rs.getLong("flightID"));
+           flight.setDate(rs.getDate("date"));
+           flight.setTime(rs.getTime("time"));
+           flight.setNote(rs.getString("note"));
+           flight.setAirline(rs.getString("airline"));
+           Line line=new Line();
+           Airplane airplane=new Airplane();
+           airplane.setAirplaneID(rs.getLong("airplaneID"));
+           airplane.setAirplaneName(rs.getString("airplaneName"));
+           airplane.setAirplaneType(airplaneType.valueOf(rs.getString("airplaneType")));
+           airplane.setDescription(rs.getString("description"));
+           airplane.setNoPlacesBusinessClass(rs.getInt("noPlacesBusinessClass"));
+           airplane.setNoPlacesEconomyClass(rs.getInt("noPlacesEconomyClass"));
+           flight.setAirplane(airplane);
+           
+           
+           line.setLineID(rs.getLong("lineID"));
+           line.setLineName(rs.getString("lineName"));
+           
+           Airport src= new Airport();
+           Airport dest= new Airport();
+           
+         
+          src.setAirportID(rs.getLong("a.airportID"));
+          src.setAirportName(rs.getString("a.airportName"));
+          src.setPlaceName(rs.getString("a.placeName"));
+          src.setCountryName(rs.getString("a.countryName"));
+          src.setAirportCode(rs.getString("a.airportCode"));
+          line.setAirportFrom(src);
+          
+         dest.setAirportID(rs.getLong("b.airportID"));
+          dest.setAirportName(rs.getString("b.airportName"));
+          dest.setPlaceName(rs.getString("b.placeName"));
+          dest.setCountryName(rs.getString("b.countryName"));
+          dest.setAirportCode(rs.getString("b.airportCode"));
+          line.setAirportTo(dest);
+          flight.setLine(line);
+           
+       
+          
+          flights.add(flight);
+       }
+       return flights;
     }
 
     @Override
@@ -182,7 +228,7 @@ public class Flight implements GenericEntity {
     }
 
     @Override
-    public String returnJoinConditionIwo() {
+    public String returnJoinConditionTwo() {
         return "flight.airplaneID=airplane.airplaneID";
 
     }
@@ -193,24 +239,82 @@ public class Flight implements GenericEntity {
     }
 
     @Override
-    public String returnJoinTableIwo() {
+    public String returnJoinTableTwo() {
         return "airplane";
     }
 
     @Override
     public String returnSearchCondition()  {    
      //return "airportFrom LIKE "+"'%"+searchCriteriaSrc+"%'"+ "OR airportTo LIKE"+"'%"+searchCriteriaDest+"%'";
-     //DOPUNI
-        return "airline LIKE "+"'%"+searchCriteria+"%'";
+     //DOPUNI!!!!!!!!!!!!
+        return "flight.airline LIKE "+"'%"+searchCriteria+"%'";
+    }
+/*
+         return "'" + brojClanskeKarte + "','" + ime + "','" + prezime + "', '" + jmbg + "', '" + new java.sql.Date(datumRodjenja.getTime()) + "',"
+                + "'" + adresa + "', '" + brojTelefona + "','" + grad.getGradID()+ "'";
+   
+    */
+    @Override
+    public String returnUpdateValues() {
+        return "flightID= "+flightID+", date='"+String.valueOf(date)+"', time='"+String.valueOf(time)+"',airline='"+airline+"',airplaneID="+String.valueOf(airplane.getAirplaneID())+",lineID="+String.valueOf(line.getLineID())+",note= '"+note+"'";
+    }
+/*
+           return "brojClanskeKarte = '" + brojClanskeKarte + "', ime = '" + ime + "', prezime = '" + prezime + 
+                "', jmbg = '" + jmbg + "', datumRodjenja = '" + new java.sql.Date(datumRodjenja.getTime()) + "', adresa = '" + adresa +"', brojTelefona = '" + brojTelefona + "', gradID = '" + grad.getGradID() + "'";
+  
+    */
+    @Override
+    public String returnUpdateCondition() {
+        return "flightID="+flightID;
     }
 
     @Override
-    public String returnUpdateValues() {
+    public String returnJoinConditionThree() {
+        return "line.airportFrom=a.airportID";
+    }
+
+    @Override
+    public String returnJoinConditionFour() {
+        return "line.airportTo=b.airportID";
+    }
+
+    @Override
+    public String returnJoinTableThree() {
+        return "airport a";
+    }
+
+    @Override
+    public String returnJoinTableFour() {
+        return "airport b";
+    }
+
+    @Override
+    public String returnJoinConditionFive() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public String returnUpdateCondition() {
+    public String returnJoinConditionSix() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String returnJoinConditionSeven() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String returnJoinTableFive() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String returnJoinTableSix() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String returnJoinTableSeven() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

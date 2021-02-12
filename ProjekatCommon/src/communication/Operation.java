@@ -48,5 +48,5 @@ public enum Operation  implements Serializable{
     CHANGE_RESERVATION,
     SEARCH_RESERVATIONS,
     DELETE_RESERVATION,
-    RETURN_RESERVATIONS
+    RETURN_RESERVATIONS_ALL
 }
