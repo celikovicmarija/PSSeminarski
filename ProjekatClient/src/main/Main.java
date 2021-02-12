@@ -5,7 +5,7 @@
  */
 package main;
 
-import coordinator.MainCordinator;
+import coordinator.MainCoordinator;
 
 /**
  *
@@ -13,6 +13,6 @@ import coordinator.MainCordinator;
  */
 public class Main {
     public static void main(String[] args) {
-        MainCordinator.getInstance().openLoginForm();
+        MainCoordinator.getInstance().openLoginForm();
     }
 }

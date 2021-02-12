@@ -16,7 +16,12 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="miSearchFlights">
               <Properties>
-                <Property name="text" type="java.lang.String" value="SearchFlights"/>
+                <Property name="text" type="java.lang.String" value="Search Flights"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="miDeleteFlight">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Delete Flight"/>
               </Properties>
             </MenuItem>
           </SubComponents>
@@ -54,6 +59,16 @@
             <MenuItem class="javax.swing.JMenuItem" name="miCreateReservation">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Create Reservation"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="miSearchReservations">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Search Reservations"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="miDeleteReservation">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Delete Reservation"/>
               </Properties>
             </MenuItem>
           </SubComponents>

@@ -85,5 +85,12 @@ public class FlightTableModel extends AbstractTableModel{
         
         fireTableDataChanged();
     }
+    public List<Flight>getFlights(){
+        return flights;
+    }   
+    public void deleteFlight(Flight flight) {
+        flights.remove(flight);
+        fireTableDataChanged();
+    }
     
 }

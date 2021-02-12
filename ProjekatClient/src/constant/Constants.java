@@ -11,6 +11,6 @@ package constant;
  */
 public class Constants {
     public static final String CURRENT_USER="CURRENT_USER";
-    public static final String PARAM_PRODUCT="PRODUCT";
+    public static final String PARAM_FLIGHT="FLIGHT";
     public static final String FORM_ALL_PRODUCT="FORM_ALL_PRODUCT";
 }

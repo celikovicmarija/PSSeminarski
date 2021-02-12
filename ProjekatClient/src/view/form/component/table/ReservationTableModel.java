@@ -83,6 +83,24 @@ public class ReservationTableModel extends AbstractTableModel{
         fireTableRowsInserted(reservations.size()-1, reservations.size()-1);
   
     }
+        public void clear() {
+        reservations.removeAll(reservations);
+        fireTableDataChanged();
+    }
+    public void addReservations(List<Reservation> list) {
+        for (Reservation a : list) {
+            reservations.add(a);        
+        }
+        
+        fireTableDataChanged();
+    }
+    public List<Reservation>getReservations(){
+        return reservations;
+    }   
+    public void deleteFlight(Reservation reservation) {
+        reservations.remove(reservation);
+        fireTableDataChanged();
+    }
         /*
         
     public void addInvoiceItem(Product product, BigDecimal quantity, BigDecimal price) {

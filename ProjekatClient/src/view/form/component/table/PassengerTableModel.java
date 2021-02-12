@@ -43,6 +43,13 @@ public class PassengerTableModel extends AbstractTableModel {
             default: return "n/a";
         }
     }
+        @Override
+    public String getColumnName(int column) {
+        if (column > columnNames.length) {
+            return "n/a";
+        }
+        return columnNames[column];
+    }
 
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
@@ -73,6 +80,24 @@ public class PassengerTableModel extends AbstractTableModel {
         passengers.add(passenger);
         fireTableRowsInserted(passengers.size()-1, passengers.size()-1);
  
+    }
+       public void clear() {
+        passengers.removeAll(passengers);
+        fireTableDataChanged();
+    }
+    public void addPassengers(List<Passenger> list) {
+        for (Passenger a : list) {
+            passengers.add(a);        
+        }
+        
+        fireTableDataChanged();
+    }
+    public List<Passenger>getPassengers(){
+        return passengers;
+    }   
+    public void deletePassenger(Passenger passenger) {
+        passengers.remove(passenger);
+        fireTableDataChanged();
     }
     
 

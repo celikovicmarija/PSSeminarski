@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import domain.User;
 import constant.Constants;
-import coordinator.MainCordinator;
+import coordinator.MainCoordinator;
 import view.form.FrmUserMain;
 
 public class MainContoller {
@@ -22,7 +22,7 @@ public class MainContoller {
     }
 
     public void openForm() {
-        User user = (User) MainCordinator.getInstance().getParam(Constants.CURRENT_USER);
+        User user = (User) MainCoordinator.getInstance().getParam(Constants.CURRENT_USER);
         //frmMain.getLblCurrentUser().setText(user.getFirstname() + ", " + user.getLastname());
         frmMain.setVisible(true);
     }
@@ -31,24 +31,49 @@ public class MainContoller {
         frmMain.miCreateFlightAddActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MainCordinator.getInstance().openCreateFlightForm();
+                MainCoordinator.getInstance().openCreateFlightForm();
             }
         });
-        frmMain.miSearchFlightsAddActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MainCordinator.getInstance().openSearchFlightsForm();
-            }
 
-        });
 
         frmMain.miCreateReservationAddActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MainCordinator.getInstance().openCreateReservationForm();
+                MainCoordinator.getInstance().openCreateReservationForm();
             }
 
         });
+        frmMain.miSearchFlightsAddActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MainCoordinator.getInstance().openSearchFlightsForm();
+            }
+
+        });
+                frmMain.miSearchReservationsAddActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MainCoordinator.getInstance().openSearchResevationsForm();
+            }
+
+        });
+                
+                  frmMain.miDeleteFlightAddActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                //check to see how are you going to implement disabled buttons
+                MainCoordinator.getInstance().openSearchFlightsForm();
+            }
+
+        });
+                frmMain.miDeleteReservationAddActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MainCoordinator.getInstance().openSearchResevationsForm();
+            }
+
+        });      
+                
 
         /*  frmMain.jmiProductShowAllActionListener(new java.awt.event.ActionListener() {
             @Override
@@ -57,7 +82,7 @@ public class MainContoller {
             }
 
             private void jmiProductShowAllActionPerformed(java.awt.event.ActionEvent evt) {
-                MainCordinator.getInstance().openViewAllProductForm();
+                MainCoordinator.getInstance().openViewAllProductForm();
             }
         });*/
     }

@@ -13,27 +13,33 @@ import view.controller.CreateReservationController;
 import view.controller.LoginController;
 import view.controller.MainContoller;
 import view.controller.SearchFlightsController;
+import view.controller.SearchReservationsController;
+import view.controller.UpdateFlightController;
+import view.controller.UpdateReservationController;
 import view.form.FrmCreateFlight;
 import view.form.FrmCreateReservation;
 import view.form.FrmLogin;
 import view.form.FrmSearchFlights;
+import view.form.FrmSearchReservations;
+import view.form.FrmUpdateFlight;
+import view.form.FrmUpdateReservation;
 import view.form.FrmUserMain;
 
-public class MainCordinator {
+public class MainCoordinator {
 
-    private static MainCordinator instance;
+    private static MainCoordinator instance;
 
     private final MainContoller mainContoller;
     private final Map<String, Object> params;
 
-    private MainCordinator() {
+    private MainCoordinator() {
         mainContoller = new MainContoller(new FrmUserMain());
         params = new HashMap<>();
     }
 
-    public static MainCordinator getInstance() {
+    public static MainCoordinator getInstance() {
         if (instance == null) {
-            instance = new MainCordinator();
+            instance = new MainCoordinator();
         }
         return instance;
     }
@@ -52,13 +58,24 @@ public class MainCordinator {
     }
     
     public void openCreateReservationForm() {
-        
          CreateReservationController reservationController= new CreateReservationController(new FrmCreateReservation());
          reservationController.openForm();
     }
     public void openSearchFlightsForm(){
         SearchFlightsController searchFlightsController= new SearchFlightsController(new FrmSearchFlights());
         searchFlightsController.openForm();
+    }
+    public void openSearchResevationsForm(){
+        SearchReservationsController searchReservationsController= new SearchReservationsController(new FrmSearchReservations());
+        searchReservationsController.openForm();
+    }
+   public void openUpdateFlightForm(){
+        UpdateFlightController updateFlightController= new UpdateFlightController(new FrmUpdateFlight());
+        updateFlightController.openForm();
+    }
+    public void openUpdateResevationForm(){
+ UpdateReservationController updateReservationController= new UpdateReservationController(new FrmUpdateReservation());
+        updateReservationController.openForm();
     }
 
     public MainContoller getMainContoller() {

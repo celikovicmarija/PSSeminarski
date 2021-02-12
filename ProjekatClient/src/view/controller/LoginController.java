@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 import communication.Communication;
 import domain.User;
 import constant.Constants;
-import coordinator.MainCordinator;
+import coordinator.MainCoordinator;
 import view.form.FrmLogin;
 
 /**
@@ -54,8 +54,8 @@ public class LoginController {
                             "Login", JOptionPane.INFORMATION_MESSAGE
                     );
                     frmLogin.dispose();
-                    MainCordinator.getInstance().addParam(Constants.CURRENT_USER, user);
-                    MainCordinator.getInstance().openMainForm();
+                    MainCoordinator.getInstance().addParam(Constants.CURRENT_USER, user);
+                    MainCoordinator.getInstance().openMainForm();
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(frmLogin, "User with the given credentials does not exist.", "Login error", JOptionPane.ERROR_MESSAGE);
                 }

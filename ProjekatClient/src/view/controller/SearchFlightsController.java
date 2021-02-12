@@ -7,7 +7,8 @@ package view.controller;
 
 import communication.Communication;
 import domain.Flight;
-import domain.Line;
+import constant.Constants;
+import coordinator.MainCoordinator;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -37,31 +38,69 @@ public class SearchFlightsController {
         frm.addBtnEditActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                editFlight();
+                
+                     editFlight();
+             
             }
 
             private void editFlight() {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                int row=frm.getTblFlights().getSelectedRow();
+                    if(row<0){
+                   JOptionPane.showMessageDialog(frm, "Please select a flight to delete","Delete flight",JOptionPane.INFORMATION_MESSAGE);
+                }else{
+                  FlightTableModel ftc=(FlightTableModel)frm.getTblFlights().getModel();
+                List<Flight> flights=ftc.getFlights();
+                Flight flight=flights.get(row);
+                MainCoordinator.getInstance().addParam(Constants.PARAM_FLIGHT,flight );
+                MainCoordinator.getInstance().openUpdateFlightForm();
+                        tidyFlightsTableAfterSearch(flights);
+                    }
             }
         });
         
-        
+                frm.addBtnDeleteActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                deleteFlight();
+            }
+
+            private void deleteFlight() {
+                int row=frm.getTblFlights().getSelectedRow();
+                if(row<0){
+                   JOptionPane.showMessageDialog(frm, "Please select a flight to delete","Delete flight",JOptionPane.INFORMATION_MESSAGE);
+                }else{
+                    try {
+                        FlightTableModel ftc=(FlightTableModel)frm.getTblFlights().getModel();
+                        List<Flight> flights=ftc.getFlights();
+                        
+                        //OVDE TREBA I PREDUSLOVE DA VIDIS
+                        Flight flight=flights.get(row);
+                        Communication.getInstance().deleteFlight(flight);
+                        JOptionPane.showMessageDialog(frm, "Deleted successfully","Delete flight",JOptionPane.INFORMATION_MESSAGE);
+                         ftc.deleteFlight(flight);
+                    } catch (Exception ex) {
+                       JOptionPane.showMessageDialog(frm, "Could not delete selected flight","Delete flight",JOptionPane.INFORMATION_MESSAGE);
+                        Logger.getLogger(SearchFlightsController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        });
       
         
            frm.addBtnSearchActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                searchLines();
+                searchFlights();
             }
 
-            private void searchLines() {
+            private void searchFlights() {
                 String criteria = frm.getTxtLine().getText();
                 if (criteria.isEmpty() || criteria.equals("*")) {
                     try {
-                        List<Line> lines = Communication.getInstance().getAllLines();
-                        if (lines != null) {
-                            JOptionPane.showMessageDialog(frm, "Found results for the lines", "Search lines", JOptionPane.INFORMATION_MESSAGE);
-                       //     tidyFlightsTableAfterSearch(lines);
+                        List<Flight> flights = Communication.getInstance().getAllFlights();
+                        if (flights != null) {
+                            JOptionPane.showMessageDialog(frm, "Found results for the flights", "Search flights", JOptionPane.INFORMATION_MESSAGE);
+                           tidyFlightsTableAfterSearch(flights);
                         } else {
                             JOptionPane.showMessageDialog(frm, "Could not find results for the lines", "Search airports", JOptionPane.INFORMATION_MESSAGE);
 
@@ -71,18 +110,16 @@ public class SearchFlightsController {
                     }
                 } else {
                     try {
-                        Line line = new Line();
-                        //check for errors
-                        String[] parts = criteria.split(",", 2);
-                        line.setSearchCriteriaSrc(parts[0]);
-                        line.setSearchCriteriaDest(parts[1]);
+                      
+                        Flight flight=new Flight();
+                        flight.setSearchCriteria(criteria);
 
-                        List<Line> lines = Communication.getInstance().searchLines(line);
-                        if (lines != null) {
-                            JOptionPane.showMessageDialog(frm, "Found results for the lines", "Search lines", JOptionPane.INFORMATION_MESSAGE);
-                           // tidyFlightsTableAfterSearch(lines);
+                        List<Flight> flights = Communication.getInstance().searchFlights(flight);
+                        if (flights != null) {
+                            JOptionPane.showMessageDialog(frm, "Found results for the flights", "Search flights", JOptionPane.INFORMATION_MESSAGE);
+                           tidyFlightsTableAfterSearch(flights);
                         } else {
-                            JOptionPane.showMessageDialog(frm, "Could not find results for the airports", "Search airports", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(frm, "Could not find results for the flights", "Search flights", JOptionPane.INFORMATION_MESSAGE);
 
                         }
                     } catch (Exception ex) {

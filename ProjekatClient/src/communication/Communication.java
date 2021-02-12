@@ -54,11 +54,8 @@ public class Communication {
         }
     }
 
-    /*
-
-
-    public void editProduct(Product product) throws Exception {
-        Request request=new Request(Operation.EDIT_PRODUCT, product);
+        public void editFlight(Flight flight) throws Exception {
+        Request request=new Request(Operation.CHANGE_FLIGHT, flight);
         sender.send(request);
         Response response=(Response)receiver.receive();
         if(response.getException()==null){
@@ -67,8 +64,6 @@ public class Communication {
             throw response.getException();
         }
     }
-
-     */
     public List<Flight> getAllFlights() throws Exception {
         Request request = new Request(Operation.RETURN_FLIGHTS_ALL, null);
         sender.send(request);
@@ -113,7 +108,27 @@ public class Communication {
             throw response.getException();
         }
     }
-
+   public List<Passenger> getAllPassengers() throws Exception {
+               Request request = new Request(Operation.RETURN_PASSENGERS_ALL, null);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if (response.getException() == null) {
+            return (List<Passenger>) response.getResult();
+        } else {
+            throw response.getException();
+        }
+    }
+       public List<Reservation> getAllReservations() throws Exception {
+        Request request = new Request(Operation.RETURN_RESERVATIONS_ALL, null);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if (response.getException() == null) {
+            return (List<Reservation>) response.getResult();
+        } else {
+            throw response.getException();
+        }
+    }
+    
     public void addFlight(Flight flight) throws Exception {
         Request request = new Request(Operation.ADD_FLIGHT, flight);
         sender.send(request);
@@ -232,6 +247,9 @@ public class Communication {
             throw response.getException();
         }
     }
-    
+
+
+
+ 
 
 }

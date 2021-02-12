@@ -25,6 +25,9 @@ public class FrmSearchFlights extends javax.swing.JFrame {
     public void addBtnEditActionListener(ActionListener actionListener) {
         btnEdit.addActionListener(actionListener);
     }
+     public void addBtnDeleteActionListener(ActionListener actionListener) {
+        btnDelete.addActionListener(actionListener);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -42,11 +45,12 @@ public class FrmSearchFlights extends javax.swing.JFrame {
         btnEdit = new javax.swing.JButton();
         txtLine = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        btnDelete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
-        jLabel1.setText("Search flights by line: ");
+        jLabel1.setText("Search flights by airline: ");
 
         btnSearch.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
         btnSearch.setText("Search");
@@ -70,6 +74,9 @@ public class FrmSearchFlights extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Calibri Light", 2, 36)); // NOI18N
         jLabel2.setText("Search Flights");
 
+        btnDelete.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
+        btnDelete.setText("Delete");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -90,10 +97,12 @@ public class FrmSearchFlights extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addComponent(jLabel2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(152, 152, 152)
                 .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65))
+                .addGap(59, 59, 59)
+                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,7 +117,9 @@ public class FrmSearchFlights extends javax.swing.JFrame {
                 .addGap(48, 48, 48)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
-                .addComponent(btnEdit)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEdit)
+                    .addComponent(btnDelete))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
 
@@ -117,6 +128,7 @@ public class FrmSearchFlights extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnSearch;
     private javax.swing.JLabel jLabel1;
@@ -156,6 +168,14 @@ public class FrmSearchFlights extends javax.swing.JFrame {
 
     public void setTxtLine(javax.swing.JTextField txtLine) {
         this.txtLine = txtLine;
+    }
+
+    public javax.swing.JButton getBtnDelete() {
+        return btnDelete;
+    }
+
+    public void setBtnDelete(javax.swing.JButton btnDelete) {
+        this.btnDelete = btnDelete;
     }
     
 }

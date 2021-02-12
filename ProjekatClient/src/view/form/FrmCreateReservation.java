@@ -5,6 +5,8 @@
  */
 package view.form;
 
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author Marija
@@ -17,7 +19,15 @@ public class FrmCreateReservation extends javax.swing.JFrame {
     public FrmCreateReservation() {
         initComponents();
     }
-
+public void addSaveBtnActionListener(ActionListener actionListener) {
+        btnSave.addActionListener(actionListener);
+    }
+    public void addSearchFlightsBtnActionListener(ActionListener actionListener) {
+        btnSearchFlights.addActionListener(actionListener);
+    }
+    public void addSearchPasengersBtnActionListener(ActionListener actionListener) {
+        btnSearchPassengers.addActionListener(actionListener);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,27 +38,165 @@ public class FrmCreateReservation extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        txtAirline = new javax.swing.JTextField();
+        txtPrice = new javax.swing.JTextField();
+        txtDiscountedPrice = new javax.swing.JTextField();
+        txtPassenger = new javax.swing.JTextField();
+        txtValidUntil = new javax.swing.JTextField();
+        txtIssueDate = new javax.swing.JTextField();
+        btnSave = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblFlights = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblPassengers = new javax.swing.JTable();
+        btnSearchFlights = new javax.swing.JButton();
+        btnSearchPassengers = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Calibri Light", 2, 36)); // NOI18N
         jLabel1.setText("Create Reservation");
+
+        jLabel2.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
+        jLabel2.setText("Price:");
+
+        jLabel3.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
+        jLabel3.setText("Discounted Price:");
+
+        jLabel4.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
+        jLabel4.setText("Issue Date:");
+
+        jLabel5.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
+        jLabel5.setText("Search Flight by airline:");
+
+        jLabel6.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
+        jLabel6.setText("Search Passenger By Name/Surname:");
+
+        jLabel7.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
+        jLabel7.setText("Valid Until:");
+
+        btnSave.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
+        btnSave.setText("Save Reservation");
+
+        tblFlights.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tblFlights);
+
+        tblPassengers.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(tblPassengers);
+
+        btnSearchFlights.setFont(new java.awt.Font("Calibri Light", 2, 14)); // NOI18N
+        btnSearchFlights.setText("Search");
+
+        btnSearchPassengers.setFont(new java.awt.Font("Calibri Light", 2, 14)); // NOI18N
+        btnSearchPassengers.setText("Search");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(91, 91, 91)
-                .addComponent(jLabel1)
-                .addContainerGap(584, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtAirline, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnSearchFlights, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtPassenger, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnSearchPassengers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 717, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGap(27, 27, 27)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel3)
+                                        .addComponent(jLabel2))
+                                    .addGap(64, 64, 64)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtPrice, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtDiscountedPrice, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel7)
+                                        .addComponent(jLabel4))
+                                    .addGap(63, 63, 63)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtValidUntil, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtIssueDate, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 717, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 741, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(409, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtAirline, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearchFlights))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtPassenger, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearchPassengers))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7)
+                    .addComponent(txtIssueDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtDiscountedPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtValidUntil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(93, 93, 93))
         );
 
         pack();
@@ -56,6 +204,113 @@ public class FrmCreateReservation extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSave;
+    private javax.swing.JButton btnSearchFlights;
+    private javax.swing.JButton btnSearchPassengers;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tblFlights;
+    private javax.swing.JTable tblPassengers;
+    private javax.swing.JTextField txtAirline;
+    private javax.swing.JTextField txtDiscountedPrice;
+    private javax.swing.JTextField txtIssueDate;
+    private javax.swing.JTextField txtPassenger;
+    private javax.swing.JTextField txtPrice;
+    private javax.swing.JTextField txtValidUntil;
     // End of variables declaration//GEN-END:variables
+
+    public javax.swing.JButton getBtnSave() {
+        return btnSave;
+    }
+
+    public void setBtnSave(javax.swing.JButton btnSave) {
+        this.btnSave = btnSave;
+    }
+
+    public javax.swing.JTable getTblFlights() {
+        return tblFlights;
+    }
+
+    public void setTblFlights(javax.swing.JTable tblFlights) {
+        this.tblFlights = tblFlights;
+    }
+
+    public javax.swing.JTable getTblPassengers() {
+        return tblPassengers;
+    }
+
+    public void setTblPassengers(javax.swing.JTable tblPassengers) {
+        this.tblPassengers = tblPassengers;
+    }
+
+    public javax.swing.JTextField getTxtAirline() {
+        return txtAirline;
+    }
+
+    public void setTxtAirline(javax.swing.JTextField txtAirline) {
+        this.txtAirline = txtAirline;
+    }
+
+    public javax.swing.JTextField getTxtDiscountedPrice() {
+        return txtDiscountedPrice;
+    }
+
+    public void setTxtDiscountedPrice(javax.swing.JTextField txtDiscountedPrice) {
+        this.txtDiscountedPrice = txtDiscountedPrice;
+    }
+
+    public javax.swing.JTextField getTxtIssueDate() {
+        return txtIssueDate;
+    }
+
+    public void setTxtIssueDate(javax.swing.JTextField txtIssueDate) {
+        this.txtIssueDate = txtIssueDate;
+    }
+
+    public javax.swing.JTextField getTxtPassenger() {
+        return txtPassenger;
+    }
+
+    public void setTxtPassenger(javax.swing.JTextField txtPassenger) {
+        this.txtPassenger = txtPassenger;
+    }
+
+    public javax.swing.JTextField getTxtPrice() {
+        return txtPrice;
+    }
+
+    public void setTxtPrice(javax.swing.JTextField txtPrice) {
+        this.txtPrice = txtPrice;
+    }
+
+    public javax.swing.JTextField getTxtValidUntil() {
+        return txtValidUntil;
+    }
+
+    public void setTxtValidUntil(javax.swing.JTextField txtValidUntil) {
+        this.txtValidUntil = txtValidUntil;
+    }
+
+    public javax.swing.JButton getBtnSearchFlights() {
+        return btnSearchFlights;
+    }
+
+    public void setBtnSearchFlights(javax.swing.JButton btnSearchFlights) {
+        this.btnSearchFlights = btnSearchFlights;
+    }
+
+    public javax.swing.JButton getBtnSearchPassengers() {
+        return btnSearchPassengers;
+    }
+
+    public void setBtnSearchPassengers(javax.swing.JButton btnSearchPassengers) {
+        this.btnSearchPassengers = btnSearchPassengers;
+    }
 }

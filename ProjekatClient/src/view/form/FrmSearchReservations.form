@@ -23,31 +23,38 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="txtLine" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnSearch" min="-2" pref="156" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="137" max="-2" attributes="0"/>
+                      <Component id="btnEdit" min="-2" pref="190" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="323" max="-2" attributes="0"/>
+                      <Component id="btnDelete" min="-2" pref="190" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="809" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="152" max="-2" attributes="0"/>
-              <Component id="btnEdit" min="-2" pref="190" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
-              <Component id="btnDelete" min="-2" pref="190" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="jScrollPane1" min="-2" pref="836" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="536" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="txtSearchTerm" min="-2" pref="381" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btnSearch" min="-2" pref="156" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="539" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
           </Group>
       </Group>
     </DimensionLayout>
@@ -56,40 +63,42 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtLine" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnSearch" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                  <Component id="txtSearchTerm" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="243" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="116" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnEdit" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnDelete" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="35" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
+    <Component class="javax.swing.JLabel" name="jLabel2">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Calibri Light" size="36" style="2"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Search Reservations"/>
+      </Properties>
+    </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Calibri Light" size="18" style="2"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Search flights by airline: "/>
+        <Property name="text" type="java.lang.String" value="Search reservations by id: "/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnSearch">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Calibri Light" size="18" style="2"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Search"/>
-      </Properties>
+    <Component class="javax.swing.JTextField" name="txtSearchTerm">
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
@@ -98,7 +107,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="tblFlights">
+        <Component class="javax.swing.JTable" name="tbReservations">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="4" rowCount="4">
@@ -120,22 +129,20 @@
         <Property name="text" type="java.lang.String" value="Edit"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtLine">
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel2">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Calibri Light" size="36" style="2"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Search Flights"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JButton" name="btnDelete">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Calibri Light" size="18" style="2"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Delete"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnSearch">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Calibri Light" size="18" style="2"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Search"/>
       </Properties>
     </Component>
   </SubComponents>
