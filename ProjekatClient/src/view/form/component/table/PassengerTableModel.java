@@ -1,0 +1,80 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package view.form.component.table;
+
+import domain.Passenger;
+import java.util.List;
+import javax.swing.table.AbstractTableModel;
+
+/**
+ *
+ * @author Marija
+ */
+public class PassengerTableModel extends AbstractTableModel {
+    private final List<Passenger> passengers;
+    private final String[] columnNames={"Passport No","First Name","Last Name","MLB"};
+
+    public PassengerTableModel(List<Passenger> passengers) {
+        this.passengers = passengers;
+    }
+
+    @Override
+    public int getRowCount() {
+        if (passengers==null) return 0;
+            return passengers.size();
+    }
+
+    @Override
+    public int getColumnCount() {
+        return 4;
+    }
+
+    @Override
+    public Object getValueAt(int rowIndex, int columnIndex) {
+            Passenger passenger= passengers.get(rowIndex);
+        switch(columnIndex){
+            case 0: return passenger.getPassportNumber();
+            case 1: return passenger.getFirstName();
+            case 2: return passenger.getLastName();
+            case 3: return passenger.getMlb();
+            default: return "n/a";
+        }
+    }
+
+    @Override
+    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+            Passenger passenger= passengers.get(rowIndex);
+            switch(columnIndex){
+            case 0: passenger.setPassportNumber(String.valueOf(aValue)); break;
+           /* case 1:  passenger.setFirstName();break;
+            case 2:  passenger.setLastName();break;
+            case 3:  passenger.setMlb();break;*/
+          
+        }
+    }
+        //TODO- DORADI OVO I I VIDI OVO POD KOMENTAROM
+   /*   @Override
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return (columnIndex==1) || (columnIndex==3);
+        //if (columnIndex==1) return true;
+        //return false;
+    }*/
+    
+    
+    
+     public Passenger getPassengerAt(int row){
+        return passengers.get(row);
+    }
+    
+     public void addPassenger(Passenger passenger){
+        passengers.add(passenger);
+        fireTableRowsInserted(passengers.size()-1, passengers.size()-1);
+ 
+    }
+    
+
+    
+}

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Menu class="javax.swing.JMenuBar" name="menuBarMain">
+      <SubComponents>
+        <Menu class="javax.swing.JMenu" name="menuFlight">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Flight"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="miCreateFlight">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Create Flight"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="miSearchFlights">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="SearchFlights"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="menuLine">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Line"/>
+          </Properties>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="menuPassenger">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Passenger"/>
+          </Properties>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="menuCoupon">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Coupon"/>
+          </Properties>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="menuAirplane">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Airplane"/>
+          </Properties>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="menuAirport">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Airport"/>
+          </Properties>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="menuReservation">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Reservation"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="miCreateReservation">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Create Reservation"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="menuOptions">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Options"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="miLogout">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Logout"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+      </SubComponents>
+    </Menu>
+  </NonVisualComponents>
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="menuBar" type="java.lang.String" value="menuBarMain"/>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <EmptySpace min="0" pref="532" max="32767" attributes="0"/>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <EmptySpace min="0" pref="274" max="32767" attributes="0"/>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+</Form>
