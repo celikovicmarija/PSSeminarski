@@ -29,7 +29,7 @@ public class GetAllFlights extends AbstractGenericOperation {
 
     @Override
     protected void executeOperation(Object param) throws Exception {
-         list=repository.getAll((Flight) param);
+         list=repository.returnFiveTables((Flight) param);
     }
     
 }

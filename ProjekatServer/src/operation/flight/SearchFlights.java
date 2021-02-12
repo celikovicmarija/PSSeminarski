@@ -27,7 +27,7 @@ public class SearchFlights extends AbstractGenericOperation {
 
     @Override
     protected void executeOperation(Object param) throws Exception {
-        list=repository.get((Flight) param);
+        list=repository.returnFiveTablesWithCondition((Flight) param);
     }  
     
 }

@@ -28,7 +28,8 @@ public class GetAllReservations extends AbstractGenericOperation{
 
     @Override
     protected void executeOperation(Object param) throws Exception {
-        list=repository.getAll((Reservation) param);
+        //nece biti get all, mora da se joinuje sa tabelama let, putnik
+        list=repository.returnThreeTables((Reservation) param);
     }
     
 }

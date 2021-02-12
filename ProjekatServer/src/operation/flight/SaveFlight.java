@@ -16,7 +16,7 @@ public class SaveFlight extends AbstractGenericOperation{
 
     @Override
     protected void preconditions(Object param) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

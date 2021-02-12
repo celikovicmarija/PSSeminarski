@@ -28,7 +28,7 @@ public class SearchPassengers extends AbstractGenericOperation{
 
     @Override
     protected void executeOperation(Object param) throws Exception {
-       list=repository.returnThreeTables((Passenger) param);
+       list=repository.get((Passenger) param);
     }
     
 }
