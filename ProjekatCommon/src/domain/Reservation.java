@@ -13,10 +13,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
-/**
- *
- * @author Marija
- */
 public class Reservation implements GenericEntity {
 
     private Long reservationID;
@@ -26,12 +22,13 @@ public class Reservation implements GenericEntity {
     private BigDecimal discountedPrice;
     private Flight flight;
     private Passenger passenger;
+    private Coupon coupon;
     private String searchCriteria;
 
     public Reservation() {
     }
 
-    public Reservation(Long reservationID, BigDecimal price, Date issueDate, Date validUntil, BigDecimal discountedPrice, Flight flight, Passenger passenger) {
+    public Reservation(Long reservationID,Coupon coupon, BigDecimal price, Date issueDate, Date validUntil, BigDecimal discountedPrice, Flight flight, Passenger passenger) {
         this.reservationID = reservationID;
         this.price = price;
         this.issueDate = issueDate;
@@ -39,6 +36,7 @@ public class Reservation implements GenericEntity {
         this.discountedPrice = discountedPrice;
         this.flight = flight;
         this.passenger = passenger;
+        this.coupon=coupon;
     }
 
     public Long getReservationID() {
@@ -108,7 +106,7 @@ public class Reservation implements GenericEntity {
 
     @Override
     public String toString() {
-        return "Reservation{" + "reservationID=" + reservationID + ", price=" + price + ", issueDate=" + issueDate + ", validUntil=" + validUntil + ", discountedPrice=" + discountedPrice + ", flight=" + flight + ", passenger=" + passenger + '}';
+        return "(" + reservationID + "), price=" + price + ", issueDate=" + issueDate + ", validUntil=" + validUntil + ", discountedPrice=" + discountedPrice + ", flight=" + flight + ", passenger=" + passenger + '}';
     }
 
  
@@ -144,18 +142,19 @@ public class Reservation implements GenericEntity {
 
     @Override
     public String getColumnNamesForInsert() {
-        return "id,name,description,price,manufacturerid,measurementunit";
+        return "price,discountedPrice,issueDate,validUntil,flightID,passengerID,couponID";
     }
 
     @Override
     public String getInsertValues() {
         StringBuilder sb = new StringBuilder();
-        sb.append(reservationID).append(",")
-                .append(price).append(",")
+                sb.append(price).append(",")
+                .append(discountedPrice).append(",")
                 .append("'").append(issueDate).append("',")
                 .append("'").append(validUntil).append("',")
-                .append(discountedPrice).append(",")
-                .append(flight.getFlightID());
+                .append(flight.getFlightID()).append(",'")
+                .append(passenger.getPassportNumber()).append("',")
+                 .append(coupon.getCouponID());
         return sb.toString();
     }
 
@@ -169,52 +168,41 @@ public class Reservation implements GenericEntity {
           List<GenericEntity> reservations= new LinkedList<>();
        while (rs.next()){
            Reservation reservation=new Reservation();
-           reservation.setReservationID(rs.getLong("reservationID"));
-           reservation.setIssueDate(rs.getDate("issueDate"));
-           reservation.setValidUntil(rs.getDate("validUntil"));
-           reservation.setPrice(rs.getBigDecimal("price"));
-           reservation.setDiscountedPrice(rs.getBigDecimal("discountedPrice"));
+           reservation.setReservationID(rs.getLong("reservation.reservationID"));
+           reservation.setIssueDate(rs.getDate("reservation.issueDate"));
+           reservation.setValidUntil(rs.getDate("reservation.validUntil"));
+           reservation.setPrice(rs.getBigDecimal("reservation.price"));
+           reservation.setDiscountedPrice(rs.getBigDecimal("reservation.discountedPrice"));
  
-           Passenger passenger=new Passenger();
-           Flight flight=new Flight();
+           Passenger p=new Passenger();
+           Flight f=new Flight();
            
-           passenger.setFirstName(rs.getString("passenger.firstName"));
-           passenger.setLastName(rs.getString("passenger.lastName"));
-           passenger.setPassportNumber(rs.getString("passenger.passportNumber"));
-           passenger.setMlb(rs.getString("passenger.mlb"));
+           p.setFirstName(rs.getString("passenger.firstName"));
+           p.setLastName(rs.getString("passenger.lastName"));
+           p.setPassportNumber(rs.getString("passenger.passportNumber"));
+           p.setMlb(rs.getString("passenger.mlb"));
            
-           flight.setFlightID(rs.getLong("flight.flightID"));
-           flight.setNote(rs.getString("flight.getNote"));
-           flight.setDate(rs.getDate("flight.date"));
-           flight.setTime(rs.getTime("flight.time"));
-           flight.setAirline(rs.getString("flight.airline"));
+           f.setFlightID(rs.getLong("flight.flightID"));
+           f.setNote(rs.getString("flight.note"));
+           f.setDate(rs.getDate("flight.date"));
+           f.setTime(rs.getTime("flight.time"));
+           f.setAirline(rs.getString("flight.airline"));
            
            
-           Airplane airplane=new Airplane();
-           airplane.setAirplaneID(rs.getLong("airplaneID"));
-           airplane.setAirplaneName(rs.getString("airplaneName"));
-           airplane.setAirplaneType(airplaneType.valueOf(rs.getString("airplaneType")));
-           airplane.setDescription(rs.getString("description"));
-           airplane.setNoPlacesBusinessClass(rs.getInt("noPlacesBusinessClass"));
-           airplane.setNoPlacesEconomyClass(rs.getInt("noPlacesEconomyClass"));
-           flight.setAirplane(airplane);
+           Airplane a=new Airplane();
+           a.setAirplaneID(rs.getLong("airplane.airplaneID"));
+           a.setAirplaneName(rs.getString("airplane.airplaneName"));
+           a.setAirplaneType(airplaneType.valueOf(rs.getString("airplane.airplaneType")));
+           a.setDescription(rs.getString("airplane.description"));
+           a.setNoPlacesBusinessClass(rs.getInt("airplane.noPlacesBusinessClass"));
+           a.setNoPlacesEconomyClass(rs.getInt("airplane.noPlacesEconomyClass"));
+           f.setAirplane(a);
            
            
            Line line= new Line();
-           flight.setLine(line);
-           
-           /*Airplane airplane=new Airplane();
-           airplane.setAirplaneID(rs.getLong("airplaneID"));
-           airplane.setAirplaneName(rs.getString("airplaneName"));
-           airplane.setAirplaneType(airplaneType.valueOf(rs.getString("airplaneType")));
-           airplane.setDescription(rs.getString("description"));
-           airplane.setNoPlacesBusinessClass(rs.getInt("noPlacesBusinessClass"));
-           airplane.setNoPlacesEconomyClass(rs.getInt("noPlacesEconomyClass"));
-           flight.setAirplane(airplane);
-           
-           
-           line.setLineID(rs.getLong("lineID"));
-           line.setLineName(rs.getString("lineName"));
+            
+           line.setLineID(rs.getLong("line.lineID"));
+           line.setLineName(rs.getString("line.lineName"));
            
            Airport src= new Airport();
            Airport dest= new Airport();
@@ -233,10 +221,20 @@ public class Reservation implements GenericEntity {
           dest.setCountryName(rs.getString("b.countryName"));
           dest.setAirportCode(rs.getString("b.airportCode"));
           line.setAirportTo(dest);
-          flight.setLine(line);*/
            
-       reservation.setPassenger(passenger);
-       reservation.setFlight(flight);
+           f.setLine(line);
+           
+           Coupon c=new Coupon();
+           c.setCouponID(rs.getLong("coupon.couponID"));
+           c.setDescription(rs.getString("coupon.description"));
+           c.setDiscountAmount(rs.getBigDecimal("coupon.discountAmount"));
+           c.setValidUntil(rs.getDate("coupon.validUntil"));
+       
+      
+           
+       reservation.setPassenger(p);
+       reservation.setFlight(f);
+       reservation.setCoupon(c);
           
           reservations.add(reservation);
        }
@@ -270,68 +268,75 @@ public class Reservation implements GenericEntity {
 
     @Override
     public String returnSearchCondition() {
-        //dopuni
-         return "reservationID="+searchCriteria; 
+         return "reservation.couponID="+searchCriteria+" OR reservation.reservationID="+searchCriteria+" OR reservation.flightID="+searchCriteria+" OR reservation.passengerID LIKE '%"+searchCriteria+"%'"; 
     }
 
     @Override
     public String returnUpdateValues() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return " reservation.couponID="+String.valueOf(coupon.getCouponID())+", reservation.reservationID="+reservationID+", reservation.price= "+String.valueOf(price)+", reservation.discountedPrice="+String.valueOf(price)+", reservation.validUntil='"+String.valueOf(validUntil)+"', reservation.issueDate='"+String.valueOf(issueDate)+"', reservation.passengerID='"+passenger.getPassportNumber()+"', reservation.flightID="+flight.getFlightID();
     }
 
     @Override
     public String returnUpdateCondition() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "reservation.reservationID="+reservationID;
     }
 
     @Override
     public String returnJoinConditionThree() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "flight.lineID=line.lineID";
     }
 
     @Override
     public String returnJoinConditionFour() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "flight.airplaneID=airplane.airplaneID";
     }
 
     @Override
     public String returnJoinTableThree() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "line";
     }
 
     @Override
     public String returnJoinTableFour() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "airplane";
     }
 
     @Override
     public String returnJoinConditionFive() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "line.airportFrom=a.airportID";
     }
 
     @Override
     public String returnJoinConditionSix() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "line.airportTo=b.airportID";
     }
 
     @Override
     public String returnJoinConditionSeven() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "coupon.couponID=reservation.couponID";
     }
 
     @Override
     public String returnJoinTableFive() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "airport a";
     }
 
     @Override
     public String returnJoinTableSix() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "airport b";
     }
 
     @Override
     public String returnJoinTableSeven() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "coupon";
+    }
+
+    public Coupon getCoupon() {
+        return coupon;
+    }
+
+    public void setCoupon(Coupon coupon) {
+        this.coupon = coupon;
     }
 
 }

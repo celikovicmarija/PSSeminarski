@@ -112,12 +112,17 @@ public class Passenger implements GenericEntity {
 
     @Override
     public String getColumnNamesForInsert() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "firstName, lastName, passportNumber, mlb";
     }
 
     @Override
     public String getInsertValues() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         StringBuilder sb = new StringBuilder();
+        sb.append("'").append(firstName).append("',")
+                .append("'").append(lastName).append("',")
+                .append("'").append(passportNumber).append("',")
+                .append("'").append(mlb).append("'");
+        return sb.toString();
     }
 
     @Override

@@ -136,7 +136,7 @@ public class Flight implements GenericEntity {
 
     @Override
     public String toString() {
-        return "Flight{" + "flightID=" + flightID + ", date=" + date + ", time=" + time + ", note=" + note + ", airline=" + airline + ", line=" + line + ", airplane=" + airplane + '}';
+        return flightID +" ("+ airline + ")";
     }
 
     @Override
