@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import coordinator.ServerCoordinator;
@@ -30,6 +25,7 @@ import operation.flight.GetAllFlights;
 import operation.flight.SaveFlight;
 import operation.flight.SearchFlights;
 import operation.line.SearchLines;
+import operation.passenger.CreatePassenger;
 import operation.passenger.GetAllPassengers;
 import operation.passenger.SearchPassengers;
 import operation.reservation.CreateReservation;
@@ -39,30 +35,21 @@ import operation.reservation.SaveReservation;
 import operation.reservation.SearchReservations;
 import repository.db.impl.RepositoryDBGeneric;
 
-/**
- *
- * @author laptop-02
- */
+
 public class Controller {
 
     private final Repository repositoryUser;
     private List<User> activeUsers;
-    /*  private final Repository repositoryManufacturer;
-    private final Repository repositoryProduct;
-    private final Repository repositoryInvoice;*/
     private final Repository repositoryGeneric;
 
     private static Controller controller;
     StartServerThread sst;
 
     private Controller() {
-        activeUsers = new LinkedList<User>();
+        activeUsers = new LinkedList<>();
         this.repositoryUser = new RepositoryDbUser();
         this.repositoryGeneric = new RepositoryDBGeneric();
-        /*  this.repositoryManufacturer = new RepositoryDBManufacturer();
-        this.repositoryProduct = new RepositoryDBProduct();
-        this.repositoryInvoice = new RepositoryDBInvoice();
-         */
+
     }
 
     public static Controller getInstance() {
@@ -137,6 +124,11 @@ public class Controller {
         operation.execute(entity);
     }
 
+    public void addPassenger(GenericEntity entity) throws Exception {
+        AbstractGenericOperation operation = new CreatePassenger();
+        operation.execute(entity);
+    }
+
     public void addReservation(GenericEntity entity) throws Exception {
         AbstractGenericOperation operation = new CreateReservation();
         operation.execute(entity);
@@ -208,62 +200,6 @@ public class Controller {
         return activeUsers;
     }
 
-    /*
-    public List<Product> getAllProducts() throws Exception {
-    List<Product> products = null;
-    //((DbRepository)repositoryProduct).connect();
-    try {
-    products = repositoryProduct.getAll();
-    //((DbRepository)repositoryProduct).commit();
-    } catch (Exception e) {
-    e.printStackTrace();
-    //((DbRepository)repositoryProduct).rollback();
-    throw e;
-    } finally {
-    //((DbRepository)repositoryProduct).disconnect();
-    }
-    return products;
-    }
-    public void deleteProduct(Product product) throws Exception {
-    ((DbRepository) repositoryProduct).connect();
-    try {
-    repositoryProduct.delete(product);
-    ((DbRepository) repositoryProduct).commit();
-    } catch (Exception e) {
-    e.printStackTrace();
-    ((DbRepository) repositoryProduct).rollback();
-    throw e;
-    } finally {
-    ((DbRepository) repositoryProduct).disconnect();
-    }
-    }
-    public void editProduct(Product product) throws Exception {
-    ((DbRepository) repositoryProduct).connect();
-    try {
-    ((DbRepository) repositoryProduct).edit(product);
-    ((DbRepository) repositoryProduct).commit();
-    } catch (Exception e) {
-    e.printStackTrace();
-    ((DbRepository) repositoryProduct).rollback();
-    throw e;
-    } finally {
-    ((DbRepository) repositoryProduct).disconnect();
-    }
-    }
-    public void addInvoice(Invoice invoice) throws Exception {
-    ((DbRepository) repositoryInvoice).connect();
-    try {
-    repositoryInvoice.add(invoice);
-    ((DbRepository) repositoryInvoice).commit();
-    } catch (Exception e) {
-    e.printStackTrace();
-    ((DbRepository) repositoryInvoice).rollback();
-    throw e;
-    } finally {
-    ((DbRepository) repositoryInvoice).disconnect();
-    }
-    }
-     */
     public void setActiveUsers(List<User> activeUsers) {
         this.activeUsers = activeUsers;
     }
@@ -274,14 +210,14 @@ public class Controller {
     }
 
     public void stopServer() {
-        for (ProcessClientsRequests pcr : StartServerThread.clients) {
-            for (User user : activeUsers) {
-                if (user.getUsername().equals(pcr.getUser().getUsername())) {
-                    Controller.getInstance().getActiveUsers().remove(pcr.getUser());
-                }
-            }
+        StartServerThread.clients.stream().map((pcr) -> {
+            activeUsers.stream().filter((user) -> (user.getUsername().equals(pcr.getUser().getUsername()))).forEachOrdered((_item) -> {
+                Controller.getInstance().getActiveUsers().remove(pcr.getUser());
+            });
+            return pcr;
+        }).forEachOrdered((pcr) -> {
             pcr.logoutEverybody();
-        }
+        });
 
         sst.stopAllThreads();
     }

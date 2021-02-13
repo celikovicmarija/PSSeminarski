@@ -16,38 +16,40 @@ import java.awt.event.ActionListener;
  * @author Marija
  */
 public class FrmMainController {
+
     private final FrmMain frmMain;
 
     public FrmMainController(FrmMain frmMain) {
         this.frmMain = frmMain;
         addActionListeners();
     }
-      public void openForm() {
+
+    public void openForm() {
         frmMain.setVisible(true);
         frmMain.getTblActiveUsers().setVisible(true);
         Controller.getInstance().fillTblUsers(frmMain);
-    } 
-        public FrmMain getFrmMain() {
+    }
+
+    public FrmMain getFrmMain() {
         return frmMain;
     }
 
     private void addActionListeners() {
-        frmMain.getJmiSettings().addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ServerCoordinator.getInstance().openSettingsForm();
-            }
-
+        frmMain.getJmiSettings().addActionListener((ActionEvent e) -> {
+            ServerCoordinator.getInstance().openSettingsForm();
         });
-        
-        frmMain.addBtnStartServerActionListener(new ActionListener(){
+        frmMain.getJmiAboutSoftware().addActionListener((ActionEvent e) -> {
+            ServerCoordinator.getInstance().openAboutForm();
+        });
+
+        frmMain.addBtnStartServerActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               startServer();
+                startServer();
             }
 
             private void startServer() {
-                
+
                 frmMain.setRunning(true);
                 frmMain.getBtnStartServer().setEnabled(false);
                 frmMain.getBtnStopServer().setEnabled(true);
@@ -56,14 +58,14 @@ public class FrmMainController {
 
             }
         });
-        
-        frmMain.addBtnStopServerActionListener(new ActionListener(){
+
+        frmMain.addBtnStopServerActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               stopServer();
+                stopServer();
             }
 
-            private void stopServer() { 
+            private void stopServer() {
                 frmMain.setRunning(false);
                 frmMain.getBtnStartServer().setEnabled(true);
                 frmMain.getBtnStopServer().setEnabled(false);
@@ -73,6 +75,5 @@ public class FrmMainController {
             }
         });
     }
-    
-    
+
 }

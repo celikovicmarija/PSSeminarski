@@ -23,21 +23,19 @@ import domain.Passenger;
 import domain.Reservation;
 import domain.User;
 
-
 public class ProcessClientsRequests extends Thread {
 
     private Socket socket;
     Sender sender;
     Receiver receiver;
-    boolean end=true;
+    boolean end = true;
     User user;
-    
 
     public ProcessClientsRequests(Socket socket) {
-        this.socket = socket;        
+        this.socket = socket;
         sender = new Sender(socket);
         receiver = new Receiver(socket);
-        user=new User();
+        user = new User();
     }
 
     public User getUser() {
@@ -50,7 +48,6 @@ public class ProcessClientsRequests extends Thread {
 
     @Override
     public void run() {
-        
 
         while (true) {
             try {
@@ -60,9 +57,9 @@ public class ProcessClientsRequests extends Thread {
                     switch (request.getOperation()) {
                         case LOGIN:
                             User u = (User) request.getArgument();
-                           response.setResult(Controller.getInstance().login(u.getUsername(), u.getPassword()));
-                            user=u;
-                           break;
+                            response.setResult(Controller.getInstance().login(u.getUsername(), u.getPassword()));
+                            user = u;
+                            break;
                         case RETURN_AIRPLANES_ALL:
                             response.setResult(Controller.getInstance().getAllAirplanes(new Airplane()));
                             break;
@@ -83,92 +80,75 @@ public class ProcessClientsRequests extends Thread {
                             break;
                         case RETURN_FLIGHTS_ALL:
                             response.setResult(Controller.getInstance().getAllFlights(new Flight()));
-                            
                             break;
                         case ADD_FLIGHT:
                             GenericEntity flightInsert = (GenericEntity) request.getArgument();
-                            System.out.println("Received this: "+flightInsert);
                             Controller.getInstance().addFlight(flightInsert);
                             response.setResult(flightInsert);
                             break;
+                        case ADD_PASSENGER:
+                            GenericEntity passengerInsert = (GenericEntity) request.getArgument();
+                            Controller.getInstance().addPassenger(passengerInsert);
+                            response.setResult(passengerInsert);
+                            break;
                         case ADD_RESERVATION:
-                                GenericEntity reservationInsert = (GenericEntity) request.getArgument();
+                            GenericEntity reservationInsert = (GenericEntity) request.getArgument();
                             Controller.getInstance().addReservation(reservationInsert);
                             response.setResult(reservationInsert);
                             break;
-                         case DELETE_FLIGHT:
-                            GenericEntity flightDelete= (GenericEntity) request.getArgument();
+                        case DELETE_FLIGHT:
+                            GenericEntity flightDelete = (GenericEntity) request.getArgument();
                             Controller.getInstance().deleteFlight(flightDelete);
                             break;
-                         case DELETE_RESERVATION:
-                            GenericEntity reservationDelete= (GenericEntity) request.getArgument();
+                        case DELETE_RESERVATION:
+                            GenericEntity reservationDelete = (GenericEntity) request.getArgument();
                             Controller.getInstance().deleteReservation(reservationDelete);
                             break;
-                         case CHANGE_FLIGHT:
+                        case CHANGE_FLIGHT:
                             GenericEntity flightEdit = (GenericEntity) request.getArgument();
                             Controller.getInstance().editFlight(flightEdit);
                             break;
-                         case CHANGE_RESERVATION:
-                           GenericEntity reservationEdit = (GenericEntity) request.getArgument();
+                        case CHANGE_RESERVATION:
+                            GenericEntity reservationEdit = (GenericEntity) request.getArgument();
                             Controller.getInstance().editReservation(reservationEdit);
                             break;
-                         case SEARCH_AIRPLANES:
-                             GenericEntity airplaneSearch = (GenericEntity) request.getArgument();
-                               response.setResult(Controller.getInstance().searchAirplanes(airplaneSearch));
-                             break; 
-                          case SEARCH_AIRPORTS:
-                               GenericEntity airportSearch = (GenericEntity) request.getArgument();
-                               response.setResult(Controller.getInstance().searchAirports(airportSearch));
-                             break; 
-                           case SEARCH_COUPONS:
-                                GenericEntity couponSearch = (GenericEntity) request.getArgument();
-                               response.setResult(Controller.getInstance().searchCoupons(couponSearch));
-                             break; 
-                           case SEARCH_PASSENGERS:
+                        case SEARCH_AIRPLANES:
+                            GenericEntity airplaneSearch = (GenericEntity) request.getArgument();
+                            response.setResult(Controller.getInstance().searchAirplanes(airplaneSearch));
+                            break;
+                        case SEARCH_AIRPORTS:
+                            GenericEntity airportSearch = (GenericEntity) request.getArgument();
+                            response.setResult(Controller.getInstance().searchAirports(airportSearch));
+                            break;
+                        case SEARCH_COUPONS:
+                            GenericEntity couponSearch = (GenericEntity) request.getArgument();
+                            response.setResult(Controller.getInstance().searchCoupons(couponSearch));
+                            break;
+                        case SEARCH_PASSENGERS:
                             GenericEntity passengerSearch = (GenericEntity) request.getArgument();
-                               response.setResult(Controller.getInstance().searchPassengers(passengerSearch));        
-                               break;
-                           case SEARCH_LINES:
+                            response.setResult(Controller.getInstance().searchPassengers(passengerSearch));
+                            break;
+                        case SEARCH_LINES:
                             GenericEntity linetSearch = (GenericEntity) request.getArgument();
-                              response.setResult(Controller.getInstance().searchLines(linetSearch));
-                               break;
-                            case SEARCH_FLIGHTS:
-                             GenericEntity flightSearch = (GenericEntity) request.getArgument();
-                             response.setResult(Controller.getInstance().searchFlights(flightSearch));
+                            response.setResult(Controller.getInstance().searchLines(linetSearch));
+                            break;
+                        case SEARCH_FLIGHTS:
+                            GenericEntity flightSearch = (GenericEntity) request.getArgument();
+                            response.setResult(Controller.getInstance().searchFlights(flightSearch));
 
-                             break;
-                             case SEARCH_RESERVATIONS:
-                                 GenericEntity reservationSearch = (GenericEntity) request.getArgument();
+                            break;
+                        case SEARCH_RESERVATIONS:
+                            GenericEntity reservationSearch = (GenericEntity) request.getArgument();
                             response.setResult(Controller.getInstance().searchReservations(reservationSearch));
-                             break; 
-                            
-                         
-                       /* 
-                        case ADD_PRODUCT:
-                            Product productInsert = (Product) request.getArgument();
-                            Controller.getInstance().addProduct(productInsert);
                             break;
-                        case EDIT_PRODUCT:
-                            Product productEdit = (Product) request.getArgument();
-                            Controller.getInstance().editProduct(productEdit);
-                            break;
-                        case DELETE_PRODUCT:
-                            Product productDelete = (Product) request.getArgument();
-                            Controller.getInstance().deleteProduct(productDelete);
-                            break;
-                        case ADD_INVOICE:
-                            Invoice invoiceInsert = (Invoice) request.getArgument();
-                            Controller.getInstance().addInvoice(invoiceInsert);
-                            response.setResult(invoiceInsert);
-                            break;*/
                     }
                 } catch (Exception e) {
-                   // e.printStackTrace();
+                    // e.printStackTrace();
                     response.setException(e);
                 }
                 sender.send(response);
             } catch (Exception ex) {
-             //   Logger.getLogger(ProcessClientsRequests.class.getName()).log(Level.SEVERE, null, ex);
+                //   Logger.getLogger(ProcessClientsRequests.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -181,16 +161,15 @@ public class ProcessClientsRequests extends Thread {
         this.socket = socket;
     }
 
-        public void logoutEverybody() {
-         try {
-             end = true;
-             
-             Request request = new Request(Operation.LOGOUT,null);
-             sender.send(request);
-    
-             
-         } catch (Exception ex) {
-             System.out.println("Greska pri logoutovanju prijavljenih korisnika");
-         }
-   }
+    public void logoutEverybody() {
+        try {
+            end = true;
+
+            Request request = new Request(Operation.LOGOUT, null);
+            sender.send(request);
+
+        } catch (Exception ex) {
+            System.out.println("Greska pri logoutovanju prijavljenih korisnika");
+        }
+    }
 }

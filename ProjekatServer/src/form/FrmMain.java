@@ -34,10 +34,11 @@ public class FrmMain extends javax.swing.JFrame {
         jlbStudent = new javax.swing.JLabel();
         btnStartServer = new javax.swing.JButton();
         btnStopServer = new javax.swing.JButton();
-        jlbProgramName = new javax.swing.JLabel();
         lblStatus = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblActiveUsers = new javax.swing.JTable();
+        lblProgramName = new javax.swing.JLabel();
+        lblUsers = new javax.swing.JLabel();
         jmbMain = new javax.swing.JMenuBar();
         jmServer = new javax.swing.JMenu();
         jmiSettings = new javax.swing.JMenuItem();
@@ -55,10 +56,8 @@ public class FrmMain extends javax.swing.JFrame {
         btnStopServer.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
         btnStopServer.setText("Stop Server");
 
-        jlbProgramName.setFont(new java.awt.Font("Calibri Light", 2, 24)); // NOI18N
-        jlbProgramName.setText("Mirko Perce Travel Agency");
-
-        lblStatus.setFont(new java.awt.Font("Calibri Light", 0, 13)); // NOI18N
+        lblStatus.setFont(new java.awt.Font("Calibri Light", 2, 13)); // NOI18N
+        lblStatus.setForeground(new java.awt.Color(255, 0, 0));
         lblStatus.setText("Server is not running.");
 
         tblActiveUsers.setModel(new javax.swing.table.DefaultTableModel(
@@ -74,15 +73,25 @@ public class FrmMain extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblActiveUsers);
 
-        jmServer.setText("Server");
+        lblProgramName.setFont(new java.awt.Font("Vivaldi", 2, 36)); // NOI18N
+        lblProgramName.setText("Mirko Perce & Co Travel Agency");
 
+        lblUsers.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
+        lblUsers.setText("All System Users:");
+
+        jmServer.setText("Server");
+        jmServer.setFont(new java.awt.Font("Calibri Light", 2, 20)); // NOI18N
+
+        jmiSettings.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
         jmiSettings.setText("Settings");
         jmServer.add(jmiSettings);
 
         jmbMain.add(jmServer);
 
         jmAbout.setText("About");
+        jmAbout.setFont(new java.awt.Font("Calibri Light", 2, 20)); // NOI18N
 
+        jmiAboutSoftware.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
         jmiAboutSoftware.setText("About Software");
         jmAbout.add(jmiAboutSoftware);
 
@@ -97,33 +106,39 @@ public class FrmMain extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jlbStudent)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(btnStartServer)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnStopServer))
-                        .addComponent(jlbProgramName)
-                        .addComponent(lblStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                    .addComponent(lblProgramName, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblUsers)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(btnStartServer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jlbStudent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnStopServer, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jlbProgramName)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblProgramName)
+                .addGap(5, 5, 5)
                 .addComponent(jlbStudent)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnStartServer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnStartServer, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnStopServer, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblStatus)
-                .addGap(12, 12, 12)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblUsers)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(81, 81, 81))
         );
 
         pack();
@@ -147,14 +162,15 @@ public class FrmMain extends javax.swing.JFrame {
     private javax.swing.JButton btnStartServer;
     private javax.swing.JButton btnStopServer;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel jlbProgramName;
     private javax.swing.JLabel jlbStudent;
     private javax.swing.JMenu jmAbout;
     private javax.swing.JMenu jmServer;
     private javax.swing.JMenuBar jmbMain;
     private javax.swing.JMenuItem jmiAboutSoftware;
     private javax.swing.JMenuItem jmiSettings;
+    private javax.swing.JLabel lblProgramName;
     private javax.swing.JLabel lblStatus;
+    private javax.swing.JLabel lblUsers;
     private javax.swing.JTable tblActiveUsers;
     // End of variables declaration//GEN-END:variables
 
@@ -172,14 +188,6 @@ public class FrmMain extends javax.swing.JFrame {
 
     public void setBtnStopServer(javax.swing.JButton btnStopServer) {
         this.btnStopServer = btnStopServer;
-    }
-
-    public javax.swing.JLabel getJlbProgramName() {
-        return jlbProgramName;
-    }
-
-    public void setJlbProgramName(javax.swing.JLabel jlbProgramName) {
-        this.jlbProgramName = jlbProgramName;
     }
 
     public javax.swing.JLabel getJlbStudent() {
@@ -252,6 +260,22 @@ public class FrmMain extends javax.swing.JFrame {
 
     public void setTblActiveUsers(javax.swing.JTable tblActiveUsers) {
         this.tblActiveUsers = tblActiveUsers;
+    }
+
+    public javax.swing.JLabel getLblProgramName() {
+        return lblProgramName;
+    }
+
+    public void setLblProgramName(javax.swing.JLabel lblProgramName) {
+        this.lblProgramName = lblProgramName;
+    }
+
+    public javax.swing.JLabel getLblUsers() {
+        return lblUsers;
+    }
+
+    public void setLblUsers(javax.swing.JLabel lblUsers) {
+        this.lblUsers = lblUsers;
     }
     
     

@@ -5,25 +5,21 @@
  */
 package operation.flight;
 
-
 import domain.Flight;
 import operation.AbstractGenericOperation;
 
-/**
- *
- * @author Marija
- */
 public class DeleteFlight extends AbstractGenericOperation {
 
     @Override
     protected void preconditions(Object param) throws Exception {
-    
-    //TODO- Implement this
+        if (param == null || !(param instanceof Flight)) {
+            throw new Exception("Invalid flight data!");
+        }
     }
 
     @Override
     protected void executeOperation(Object param) throws Exception {
-       repository.delete((Flight) param);
-     }
-    
+        repository.delete((Flight) param);
+    }
+
 }

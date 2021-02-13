@@ -15,17 +15,17 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Marija
- */
+
 public class FrmSettingsController {
     private final FrmSettings frmSettings;
 
     public FrmSettingsController(FrmSettings frmSettings) {
         this.frmSettings = frmSettings;
+        this.frmSettings.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
     }
     
     public void openForm() {

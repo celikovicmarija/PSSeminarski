@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package server;
 
 import form.FrmMain;
@@ -14,13 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import repository.db.DbProperties;
 import thread.ProcessClientsRequests;
-import thread.ProcessClientsRequests;
 import thread.ThreadUpdateTable;
 
-/**
- *
- * @author Marija
- */
 public class StartServerThread extends Thread {
 
     private ServerSocket serverSocket;
@@ -31,7 +21,7 @@ public class StartServerThread extends Thread {
 
     public StartServerThread(FrmMain frm) {
         try {
-    
+
             this.frm = frm;
         } catch (Exception ex) {
             System.out.println("There has been an error. Server socket has not been created.");
@@ -42,22 +32,20 @@ public class StartServerThread extends Thread {
     @Override
     public void run() {
         try {
-                    DbProperties properties = new DbProperties();
-            portNumber = Integer.parseInt(properties.returnDbPort());              
+            DbProperties properties = new DbProperties();
+            portNumber = Integer.parseInt(properties.returnDbPort());
             serverSocket = new ServerSocket(portNumber);
             working = true;
             working = true;
             while (!isInterrupted()) {
 
-               // NitAzuriranjeTabele nat = new NitAzuriranjeTabele(frm);
-                //nat.start();
                 System.out.println("Server has been started");
                 Socket socket = serverSocket.accept();
-                
+
                 ProcessClientsRequests okz = new ProcessClientsRequests(socket);
                 okz.start();
                 clients.add(okz);
-                ThreadUpdateTable tut=new ThreadUpdateTable(frm);
+                ThreadUpdateTable tut = new ThreadUpdateTable(frm);
                 tut.start();
 
                 System.out.println("Client connected to the server!");
@@ -95,9 +83,9 @@ public class StartServerThread extends Thread {
             working = false;
             serverSocket.close();
             for (ProcessClientsRequests clientThread : clients) {
-                System.out.println("Logg outin client no"+ i);
+                System.out.println("Logg outin client no" + i);
                 i++;
-               // Controller.getInstance().getKorisniciUlogovani().remove(clientThread.getKorisnik());
+                // Controller.getInstance().getKorisniciUlogovani().remove(clientThread.getKorisnik());
                 clients.remove(clientThread);
                 clientThread.getSocket().close();
             }

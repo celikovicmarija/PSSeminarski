@@ -3,8 +3,6 @@ package repository;
 import java.util.List;
 
 /**
- *
- * @author laptop-02
  * @param <T>
  */
 public interface Repository<T> {
@@ -24,11 +22,14 @@ public interface Repository<T> {
     List<T> returnFiveTablesWithCondition(T param) throws Exception;
 
     List<T> returnFiveTables(T param) throws Exception;
-    List<T> returnSevenTables(T param) throws Exception;
-    List<T> returnSevenTablesWithCondition(T param) throws Exception;
-    List<T> returnEightTables(T param) throws Exception;
-    List<T> returnEightTablesWithCondition(T param) throws Exception;
 
+    List<T> returnSevenTables(T param) throws Exception;
+
+    List<T> returnSevenTablesWithCondition(T param) throws Exception;
+
+    List<T> returnEightTables(T param) throws Exception;
+
+    List<T> returnEightTablesWithCondition(T param) throws Exception;
 
     void add(T param) throws Exception;
 

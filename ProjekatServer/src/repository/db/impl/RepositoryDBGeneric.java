@@ -47,6 +47,7 @@ public class RepositoryDBGeneric implements DbRepository<GenericEntity> {
             throw ex;
         }
     }
+
     @Override
     public List<GenericEntity> getAll(GenericEntity param) throws Exception {
         try {
@@ -107,7 +108,7 @@ public class RepositoryDBGeneric implements DbRepository<GenericEntity> {
             System.out.println(query);
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(query);
-           // st.close();
+            // st.close();
             return param.getList(rs);
 
         } catch (SQLException ex) {
@@ -153,14 +154,14 @@ public class RepositoryDBGeneric implements DbRepository<GenericEntity> {
         }
 
     }
-    
+
     @Override
     public List<GenericEntity> returnThreeTablesWithCondition(GenericEntity param) throws SQLException, Exception {
         try {
             Connection connection = DbConnectionFactory.getInstance().getConnection();
             String query = "SELECT * FROM " + param.getTableName() + " JOIN "
                     + param.returnJoinTableOne() + " ON " + param.returnJoinConditionOne() + " JOIN "
-                    + param.returnJoinTableTwo() + " ON " + param.returnJoinConditionTwo()+" WHERE "+param.returnSearchCondition();
+                    + param.returnJoinTableTwo() + " ON " + param.returnJoinConditionTwo() + " WHERE " + param.returnSearchCondition();
             System.out.println(query);
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -171,14 +172,14 @@ public class RepositoryDBGeneric implements DbRepository<GenericEntity> {
         }
 
     }
-    
+
     @Override
-        public List<GenericEntity> returnTwoTablesWithCondition(GenericEntity param) throws SQLException, Exception {
+    public List<GenericEntity> returnTwoTablesWithCondition(GenericEntity param) throws SQLException, Exception {
 
         try {
             Connection connection = DbConnectionFactory.getInstance().getConnection();
             String query = "SELECT * FROM " + param.getTableName() + " JOIN "
-                    + param.returnJoinTableOne() + " ON " + param.returnJoinConditionOne()+" WHERE "+param.returnSearchCondition();
+                    + param.returnJoinTableOne() + " ON " + param.returnJoinConditionOne() + " WHERE " + param.returnSearchCondition();
 
             System.out.println(query);
             Statement st = connection.createStatement();
@@ -195,15 +196,15 @@ public class RepositoryDBGeneric implements DbRepository<GenericEntity> {
 
     @Override
     public List<GenericEntity> returnFiveTablesWithCondition(GenericEntity param) throws Exception {
-        
+
         try {
             Connection connection = DbConnectionFactory.getInstance().getConnection();
             String query = "SELECT * FROM " + param.getTableName() + " JOIN "
                     + param.returnJoinTableOne() + " ON " + param.returnJoinConditionOne() + " JOIN "
-                    + param.returnJoinTableTwo() + " ON " + param.returnJoinConditionTwo()+ " JOIN "
-                    +param.returnJoinTableThree()+ " ON " + param.returnJoinConditionThree()+ " JOIN "
-                    +param.returnJoinTableFour()+ " ON " + param.returnJoinConditionFour()
-                    +" WHERE "+param.returnSearchCondition();
+                    + param.returnJoinTableTwo() + " ON " + param.returnJoinConditionTwo() + " JOIN "
+                    + param.returnJoinTableThree() + " ON " + param.returnJoinConditionThree() + " JOIN "
+                    + param.returnJoinTableFour() + " ON " + param.returnJoinConditionFour()
+                    + " WHERE " + param.returnSearchCondition();
             System.out.println(query);
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -216,14 +217,14 @@ public class RepositoryDBGeneric implements DbRepository<GenericEntity> {
 
     @Override
     public List<GenericEntity> returnFiveTables(GenericEntity param) throws Exception {
-         try {
+        try {
             Connection connection = DbConnectionFactory.getInstance().getConnection();
             String query = "SELECT * FROM " + param.getTableName() + " JOIN "
                     + param.returnJoinTableOne() + " ON " + param.returnJoinConditionOne() + " JOIN "
                     + param.returnJoinTableTwo() + " ON " + param.returnJoinConditionTwo() + " JOIN "
-                    +param.returnJoinTableThree()+ " ON " + param.returnJoinConditionThree() + " JOIN "
-                    +param.returnJoinTableFour()+ " ON " + param.returnJoinConditionFour();
-               
+                    + param.returnJoinTableThree() + " ON " + param.returnJoinConditionThree() + " JOIN "
+                    + param.returnJoinTableFour() + " ON " + param.returnJoinConditionFour();
+
             System.out.println(query);
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -233,19 +234,20 @@ public class RepositoryDBGeneric implements DbRepository<GenericEntity> {
             throw ex;
         }
     }
-        @Override
+
+    @Override
     public List<GenericEntity> returnEightTables(GenericEntity param) throws Exception {
-         try {
+        try {
             Connection connection = DbConnectionFactory.getInstance().getConnection();
             String query = "SELECT * FROM " + param.getTableName() + " JOIN "
                     + param.returnJoinTableOne() + " ON " + param.returnJoinConditionOne() + " JOIN "
                     + param.returnJoinTableTwo() + " ON " + param.returnJoinConditionTwo() + " JOIN "
-                    +param.returnJoinTableThree()+ " ON " + param.returnJoinConditionThree() + " JOIN "
-                    +param.returnJoinTableFour()+ " ON " + param.returnJoinConditionFour() + " JOIN "
-                       +param.returnJoinTableFive()+ " ON " + param.returnJoinConditionFive() + " JOIN "
-                       +param.returnJoinTableSix()+ " ON " + param.returnJoinConditionSix() + " JOIN "
-                    +param.returnJoinTableSeven()+ " ON " + param.returnJoinConditionSeven();
-               
+                    + param.returnJoinTableThree() + " ON " + param.returnJoinConditionThree() + " JOIN "
+                    + param.returnJoinTableFour() + " ON " + param.returnJoinConditionFour() + " JOIN "
+                    + param.returnJoinTableFive() + " ON " + param.returnJoinConditionFive() + " JOIN "
+                    + param.returnJoinTableSix() + " ON " + param.returnJoinConditionSix() + " JOIN "
+                    + param.returnJoinTableSeven() + " ON " + param.returnJoinConditionSeven();
+
             System.out.println(query);
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -255,19 +257,20 @@ public class RepositoryDBGeneric implements DbRepository<GenericEntity> {
             throw ex;
         }
     }
-            @Override
+
+    @Override
     public List<GenericEntity> returnEightTablesWithCondition(GenericEntity param) throws Exception {
-         try {
+        try {
             Connection connection = DbConnectionFactory.getInstance().getConnection();
             String query = "SELECT * FROM " + param.getTableName() + " JOIN "
                     + param.returnJoinTableOne() + " ON " + param.returnJoinConditionOne() + " JOIN "
                     + param.returnJoinTableTwo() + " ON " + param.returnJoinConditionTwo() + " JOIN "
-                    +param.returnJoinTableThree()+ " ON " + param.returnJoinConditionThree() + " JOIN "
-                    +param.returnJoinTableFour()+ " ON " + param.returnJoinConditionFour() + " JOIN "
-                       +param.returnJoinTableFive()+ " ON " + param.returnJoinConditionFive() + " JOIN "
-                       +param.returnJoinTableSix()+ " ON " + param.returnJoinConditionSix() + " JOIN "
-                    +param.returnJoinTableSeven()+ " ON " + param.returnJoinConditionSeven()+" WHERE "+param.returnSearchCondition();
-               
+                    + param.returnJoinTableThree() + " ON " + param.returnJoinConditionThree() + " JOIN "
+                    + param.returnJoinTableFour() + " ON " + param.returnJoinConditionFour() + " JOIN "
+                    + param.returnJoinTableFive() + " ON " + param.returnJoinConditionFive() + " JOIN "
+                    + param.returnJoinTableSix() + " ON " + param.returnJoinConditionSix() + " JOIN "
+                    + param.returnJoinTableSeven() + " ON " + param.returnJoinConditionSeven() + " WHERE " + param.returnSearchCondition();
+
             System.out.println(query);
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -285,11 +288,11 @@ public class RepositoryDBGeneric implements DbRepository<GenericEntity> {
             String query = "SELECT * FROM " + param.getTableName() + " JOIN "
                     + param.returnJoinTableOne() + " ON " + param.returnJoinConditionOne() + " JOIN "
                     + param.returnJoinTableTwo() + " ON " + param.returnJoinConditionTwo() + " JOIN "
-                    +param.returnJoinTableThree()+ " ON " + param.returnJoinConditionThree() + " JOIN "
-                    +param.returnJoinTableFour()+ " ON " + param.returnJoinConditionFour() + " JOIN "
-                       +param.returnJoinTableFive()+ " ON " + param.returnJoinConditionFive() + " JOIN "
-                       +param.returnJoinTableSix()+ " ON " + param.returnJoinConditionSix();
-               
+                    + param.returnJoinTableThree() + " ON " + param.returnJoinConditionThree() + " JOIN "
+                    + param.returnJoinTableFour() + " ON " + param.returnJoinConditionFour() + " JOIN "
+                    + param.returnJoinTableFive() + " ON " + param.returnJoinConditionFive() + " JOIN "
+                    + param.returnJoinTableSix() + " ON " + param.returnJoinConditionSix();
+
             System.out.println(query);
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -299,18 +302,19 @@ public class RepositoryDBGeneric implements DbRepository<GenericEntity> {
             throw ex;
         }
     }
-        @Override
+
+    @Override
     public List<GenericEntity> returnSevenTablesWithCondition(GenericEntity param) throws Exception {
         try {
             Connection connection = DbConnectionFactory.getInstance().getConnection();
             String query = "SELECT * FROM " + param.getTableName() + " JOIN "
                     + param.returnJoinTableOne() + " ON " + param.returnJoinConditionOne() + " JOIN "
                     + param.returnJoinTableTwo() + " ON " + param.returnJoinConditionTwo() + " JOIN "
-                    +param.returnJoinTableThree()+ " ON " + param.returnJoinConditionThree() + " JOIN "
-                    +param.returnJoinTableFour()+ " ON " + param.returnJoinConditionFour() + " JOIN "
-                       +param.returnJoinTableFive()+ " ON " + param.returnJoinConditionFive() + " JOIN "
-                       +param.returnJoinTableSix()+ " ON " + param.returnJoinConditionSix() +" WHERE "+param.returnSearchCondition();
-               
+                    + param.returnJoinTableThree() + " ON " + param.returnJoinConditionThree() + " JOIN "
+                    + param.returnJoinTableFour() + " ON " + param.returnJoinConditionFour() + " JOIN "
+                    + param.returnJoinTableFive() + " ON " + param.returnJoinConditionFive() + " JOIN "
+                    + param.returnJoinTableSix() + " ON " + param.returnJoinConditionSix() + " WHERE " + param.returnSearchCondition();
+
             System.out.println(query);
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(query);

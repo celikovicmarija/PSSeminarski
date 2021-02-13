@@ -1,18 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package operation;
 
 import repository.Repository;
 import repository.db.DbRepository;
 import repository.db.impl.RepositoryDBGeneric;
 
-/**
- *
- * @author Milos Milic
- */
 public abstract class AbstractGenericOperation {
 
     protected final Repository repository;
@@ -28,7 +19,6 @@ public abstract class AbstractGenericOperation {
             executeOperation(param);
             commitTransaction();
         } catch (Exception ex) {
-            ex.printStackTrace();
             rollbackTransaction();
             throw ex;
         } finally {
@@ -36,14 +26,12 @@ public abstract class AbstractGenericOperation {
         }
     }
 
-    // Operation-specific method
     protected abstract void preconditions(Object param) throws Exception;
 
     private void startTransaction() throws Exception {
         ((DbRepository) repository).connect();
     }
 
-    // Operation-specific method
     protected abstract void executeOperation(Object param) throws Exception;
 
     private void commitTransaction() throws Exception {

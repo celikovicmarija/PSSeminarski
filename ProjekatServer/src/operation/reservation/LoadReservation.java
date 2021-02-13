@@ -8,10 +8,6 @@ package operation.reservation;
 import domain.Reservation;
 import operation.AbstractGenericOperation;
 
-/**
- *
- * @author Marija
- */
 public class LoadReservation extends AbstractGenericOperation{
 
     @Override
