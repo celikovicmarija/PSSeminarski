@@ -84,10 +84,10 @@ public class FrmCreateFlight extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
         jLabel3.setText("Searh airports by name: ");
 
-        btnSearchAirplanes.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+        btnSearchAirplanes.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
         btnSearchAirplanes.setText("Search");
 
-        btnSearchAirports.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+        btnSearchAirports.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
         btnSearchAirports.setText("Search");
 
         tblAirplanes.setModel(new javax.swing.table.DefaultTableModel(
@@ -132,7 +132,7 @@ public class FrmCreateFlight extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
         jLabel4.setText("Searh line by src,dest: ");
 
-        btnSearchLines.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+        btnSearchLines.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
         btnSearchLines.setText("Search");
         btnSearchLines.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
@@ -149,7 +149,7 @@ public class FrmCreateFlight extends javax.swing.JFrame {
         txtNote.setRows(5);
         jScrollPane4.setViewportView(txtNote);
 
-        btnSave.setFont(new java.awt.Font("Calibri Light", 0, 24)); // NOI18N
+        btnSave.setFont(new java.awt.Font("Calibri Light", 2, 24)); // NOI18N
         btnSave.setText("Save flight");
 
         jLabel8.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N

@@ -1,21 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view.form.component.table;
 
 import domain.Reservation;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
-/**
- *
- * @author Marija
- */
+
 public class ReservationTableModel extends AbstractTableModel{
     private final List<Reservation> reservations;
-    private final String[] columnNames={"ID","Price","Issue Date","Valid Until","Discounted Price","Flight", "Passenger"};
+    private final String[] columnNames={"ID","Price","Issue Date","Valid Until","Discounted Price","Flight", "Passenger","Coupon"};
 
     public ReservationTableModel(List<Reservation> reservations) {
         this.reservations = reservations;
@@ -34,7 +26,7 @@ public class ReservationTableModel extends AbstractTableModel{
 
     @Override
     public int getColumnCount() {
-        return 7;
+        return 8;
     }
 
     @Override
@@ -48,6 +40,7 @@ public class ReservationTableModel extends AbstractTableModel{
             case 4: return reservation.getDiscountedPrice();
             case 5: return reservation.getFlight().getFlightID();
             case 6: return reservation.getPassenger().getPassportNumber();
+            case 7: return reservation.getCoupon().getDescription();
             default: return "n/a";
         }
     }
@@ -101,39 +94,9 @@ public class ReservationTableModel extends AbstractTableModel{
         reservations.remove(reservation);
         fireTableDataChanged();
     }
-        /*
-        
-    public void addInvoiceItem(Product product, BigDecimal quantity, BigDecimal price) {
-        InvoiceItem item = new InvoiceItem();
-        item.setInvoice(invoice);
-        item.setOrderNumber(invoice.getItems().size() + 1);
-        item.setProduct(product);
-        item.setPrice(price);
-        item.setQuantity(quantity);
-        item.setMeasurementUnit(product.getMeasurementUnit());
-        item.setAmount(item.getPrice().multiply(item.getQuantity()));
-        invoice.getItems().add(item);
-        invoice.setAmount(invoice.getAmount().add(item.getPrice().multiply(item.getQuantity())));
-        fireTableRowsInserted(invoice.getItems().size() - 1, invoice.getItems().size() - 1);
+       public void refresh( ) {
+        fireTableDataChanged();
     }
 
-    public void removeInvoiceItem(int rowIndex) {
-        InvoiceItem item = invoice.getItems().get(rowIndex);
-        invoice.getItems().remove(rowIndex);
-        invoice.setAmount(invoice.getAmount().subtract(item.getPrice().multiply(item.getQuantity())));
-        setOrderNumbers();
-        fireTableRowsDeleted(invoice.getItems().size() - 1, invoice.getItems().size() - 1);
-    }
-
-    private void setOrderNumbers() {
-        int orderNo = 0;
-        for (InvoiceItem item : invoice.getItems()) {
-            item.setOrderNumber(++orderNo);
-        }
-    }
-        
-        
-        
-        */
     
 }

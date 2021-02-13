@@ -26,30 +26,17 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="menuLine">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Line"/>
-          </Properties>
-        </Menu>
         <Menu class="javax.swing.JMenu" name="menuPassenger">
           <Properties>
             <Property name="text" type="java.lang.String" value="Passenger"/>
           </Properties>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="menuCoupon">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Coupon"/>
-          </Properties>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="menuAirplane">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Airplane"/>
-          </Properties>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="menuAirport">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Airport"/>
-          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="miCreatePassenger">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Create Passenger"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="menuReservation">
           <Properties>
@@ -83,6 +70,11 @@
                 <Property name="text" type="java.lang.String" value="Logout"/>
               </Properties>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="miAbout">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="About Software"/>
+              </Properties>
+            </MenuItem>
           </SubComponents>
         </Menu>
       </SubComponents>
@@ -111,13 +103,59 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="532" max="32767" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                      <Component id="lblLoggedUser" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="lblDescription" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="113" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="274" max="32767" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblLoggedUser" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="lblDescription" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="94" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Calibri Light" size="18" style="2"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Logged User:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblLoggedUser">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Calibri Light" size="18" style="2"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Logged User"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblDescription">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Calibri Light" size="14" style="2"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Please select menu option for any operation that you wish to perform."/>
+      </Properties>
+    </Component>
+  </SubComponents>
 </Form>

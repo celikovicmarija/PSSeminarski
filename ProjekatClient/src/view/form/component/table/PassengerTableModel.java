@@ -1,18 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view.form.component.table;
 
 import domain.Passenger;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
-/**
- *
- * @author Marija
- */
+
 public class PassengerTableModel extends AbstractTableModel {
     private final List<Passenger> passengers;
     private final String[] columnNames={"Passport No","First Name","Last Name","MLB"};
@@ -86,9 +78,9 @@ public class PassengerTableModel extends AbstractTableModel {
         fireTableDataChanged();
     }
     public void addPassengers(List<Passenger> list) {
-        for (Passenger a : list) {
-            passengers.add(a);        
-        }
+        list.forEach((a) -> {
+            passengers.add(a);
+        });
         
         fireTableDataChanged();
     }
@@ -99,7 +91,9 @@ public class PassengerTableModel extends AbstractTableModel {
         passengers.remove(passenger);
         fireTableDataChanged();
     }
-    
+           public void refresh( ) {
+        fireTableDataChanged();
+    }
 
     
 }

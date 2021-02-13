@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view.controller;
 
 import communication.Communication;
@@ -19,14 +14,9 @@ import coordinator.MainCoordinator;
 import constant.Constants;
 import domain.Airplane;
 import domain.Line;
-import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import view.form.component.table.FlightTableModel;
 
-/**
- *
- * @author Marija
- */
 public class UpdateFlightController {
 
     FrmUpdateFlight frm;
@@ -34,12 +24,13 @@ public class UpdateFlightController {
 
     public UpdateFlightController(FrmUpdateFlight frm) {
         this.frm = frm;
+        this.frm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        addActionListeners();
     }
 
     public void openForm() {
         prepareForm();
         frm.setVisible(true);
-        addActionListeners();
     }
 
     private void prepareForm() {
@@ -130,10 +121,12 @@ public class UpdateFlightController {
     }
 
     private void fillCbLines() throws Exception {
+         frm.getCbLines().removeAllItems();
         frm.getCbLines().setModel(new DefaultComboBoxModel(Communication.getInstance().getAllLines().toArray()));
     }
 
     private void fillCbAirplanes() throws Exception {
+         frm.getCbAirplanes().removeAllItems();
         frm.getCbAirplanes().setModel(new DefaultComboBoxModel(Communication.getInstance().getAllAirplanes().toArray()));
     }
 

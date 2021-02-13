@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package communication;
 
 import domain.Airplane;
@@ -16,10 +11,6 @@ import java.net.Socket;
 import domain.User;
 import java.util.List;
 
-/**
- *
- * @author Cartman
- */
 public class Communication {
 
     Socket socket;
@@ -54,16 +45,28 @@ public class Communication {
         }
     }
 
-        public void editFlight(Flight flight) throws Exception {
-        Request request=new Request(Operation.CHANGE_FLIGHT, flight);
+    public void editFlight(Flight flight) throws Exception {
+        Request request = new Request(Operation.CHANGE_FLIGHT, flight);
         sender.send(request);
-        Response response=(Response)receiver.receive();
-        if(response.getException()==null){
-            
-        }else{
+        Response response = (Response) receiver.receive();
+        if (response.getException() == null) {
+
+        } else {
             throw response.getException();
         }
     }
+
+    public void editReservation(Reservation reservation) throws Exception {
+        Request request = new Request(Operation.CHANGE_RESERVATION, reservation);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if (response.getException() == null) {
+
+        } else {
+            throw response.getException();
+        }
+    }
+
     public List<Flight> getAllFlights() throws Exception {
         Request request = new Request(Operation.RETURN_FLIGHTS_ALL, null);
         sender.send(request);
@@ -108,8 +111,20 @@ public class Communication {
             throw response.getException();
         }
     }
-   public List<Passenger> getAllPassengers() throws Exception {
-               Request request = new Request(Operation.RETURN_PASSENGERS_ALL, null);
+
+    public List<Coupon> getAllCoupons() throws Exception {
+        Request request = new Request(Operation.RETURN_COUPONS_ALL, null);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if (response.getException() == null) {
+            return (List<Coupon>) response.getResult();
+        } else {
+            throw response.getException();
+        }
+    }
+
+    public List<Passenger> getAllPassengers() throws Exception {
+        Request request = new Request(Operation.RETURN_PASSENGERS_ALL, null);
         sender.send(request);
         Response response = (Response) receiver.receive();
         if (response.getException() == null) {
@@ -118,7 +133,8 @@ public class Communication {
             throw response.getException();
         }
     }
-       public List<Reservation> getAllReservations() throws Exception {
+
+    public List<Reservation> getAllReservations() throws Exception {
         Request request = new Request(Operation.RETURN_RESERVATIONS_ALL, null);
         sender.send(request);
         Response response = (Response) receiver.receive();
@@ -128,7 +144,7 @@ public class Communication {
             throw response.getException();
         }
     }
-    
+
     public void addFlight(Flight flight) throws Exception {
         Request request = new Request(Operation.ADD_FLIGHT, flight);
         sender.send(request);
@@ -136,6 +152,17 @@ public class Communication {
         if (response.getException() == null) {
             Flight newFlight = (Flight) response.getResult();
             flight.setId(newFlight.getFlightID());
+        } else {
+            throw response.getException();
+        }
+    }
+
+    public void addPassenger(Passenger passenger) throws Exception {
+        Request request = new Request(Operation.ADD_PASSENGER, passenger);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if (response.getException() == null) {
+            Passenger newPassenger = (Passenger) response.getResult();
         } else {
             throw response.getException();
         }
@@ -207,6 +234,7 @@ public class Communication {
             throw response.getException();
         }
     }
+
     public List<Coupon> searchCoupons(Coupon coupon) throws Exception {
         Request request = new Request(Operation.SEARCH_COUPONS, coupon);
         sender.send(request);
@@ -217,6 +245,7 @@ public class Communication {
             throw response.getException();
         }
     }
+
     public List<Flight> searchFlights(Flight flight) throws Exception {
         Request request = new Request(Operation.SEARCH_FLIGHTS, flight);
         sender.send(request);
@@ -227,6 +256,7 @@ public class Communication {
             throw response.getException();
         }
     }
+
     public List<Passenger> searchPassengers(Passenger passenger) throws Exception {
         Request request = new Request(Operation.SEARCH_PASSENGERS, passenger);
         sender.send(request);
@@ -237,8 +267,9 @@ public class Communication {
             throw response.getException();
         }
     }
-    public List<Reservation> searchReservations() throws Exception {
-        Request request = new Request(Operation.SEARCH_RESERVATIONS, null);
+
+    public List<Reservation> searchReservations(Reservation reservation) throws Exception {
+        Request request = new Request(Operation.SEARCH_RESERVATIONS, reservation);
         sender.send(request);
         Response response = (Response) receiver.receive();
         if (response.getException() == null) {
@@ -247,9 +278,5 @@ public class Communication {
             throw response.getException();
         }
     }
-
-
-
- 
 
 }

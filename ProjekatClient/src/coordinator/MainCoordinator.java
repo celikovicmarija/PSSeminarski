@@ -1,13 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package coordinator;
 
 import java.util.HashMap;
 import java.util.Map;
 import view.controller.CreateFlightController;
+import view.controller.CreatePassengerController;
 import view.controller.CreateReservationController;
 
 import view.controller.LoginController;
@@ -16,7 +12,9 @@ import view.controller.SearchFlightsController;
 import view.controller.SearchReservationsController;
 import view.controller.UpdateFlightController;
 import view.controller.UpdateReservationController;
+import view.form.FrmAbout;
 import view.form.FrmCreateFlight;
+import view.form.FrmCreatePassenger;
 import view.form.FrmCreateReservation;
 import view.form.FrmLogin;
 import view.form.FrmSearchFlights;
@@ -43,6 +41,7 @@ public class MainCoordinator {
         }
         return instance;
     }
+
     public void openLoginForm() {
         LoginController loginContoller = new LoginController(new FrmLogin());
         loginContoller.openForm();
@@ -51,30 +50,45 @@ public class MainCoordinator {
     public void openMainForm() {
         mainContoller.openForm();
     }
+
     public void openCreateFlightForm() {
-        FrmCreateFlight fcf= new FrmCreateFlight();
+        FrmCreateFlight fcf = new FrmCreateFlight();
         CreateFlightController createFlightController = new CreateFlightController(fcf);
         createFlightController.openForm();
     }
-    
+
     public void openCreateReservationForm() {
-         CreateReservationController reservationController= new CreateReservationController(new FrmCreateReservation());
-         reservationController.openForm();
+        CreateReservationController reservationController = new CreateReservationController(new FrmCreateReservation());
+        reservationController.openForm();
     }
-    public void openSearchFlightsForm(){
-        SearchFlightsController searchFlightsController= new SearchFlightsController(new FrmSearchFlights());
+
+    public void openCreatePassengerForm() {
+        CreatePassengerController passengerController = new CreatePassengerController(new FrmCreatePassenger());
+        passengerController.openForm();
+    }
+
+    public void openAboutForm() {
+        new FrmAbout(mainContoller.getFrmMain(), true).setVisible(true);
+
+    }
+
+    public void openSearchFlightsForm() {
+        SearchFlightsController searchFlightsController = new SearchFlightsController(new FrmSearchFlights());
         searchFlightsController.openForm();
     }
-    public void openSearchResevationsForm(){
-        SearchReservationsController searchReservationsController= new SearchReservationsController(new FrmSearchReservations());
+
+    public void openSearchResevationsForm() {
+        SearchReservationsController searchReservationsController = new SearchReservationsController(new FrmSearchReservations());
         searchReservationsController.openForm();
     }
-   public void openUpdateFlightForm(){
-        UpdateFlightController updateFlightController= new UpdateFlightController(new FrmUpdateFlight());
+
+    public void openUpdateFlightForm() {
+        UpdateFlightController updateFlightController = new UpdateFlightController(new FrmUpdateFlight());
         updateFlightController.openForm();
     }
-    public void openUpdateResevationForm(){
- UpdateReservationController updateReservationController= new UpdateReservationController(new FrmUpdateReservation());
+
+    public void openUpdateResevationForm() {
+        UpdateReservationController updateReservationController = new UpdateReservationController(new FrmUpdateReservation());
         updateReservationController.openForm();
     }
 
@@ -90,8 +104,4 @@ public class MainCoordinator {
         return params.get(name);
     }
 
-
-
-  
-   
 }

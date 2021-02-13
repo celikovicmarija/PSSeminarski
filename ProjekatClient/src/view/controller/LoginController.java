@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view.controller;
 
 import java.awt.event.ActionEvent;
@@ -14,10 +9,6 @@ import constant.Constants;
 import coordinator.MainCoordinator;
 import view.form.FrmLogin;
 
-/**
- *
- * @author laptop-02
- */
 public class LoginController {
 
     private final FrmLogin frmLogin;
@@ -46,11 +37,10 @@ public class LoginController {
 
                     validateForm(username, password);
 
-                
                     User user = Communication.getInstance().login(username, password);
                     JOptionPane.showMessageDialog(
                             frmLogin,
-                            "User " + user.getFirstname() + " " + user.getLastname()+" has been logged in successfully!",
+                            "User " + user.getFirstname() + " " + user.getLastname() + " has been logged in successfully!",
                             "Login", JOptionPane.INFORMATION_MESSAGE
                     );
                     frmLogin.dispose();

@@ -29,24 +29,34 @@ public class FrmUserMain extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        lblLoggedUser = new javax.swing.JLabel();
+        lblDescription = new javax.swing.JLabel();
         menuBarMain = new javax.swing.JMenuBar();
         menuFlight = new javax.swing.JMenu();
         miCreateFlight = new javax.swing.JMenuItem();
         miSearchFlights = new javax.swing.JMenuItem();
         miDeleteFlight = new javax.swing.JMenuItem();
-        menuLine = new javax.swing.JMenu();
         menuPassenger = new javax.swing.JMenu();
-        menuCoupon = new javax.swing.JMenu();
-        menuAirplane = new javax.swing.JMenu();
-        menuAirport = new javax.swing.JMenu();
+        miCreatePassenger = new javax.swing.JMenuItem();
         menuReservation = new javax.swing.JMenu();
         miCreateReservation = new javax.swing.JMenuItem();
         miSearchReservations = new javax.swing.JMenuItem();
         miDeleteReservation = new javax.swing.JMenuItem();
         menuOptions = new javax.swing.JMenu();
         miLogout = new javax.swing.JMenuItem();
+        miAbout = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
+        jLabel1.setText("Logged User:");
+
+        lblLoggedUser.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
+        lblLoggedUser.setText("Logged User");
+
+        lblDescription.setFont(new java.awt.Font("Calibri Light", 2, 14)); // NOI18N
+        lblDescription.setText("Please select menu option for any operation that you wish to perform.");
 
         menuFlight.setText("Flight");
 
@@ -61,20 +71,12 @@ public class FrmUserMain extends javax.swing.JFrame {
 
         menuBarMain.add(menuFlight);
 
-        menuLine.setText("Line");
-        menuBarMain.add(menuLine);
-
         menuPassenger.setText("Passenger");
+
+        miCreatePassenger.setText("Create Passenger");
+        menuPassenger.add(miCreatePassenger);
+
         menuBarMain.add(menuPassenger);
-
-        menuCoupon.setText("Coupon");
-        menuBarMain.add(menuCoupon);
-
-        menuAirplane.setText("Airplane");
-        menuBarMain.add(menuAirplane);
-
-        menuAirport.setText("Airport");
-        menuBarMain.add(menuAirport);
 
         menuReservation.setText("Reservation");
 
@@ -94,6 +96,9 @@ public class FrmUserMain extends javax.swing.JFrame {
         miLogout.setText("Logout");
         menuOptions.add(miLogout);
 
+        miAbout.setText("About Software");
+        menuOptions.add(miAbout);
+
         menuBarMain.add(menuOptions);
 
         setJMenuBar(menuBarMain);
@@ -102,27 +107,43 @@ public class FrmUserMain extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 532, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(32, 32, 32)
+                        .addComponent(lblLoggedUser))
+                    .addComponent(lblDescription))
+                .addContainerGap(113, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(lblLoggedUser))
+                .addGap(18, 18, 18)
+                .addComponent(lblDescription)
+                .addContainerGap(94, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu menuAirplane;
-    private javax.swing.JMenu menuAirport;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lblDescription;
+    private javax.swing.JLabel lblLoggedUser;
     private javax.swing.JMenuBar menuBarMain;
-    private javax.swing.JMenu menuCoupon;
     private javax.swing.JMenu menuFlight;
-    private javax.swing.JMenu menuLine;
     private javax.swing.JMenu menuOptions;
     private javax.swing.JMenu menuPassenger;
     private javax.swing.JMenu menuReservation;
+    private javax.swing.JMenuItem miAbout;
     private javax.swing.JMenuItem miCreateFlight;
+    private javax.swing.JMenuItem miCreatePassenger;
     private javax.swing.JMenuItem miCreateReservation;
     private javax.swing.JMenuItem miDeleteFlight;
     private javax.swing.JMenuItem miDeleteReservation;
@@ -153,9 +174,14 @@ public class FrmUserMain extends javax.swing.JFrame {
      public void miSearchReservationsAddActionListener(ActionListener actionListener) {
         miSearchReservations.addActionListener(actionListener);
     }
-    
+        public void miAboutAddActionListener(ActionListener actionListener) {
+        miAbout.addActionListener(actionListener);
+    }
     public void miCreateFlightAddActionListener(ActionListener actionListener) {
         miCreateFlight.addActionListener(actionListener);
+    }
+       public void miCreatePassengerAddActionListener(ActionListener actionListener) {
+        miCreatePassenger.addActionListener(actionListener);
     }
     public void miCreateReservationAddActionListener(ActionListener actionListener) {
         miCreateReservation.addActionListener(actionListener);
@@ -208,5 +234,13 @@ public class FrmUserMain extends javax.swing.JFrame {
 
     public void setMiSearchReservations(javax.swing.JMenuItem miSearchReservations) {
         this.miSearchReservations = miSearchReservations;
+    }
+
+    public javax.swing.JLabel getLblLoggedUser() {
+        return lblLoggedUser;
+    }
+
+    public void setLblLoggedUser(javax.swing.JLabel lblLoggedUser) {
+        this.lblLoggedUser = lblLoggedUser;
     }
 }
