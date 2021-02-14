@@ -44,6 +44,16 @@ public class Communication {
             throw response.getException();
         }
     }
+        public void logout(User u) throws Exception {
+             Request request = new Request(Operation.LOGOUT, u);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if (response.getException() == null) {
+           // return (User) response.getResult();
+        } else {
+            throw response.getException();
+        }
+    }
 
     public void editFlight(Flight flight) throws Exception {
         Request request = new Request(Operation.CHANGE_FLIGHT, flight);

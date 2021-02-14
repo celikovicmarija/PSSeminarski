@@ -25,6 +25,9 @@ public class FrmUpdateFlight extends javax.swing.JFrame {
      public void addBtnCancelActionListener(ActionListener actionListener) {
         btnCancel.addActionListener(actionListener);
     }
+            public void addBtnDeleteActionListener(ActionListener actionListener) {
+        btnDelete.addActionListener(actionListener);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -53,8 +56,10 @@ public class FrmUpdateFlight extends javax.swing.JFrame {
         btnCancel = new javax.swing.JButton();
         cbAirplanes = new javax.swing.JComboBox<>();
         cbLines = new javax.swing.JComboBox<>();
+        btnDelete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Update Flight");
 
         jLabel2.setFont(new java.awt.Font("Calibri Light", 2, 36)); // NOI18N
         jLabel2.setText("Update Flight");
@@ -94,13 +99,16 @@ public class FrmUpdateFlight extends javax.swing.JFrame {
 
         cbLines.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        btnDelete.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
+        btnDelete.setText("Delete");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel1)
@@ -121,8 +129,10 @@ public class FrmUpdateFlight extends javax.swing.JFrame {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSave)))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSave)
+                        .addGap(31, 31, 31)
+                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
@@ -165,7 +175,8 @@ public class FrmUpdateFlight extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnSave)
-                            .addComponent(btnCancel)))
+                            .addComponent(btnCancel)
+                            .addComponent(btnDelete)))
                     .addComponent(jLabel5))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
@@ -176,6 +187,7 @@ public class FrmUpdateFlight extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSave;
     private javax.swing.JComboBox<Object
     > cbAirplanes;
@@ -268,5 +280,13 @@ public class FrmUpdateFlight extends javax.swing.JFrame {
 
     public void setTxtTime(javax.swing.JTextField txtTime) {
         this.txtTime = txtTime;
+    }
+
+    public javax.swing.JButton getBtnDelete() {
+        return btnDelete;
+    }
+
+    public void setBtnDelete(javax.swing.JButton btnDelete) {
+        this.btnDelete = btnDelete;
     }
 }

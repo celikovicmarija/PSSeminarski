@@ -40,7 +40,7 @@ public class LoginController {
                     User user = Communication.getInstance().login(username, password);
                     JOptionPane.showMessageDialog(
                             frmLogin,
-                            "User " + user.getFirstname() + " " + user.getLastname() + " has been logged in successfully!",
+                            "User " + user.getFirstName() + " " + user.getLastName() + " has been logged in successfully!",
                             "Login", JOptionPane.INFORMATION_MESSAGE
                     );
                     frmLogin.dispose();

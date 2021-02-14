@@ -41,15 +41,15 @@ public class SearchReservationsController {
             private void editReservation() {
                 int row = frm.getTbReservations().getSelectedRow();
                 if (row < 0) {
-                    JOptionPane.showMessageDialog(frm, "Please select a reservation to delete", "Delete reservation", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(frm, "Please select a reservation to change", "Delete reservation", JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     ReservationTableModel rtm = (ReservationTableModel) frm.getTbReservations().getModel();
                     List<Reservation> reservations = rtm.getReservations();
                     Reservation r = reservations.get(row);
-                    System.out.println("Added parameter:"+r);
+                    System.out.println("Added parameter:" + r);
                     MainCoordinator.getInstance().addParam(Constants.PARAM_RESERVATION, r);
                     MainCoordinator.getInstance().openUpdateResevationForm();
-                  //  tidyReservationsTableAfterSearch(reservations);
+                    //  tidyReservationsTableAfterSearch(reservations);
                     rtm.refresh();
                 }
             }
@@ -70,15 +70,21 @@ public class SearchReservationsController {
                         ReservationTableModel rtm = (ReservationTableModel) frm.getTbReservations().getModel();
                         List<Reservation> reservations = rtm.getReservations();
 
-                        //OVDE TREBA I PREDUSLOVE DA VIDIS
                         Reservation reservation = reservations.get(row);
-                        Communication.getInstance().deleteReservation(reservation);
-                        JOptionPane.showMessageDialog(frm, "Deleted successfully", "Delete reservation", JOptionPane.INFORMATION_MESSAGE);
-                        rtm.deleteFlight(reservation);
-                      rtm.refresh();
+
+                        int result = JOptionPane.showConfirmDialog(frm, "Are you sure you want to delete this flight?", "Delete flight",
+                                JOptionPane.YES_NO_OPTION,
+                                JOptionPane.QUESTION_MESSAGE);
+                        if (result == JOptionPane.YES_OPTION) {
+                            Communication.getInstance().deleteReservation(reservation);
+                            JOptionPane.showMessageDialog(frm, "Deleted successfully", "Delete reservation", JOptionPane.INFORMATION_MESSAGE);
+                            rtm.deleteFlight(reservation);
+                        }
+
+                        rtm.refresh();
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(frm, "Could not delete selected reservation", "Delete reservation", JOptionPane.INFORMATION_MESSAGE);
-                        Logger.getLogger(SearchReservationsController.class.getName()).log(Level.SEVERE, null, ex);
+                       // Logger.getLogger(SearchReservationsController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             }
@@ -96,7 +102,8 @@ public class SearchReservationsController {
                 if (criteria.isEmpty() || criteria.equals("*")) {
                     try {
                         List<Reservation> reservations = Communication.getInstance().getAllReservations();
-                        if (reservations != null && reservations.size()>0) {
+                        if (reservations != null ) {
+                      
                             JOptionPane.showMessageDialog(frm, "Found results for the reservations", "Search reservations", JOptionPane.INFORMATION_MESSAGE);
                             tidyReservationsTableAfterSearch(reservations);
                         } else {
@@ -104,7 +111,8 @@ public class SearchReservationsController {
 
                         }
                     } catch (Exception ex) {
-                        Logger.getLogger(SearchReservationsController.class.getName()).log(Level.SEVERE, null, ex);
+                       JOptionPane.showMessageDialog(frm, "Error while fetching reservations", "Search reservations", JOptionPane.INFORMATION_MESSAGE);
+                       // Logger.getLogger(SearchReservationsController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 } else {
                     try {
@@ -113,7 +121,7 @@ public class SearchReservationsController {
                         reservation.setSearchCriteria(criteria);
 
                         List<Reservation> reservations = Communication.getInstance().searchReservations(reservation);
-                        if (reservations != null && reservations.size()>0) {
+                        if (reservations != null && reservations.size() > 0) {
                             JOptionPane.showMessageDialog(frm, "Found results for the reservations", "Search reservations", JOptionPane.INFORMATION_MESSAGE);
                             tidyReservationsTableAfterSearch(reservations);
                         } else {
@@ -121,7 +129,9 @@ public class SearchReservationsController {
 
                         }
                     } catch (Exception ex) {
-                        Logger.getLogger(SearchReservationsController.class.getName()).log(Level.SEVERE, null, ex);
+             JOptionPane.showMessageDialog(frm, "Error while fetching reservations", "Search reservations", JOptionPane.INFORMATION_MESSAGE);
+
+                    //    Logger.getLogger(SearchReservationsController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             }
@@ -135,7 +145,9 @@ public class SearchReservationsController {
         try {
             reservations = Communication.getInstance().getAllReservations();
         } catch (Exception ex) {
-            Logger.getLogger(SearchFlightsController.class.getName()).log(Level.SEVERE, null, ex);
+         JOptionPane.showMessageDialog(frm, "Error while fetching reservations", "Fill reservations", JOptionPane.INFORMATION_MESSAGE);
+
+          //  Logger.getLogger(SearchFlightsController.class.getName()).log(Level.SEVERE, null, ex);
         }
         ReservationTableModel model = new ReservationTableModel(reservations);
         frm.getTbReservations().setModel(model);

@@ -32,7 +32,9 @@ public class UpdateReservationController {
 
     public void openForm() {
         prepareForm();
-        frm.setVisible(true);     
+        frm.setVisible(true);
+        JOptionPane.showMessageDialog(frm, "Showing data for the chosen reservation", "Message", JOptionPane.INFORMATION_MESSAGE);
+
     }
 
     private void prepareForm() {
@@ -48,6 +50,30 @@ public class UpdateReservationController {
         frm.addBtnCancelActionListener((ActionEvent e) -> {
             frm.dispose();
         });
+                   frm.addBtnDeleteActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               delete();
+            }
+
+            private void delete() {
+                                 try {
+ 
+                        int result = JOptionPane.showConfirmDialog(frm, "Are you sure you want to delete this reservation?", "Delete reservation",
+                            JOptionPane.YES_NO_OPTION,
+                            JOptionPane.QUESTION_MESSAGE);
+                    if (result == JOptionPane.YES_OPTION) {
+                        Communication.getInstance().deleteReservation(reservation);
+                        JOptionPane.showMessageDialog(frm, "Deleted successfully", "Delete reservation", JOptionPane.INFORMATION_MESSAGE);
+                     frm.dispose();
+                    }
+                
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(frm, "Could not delete selected reservation", "Delete reservation", JOptionPane.INFORMATION_MESSAGE);
+                    }
+            }
+        });
+        
         frm.addBtnSaveActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -131,7 +157,7 @@ public class UpdateReservationController {
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(frm, "Cannot update reservation", "Update reservation", JOptionPane.INFORMATION_MESSAGE);
 
-                        Logger.getLogger(UpdateReservationController.class.getName()).log(Level.SEVERE, null, ex);
+                       // Logger.getLogger(UpdateReservationController.class.getName()).log(Level.SEVERE, null, ex);
                     }
 
                 } else {

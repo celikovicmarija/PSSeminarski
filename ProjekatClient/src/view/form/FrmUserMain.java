@@ -32,6 +32,7 @@ public class FrmUserMain extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         lblLoggedUser = new javax.swing.JLabel();
         lblDescription = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         menuBarMain = new javax.swing.JMenuBar();
         menuFlight = new javax.swing.JMenu();
         miCreateFlight = new javax.swing.JMenuItem();
@@ -48,6 +49,7 @@ public class FrmUserMain extends javax.swing.JFrame {
         miAbout = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Main Form");
 
         jLabel1.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
         jLabel1.setText("Logged User:");
@@ -57,6 +59,9 @@ public class FrmUserMain extends javax.swing.JFrame {
 
         lblDescription.setFont(new java.awt.Font("Calibri Light", 2, 14)); // NOI18N
         lblDescription.setText("Please select menu option for any operation that you wish to perform.");
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo.jpg"))); // NOI18N
+        jLabel3.setText("jLabel3");
 
         menuFlight.setText("Flight");
 
@@ -115,7 +120,8 @@ public class FrmUserMain extends javax.swing.JFrame {
                         .addGap(32, 32, 32)
                         .addComponent(lblLoggedUser))
                     .addComponent(lblDescription))
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addContainerGap(225, Short.MAX_VALUE))
+            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,9 +130,10 @@ public class FrmUserMain extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(lblLoggedUser))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblDescription)
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -134,6 +141,7 @@ public class FrmUserMain extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel lblDescription;
     private javax.swing.JLabel lblLoggedUser;
     private javax.swing.JMenuBar menuBarMain;

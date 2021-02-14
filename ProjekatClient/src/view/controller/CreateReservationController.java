@@ -54,7 +54,8 @@ public class CreateReservationController {
 
                         }
                     } catch (Exception ex) {
-                        Logger.getLogger(CreateReservationController.class.getName()).log(Level.SEVERE, null, ex);
+                       JOptionPane.showMessageDialog(frm, "Error while fetching flights", "Search flights", JOptionPane.INFORMATION_MESSAGE);
+                        //Logger.getLogger(CreateReservationController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 } else {
                     try {
@@ -69,7 +70,9 @@ public class CreateReservationController {
 
                         }
                     } catch (Exception ex) {
-                        Logger.getLogger(CreateReservationController.class.getName()).log(Level.SEVERE, null, ex);
+                   JOptionPane.showMessageDialog(frm, "Error while fetching flights", "Search flights", JOptionPane.INFORMATION_MESSAGE);
+
+                        //Logger.getLogger(CreateReservationController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             }
@@ -94,7 +97,9 @@ public class CreateReservationController {
 
                         }
                     } catch (Exception ex) {
-                        Logger.getLogger(CreateReservationController.class.getName()).log(Level.SEVERE, null, ex);
+                        JOptionPane.showMessageDialog(frm, "Error while fetching passengers", "Search passengers", JOptionPane.INFORMATION_MESSAGE);
+
+                       // Logger.getLogger(CreateReservationController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 } else {
                     try {
@@ -109,7 +114,8 @@ public class CreateReservationController {
 
                         }
                     } catch (Exception ex) {
-                        Logger.getLogger(CreateReservationController.class.getName()).log(Level.SEVERE, null, ex);
+                       JOptionPane.showMessageDialog(frm, "Error while fetching passengers", "Search passengers", JOptionPane.INFORMATION_MESSAGE);
+                        //Logger.getLogger(CreateReservationController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             }
@@ -125,6 +131,8 @@ public class CreateReservationController {
                 int row = frm.getTblFlights().getSelectedRow();
                 Flight flight = new Flight();
                 Passenger passenger = new Passenger();
+                BigDecimal p = BigDecimal.ZERO;
+                BigDecimal dp = BigDecimal.ZERO;
 
                 if (row >= 0) {
                     flight = ((FlightTableModel) frm.getTblFlights().getModel()).getFlightAt(row);
@@ -142,12 +150,24 @@ public class CreateReservationController {
                 String price = null;
                 price = frm.getTxtPrice().getText();
                 if (price == null) {
-                    err += "You must enter the price\n";
+                    price = "0";
+                } else {
+                    try {
+                        p = new BigDecimal(price);
+                    } catch (Exception eq) {
+                        err += "Wrong format for the price";
+                    }
                 }
                 String discountedPrice = null;
                 discountedPrice = frm.getTxtDiscountedPrice().getText();
-                if (price == null) {
-                    err += "You must enter the  discounted price\n";
+                if (discountedPrice == null) {
+                    discountedPrice = "0";
+                } else {
+                    try {
+                        dp = new BigDecimal(discountedPrice);
+                    } catch (Exception eq) {
+                        err += "Wrong format for the discounted price";
+                    }
                 }
 
                 Date validUntil = null;
@@ -169,15 +189,18 @@ public class CreateReservationController {
                 if (issuedDate == null) {
                     err += "You must enter a issue date\n";
                 }
-                  Coupon c = null;
+                if (issuedDate != null && validUntil != null) {
+                    if (issuedDate.after(validUntil)) {
+                        err += " Coupon must be valid after the issueDate\n";
+                    }
+                }
+                Coupon c = null;
                 c = (Coupon) frm.getCbCoupons().getSelectedItem();
-              
 
                 if (err.equals("")) {
                     try {
                         Reservation reservation = new Reservation();
-                        BigDecimal p = new BigDecimal(price);
-                        BigDecimal dp = new BigDecimal(discountedPrice);
+
                         reservation.setPrice(p);
                         reservation.setDiscountedPrice(dp);
                         reservation.setFlight(flight);
@@ -185,7 +208,6 @@ public class CreateReservationController {
                         reservation.setIssueDate(issuedDate);
                         reservation.setValidUntil(validUntil);
                         reservation.setCoupon(c);
-
                         Communication.getInstance().addReservation(reservation);
                         JOptionPane.showMessageDialog(frm, "Reservation created successfully!", "Create Reservation", JOptionPane.INFORMATION_MESSAGE);
                         frm.dispose();
@@ -211,7 +233,8 @@ public class CreateReservationController {
         try {
             flights = Communication.getInstance().getAllFlights();
         } catch (Exception ex) {
-            Logger.getLogger(CreateFlightController.class.getName()).log(Level.SEVERE, null, ex);
+           JOptionPane.showMessageDialog(frm, "Error while fetching flights", "Fill flights", JOptionPane.INFORMATION_MESSAGE);
+           // Logger.getLogger(CreateFlightController.class.getName()).log(Level.SEVERE, null, ex);
         }
         FlightTableModel model = new FlightTableModel(flights);
         frm.getTblFlights().setModel(model);
@@ -223,7 +246,9 @@ public class CreateReservationController {
         try {
             passengers = Communication.getInstance().getAllPassengers();
         } catch (Exception ex) {
-            Logger.getLogger(CreateFlightController.class.getName()).log(Level.SEVERE, null, ex);
+        JOptionPane.showMessageDialog(frm, "Error while fetching passengers", "Fill passengers", JOptionPane.INFORMATION_MESSAGE);
+
+            //Logger.getLogger(CreateFlightController.class.getName()).log(Level.SEVERE, null, ex);
         }
         PassengerTableModel model = new PassengerTableModel(passengers);
         frm.getTblPassengers().setModel(model);
@@ -242,12 +267,14 @@ public class CreateReservationController {
         model.addFlights(list);
     }
 
-     private void fillCbCoupons(){
+    private void fillCbCoupons() {
         try {
             frm.getCbCoupons().removeAllItems();
             frm.getCbCoupons().setModel(new DefaultComboBoxModel(Communication.getInstance().getAllCoupons().toArray()));
-        } catch (Exception ex) {
-            Logger.getLogger(CreateReservationController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {       
+            JOptionPane.showMessageDialog(frm, "Error while fetching coupons", "Fill flights", JOptionPane.INFORMATION_MESSAGE);
+
+           // Logger.getLogger(CreateReservationController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

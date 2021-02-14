@@ -25,6 +25,10 @@ public class FrmUpdateReservation extends javax.swing.JFrame {
      public void addBtnCancelActionListener(ActionListener actionListener) {
         btnCancel.addActionListener(actionListener);
     }
+       public void addBtnDeleteActionListener(ActionListener actionListener) {
+        btnDelete.addActionListener(actionListener);
+    }
+       
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -53,8 +57,10 @@ public class FrmUpdateReservation extends javax.swing.JFrame {
         btnSave = new javax.swing.JButton();
         txtPassenger = new javax.swing.JTextField();
         cbFlights = new javax.swing.JComboBox<>();
+        btnDelete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Update Reservation");
 
         jLabel1.setFont(new java.awt.Font("Calibri Light", 2, 36)); // NOI18N
         jLabel1.setText("Update Reservation");
@@ -93,6 +99,9 @@ public class FrmUpdateReservation extends javax.swing.JFrame {
 
         cbFlights.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        btnDelete.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
+        btnDelete.setText("Delete");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -100,6 +109,9 @@ public class FrmUpdateReservation extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 226, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
@@ -109,9 +121,15 @@ public class FrmUpdateReservation extends javax.swing.JFrame {
                             .addComponent(jLabel6)
                             .addComponent(jLabel5)
                             .addComponent(jLabel9)
-                            .addComponent(jLabel8))
-                        .addGap(39, 39, 39)
+                            .addComponent(jLabel8)
+                            .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(txtPrice, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtIssueDate)
                             .addComponent(txtDiscountedPrice)
@@ -119,15 +137,7 @@ public class FrmUpdateReservation extends javax.swing.JFrame {
                             .addComponent(txtPassenger)
                             .addComponent(cbCoupons, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cbFlights, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtReservationID)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(50, 50, 50)
-                                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 165, Short.MAX_VALUE)))
+                            .addComponent(txtReservationID))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -172,7 +182,8 @@ public class FrmUpdateReservation extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancel)
-                    .addComponent(btnSave))
+                    .addComponent(btnSave)
+                    .addComponent(btnDelete))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
@@ -183,6 +194,7 @@ public class FrmUpdateReservation extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSave;
     private javax.swing.JComboBox<Object> cbCoupons;
     private javax.swing.JComboBox<Object> cbFlights;
@@ -281,5 +293,13 @@ public class FrmUpdateReservation extends javax.swing.JFrame {
 
     public void setTxtValidUntil(javax.swing.JTextField txtValidUntil) {
         this.txtValidUntil = txtValidUntil;
+    }
+
+    public javax.swing.JButton getBtnDelete() {
+        return btnDelete;
+    }
+
+    public void setBtnDelete(javax.swing.JButton btnDelete) {
+        this.btnDelete = btnDelete;
     }
 }

@@ -48,6 +48,7 @@ public class FrmSearchFlights extends javax.swing.JFrame {
         btnDelete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Search Flights");
 
         jLabel1.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
         jLabel1.setText("Search flights by airline: ");

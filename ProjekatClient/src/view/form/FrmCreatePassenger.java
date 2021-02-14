@@ -44,6 +44,7 @@ public class FrmCreatePassenger extends javax.swing.JFrame {
         txtMlb = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Create Passenger");
 
         jLabel5.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
         jLabel5.setText("First Name:");

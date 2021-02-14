@@ -62,6 +62,7 @@ public void addSaveBtnActionListener(ActionListener actionListener) {
         cbCoupons = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Create Reservation");
 
         jLabel1.setFont(new java.awt.Font("Calibri Light", 2, 36)); // NOI18N
         jLabel1.setText("Create Reservation");

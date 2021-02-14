@@ -1,9 +1,14 @@
 package view.controller;
 
+import communication.Communication;
 import java.awt.event.ActionEvent;
 import domain.User;
 import constant.Constants;
 import coordinator.MainCoordinator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import view.form.FrmUserMain;
 
 public class MainContoller {
@@ -16,12 +21,13 @@ public class MainContoller {
 
     public MainContoller(FrmUserMain frmMain) {
         this.frmMain = frmMain;
+        this.frmMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         addActionListener();
     }
 
     public void openForm() {
         User user = (User) MainCoordinator.getInstance().getParam(Constants.CURRENT_USER);
-        frmMain.getLblLoggedUser().setText(user.getFirstname() + " " + user.getLastname());
+        frmMain.getLblLoggedUser().setText(user.getFirstName() + " " + user.getLastName());
         frmMain.setVisible(true);
     }
 
@@ -60,7 +66,21 @@ public class MainContoller {
             }
 
             private void logoutUser() {
-                throw new UnsupportedOperationException("Not supported yet.");
+                try {
+                    int result = JOptionPane.showConfirmDialog(frmMain, "Are you sure you want to exit?", "Log out",
+                            JOptionPane.YES_NO_OPTION,
+                            JOptionPane.QUESTION_MESSAGE);
+                    if (result == JOptionPane.YES_OPTION) {
+                        Communication.getInstance().logout((User) MainCoordinator.getInstance().getParam(Constants.CURRENT_USER));
+                        JOptionPane.showMessageDialog(frmMain, "Goodbye!", "Logout", JOptionPane.INFORMATION_MESSAGE);
+                        frmMain.dispose();
+                    }
+
+                } catch (Exception ex) {
+                  JOptionPane.showMessageDialog(frmMain, "Error while trying to perform the request op", "Logout ", JOptionPane.INFORMATION_MESSAGE);
+
+                   // Logger.getLogger(MainContoller.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
 
         });

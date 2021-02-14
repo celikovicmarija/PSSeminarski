@@ -54,14 +54,12 @@ public class CreateFlightController {
                     airplane = ((AirplaneTableModel) frm.getTblAirplanes().getModel()).getAirplaneAt(row);
                 } else {
                     err += "You must select an airplane\n";
-                    //  JOptionPane.showMessageDialog(frm,err , "Create Flight", JOptionPane.ERROR_MESSAGE);
                 }
                 int rowp = frm.getTblAirports().getSelectedRow();
                 if (rowp >= 0) {
                     airport = ((AirportTableModel) frm.getTblAirports().getModel()).getAirportAt(rowp);
                 } else {
                     err += "You must select an airport\n";
-                    // JOptionPane.showMessageDialog(frm,err , "Create Flight", JOptionPane.ERROR_MESSAGE);
                 }
                 int rowl = frm.getTblLines().getSelectedRow();
                 if (rowl >= 0) {
@@ -69,11 +67,9 @@ public class CreateFlightController {
                     System.out.println("Line: "+line);
                 } else {
                     err += "You must select a line\n";
-                    // JOptionPane.showMessageDialog(frm,err , "Create Flight", JOptionPane.ERROR_MESSAGE);
                 }
-                String airline=null;
-                airline= frm.getTxtAirline().getText();
-                if (airline == null) {
+                String airline= frm.getTxtAirline().getText();
+                if (airline.equals("")) {
                     err += "You must enter an airline\n";
                 }
                 String note=null;
@@ -141,7 +137,8 @@ public class CreateFlightController {
 
                         }
                     } catch (Exception ex) {
-                        Logger.getLogger(CreateFlightController.class.getName()).log(Level.SEVERE, null, ex);
+                         JOptionPane.showMessageDialog(frm, "Error while fetching airplanes", "Search airplanes", JOptionPane.INFORMATION_MESSAGE);
+                       // Logger.getLogger(CreateFlightController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 } else {
                     try {
@@ -156,7 +153,9 @@ public class CreateFlightController {
 
                         }
                     } catch (Exception ex) {
-                        Logger.getLogger(CreateFlightController.class.getName()).log(Level.SEVERE, null, ex);
+                          JOptionPane.showMessageDialog(frm, "Error while fetching airplanes", "Search airplanes", JOptionPane.INFORMATION_MESSAGE);
+
+                       // Logger.getLogger(CreateFlightController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
 
@@ -183,7 +182,8 @@ public class CreateFlightController {
 
                         }
                     } catch (Exception ex) {
-                        Logger.getLogger(CreateFlightController.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(frm, "Error while fetching airports", "Search airports", JOptionPane.INFORMATION_MESSAGE);
+                       // Logger.getLogger(CreateFlightController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 } else {
                     try {
@@ -198,7 +198,8 @@ public class CreateFlightController {
 
                         }
                     } catch (Exception ex) {
-                        Logger.getLogger(CreateFlightController.class.getName()).log(Level.SEVERE, null, ex);
+                     JOptionPane.showMessageDialog(frm, "Error while fetching airports", "Search airports", JOptionPane.INFORMATION_MESSAGE);
+                        //Logger.getLogger(CreateFlightController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             }
@@ -224,7 +225,8 @@ public class CreateFlightController {
 
                         }
                     } catch (Exception ex) {
-                        Logger.getLogger(CreateFlightController.class.getName()).log(Level.SEVERE, null, ex);
+                        JOptionPane.showMessageDialog(frm, "Error while fetching lines", "Search lines", JOptionPane.INFORMATION_MESSAGE);
+                       // Logger.getLogger(CreateFlightController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 } else {
                     try {
@@ -243,7 +245,8 @@ public class CreateFlightController {
 
                         }
                     } catch (Exception ex) {
-                        Logger.getLogger(CreateFlightController.class.getName()).log(Level.SEVERE, null, ex);
+                        JOptionPane.showMessageDialog(frm, "Error while fetching lines", "Search lines", JOptionPane.INFORMATION_MESSAGE);
+                        //Logger.getLogger(CreateFlightController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             }
@@ -263,7 +266,8 @@ public class CreateFlightController {
         try {
             airports = Communication.getInstance().getAllAirports();
         } catch (Exception ex) {
-            Logger.getLogger(CreateFlightController.class.getName()).log(Level.SEVERE, null, ex);
+           JOptionPane.showMessageDialog(frm, "Error while fetching airports", "Fill airports", JOptionPane.INFORMATION_MESSAGE);
+           // Logger.getLogger(CreateFlightController.class.getName()).log(Level.SEVERE, null, ex);
         }
         AirportTableModel model = new AirportTableModel(airports);
         frm.getTblAirports().setModel(model);
@@ -274,7 +278,9 @@ public class CreateFlightController {
         try {
             airplanes = Communication.getInstance().getAllAirplanes();
         } catch (Exception ex) {
-            Logger.getLogger(CreateFlightController.class.getName()).log(Level.SEVERE, null, ex);
+          JOptionPane.showMessageDialog(frm, "Error while fetching airplanes", "Fill airplanes", JOptionPane.INFORMATION_MESSAGE);
+
+           // Logger.getLogger(CreateFlightController.class.getName()).log(Level.SEVERE, null, ex);
         }
         AirplaneTableModel model = new AirplaneTableModel(airplanes);
         frm.getTblAirplanes().setModel(model);
@@ -285,7 +291,8 @@ public class CreateFlightController {
         try {
             lines = Communication.getInstance().getAllLines();
         } catch (Exception ex) {
-            Logger.getLogger(CreateFlightController.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(frm, "Error while fetching lines", "Search lines", JOptionPane.INFORMATION_MESSAGE);
+           // Logger.getLogger(CreateFlightController.class.getName()).log(Level.SEVERE, null, ex);
         }
         LineTableModel model = new LineTableModel(lines);
         frm.getTblLines().setModel(model);

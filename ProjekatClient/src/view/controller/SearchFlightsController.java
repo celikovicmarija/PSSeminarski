@@ -42,7 +42,7 @@ public class SearchFlightsController {
             private void editFlight() {
                 int row = frm.getTblFlights().getSelectedRow();
                 if (row < 0) {
-                    JOptionPane.showMessageDialog(frm, "Please select a flight to delete", "Delete flight", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(frm, "Please select a flight to change", "Delete flight", JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     FlightTableModel ftc = (FlightTableModel) frm.getTblFlights().getModel();
                     List<Flight> flights = ftc.getFlights();
@@ -70,14 +70,20 @@ public class SearchFlightsController {
                         FlightTableModel ftc = (FlightTableModel) frm.getTblFlights().getModel();
                         List<Flight> flights = ftc.getFlights();
 
-                        //OVDE TREBA I PREDUSLOVE DA VIDIS
                         Flight flight = flights.get(row);
+                        
+                        int result = JOptionPane.showConfirmDialog(frm, "Are you sure you want to delete this flight?", "Delete flight",
+                            JOptionPane.YES_NO_OPTION,
+                            JOptionPane.QUESTION_MESSAGE);
+                    if (result == JOptionPane.YES_OPTION) {
                         Communication.getInstance().deleteFlight(flight);
                         JOptionPane.showMessageDialog(frm, "Deleted successfully", "Delete flight", JOptionPane.INFORMATION_MESSAGE);
                         ftc.deleteFlight(flight);ftc.refresh();
+                    }
+                
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(frm, "Could not delete selected flight", "Delete flight", JOptionPane.INFORMATION_MESSAGE);
-                        Logger.getLogger(SearchFlightsController.class.getName()).log(Level.SEVERE, null, ex);
+                      //  Logger.getLogger(SearchFlightsController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             }
@@ -95,14 +101,19 @@ public class SearchFlightsController {
                     try {
                         List<Flight> flights = Communication.getInstance().getAllFlights();
                         if (flights != null) {
-                            JOptionPane.showMessageDialog(frm, "Found results for the flights", "Search flights", JOptionPane.INFORMATION_MESSAGE);
+                       
+                                     JOptionPane.showMessageDialog(frm, "Found results for the flights", "Search flights", JOptionPane.INFORMATION_MESSAGE);
                             tidyFlightsTableAfterSearch(flights);
-                        } else {
-                            JOptionPane.showMessageDialog(frm, "Could not find results for the lines", "Search airports", JOptionPane.INFORMATION_MESSAGE);
+                       
+                           
+                       } else {
+                            JOptionPane.showMessageDialog(frm, "Could not find results for the flights", "Search flights", JOptionPane.INFORMATION_MESSAGE);
 
                         }
                     } catch (Exception ex) {
-                        Logger.getLogger(SearchFlightsController.class.getName()).log(Level.SEVERE, null, ex);
+                  JOptionPane.showMessageDialog(frm, "Error while fetching flights", "Search flights", JOptionPane.INFORMATION_MESSAGE);
+
+                     //   Logger.getLogger(SearchFlightsController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 } else {
                     try {
@@ -111,7 +122,7 @@ public class SearchFlightsController {
                         flight.setSearchCriteria(criteria);
 
                         List<Flight> flights = Communication.getInstance().searchFlights(flight);
-                        if (flights != null) {
+                        if (flights != null && flights.size() > 0) {
                             JOptionPane.showMessageDialog(frm, "Found results for the flights", "Search flights", JOptionPane.INFORMATION_MESSAGE);
                             tidyFlightsTableAfterSearch(flights);
                         } else {
@@ -119,7 +130,9 @@ public class SearchFlightsController {
 
                         }
                     } catch (Exception ex) {
-                        Logger.getLogger(SearchFlightsController.class.getName()).log(Level.SEVERE, null, ex);
+                        JOptionPane.showMessageDialog(frm, "Error while fetching flights", "Search flights", JOptionPane.INFORMATION_MESSAGE);
+
+                       // Logger.getLogger(SearchFlightsController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             }
@@ -132,7 +145,9 @@ public class SearchFlightsController {
         try {
             flights = Communication.getInstance().getAllFlights();
         } catch (Exception ex) {
-            Logger.getLogger(SearchFlightsController.class.getName()).log(Level.SEVERE, null, ex);
+         JOptionPane.showMessageDialog(frm, "Error while fetching flights", "Fill flights", JOptionPane.INFORMATION_MESSAGE);
+
+           // Logger.getLogger(SearchFlightsController.class.getName()).log(Level.SEVERE, null, ex);
         }
         FlightTableModel model = new FlightTableModel(flights);
         frm.getTblFlights().setModel(model);

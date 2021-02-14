@@ -33,30 +33,27 @@ public class CreatePassengerController {
 
             private void save() {
                 String err = "";
-                String firstName = null;
-                firstName = frm.getTxtFirstName().getText();
-                if (firstName == null) {
+                String firstName  = frm.getTxtFirstName().getText();
+                if (firstName.equals("")) {
                     err += "You must enter passenger's name\n";
 
                 }
-                String lastName = null;
-                lastName = frm.getTxtLastName().getText();
-                if (lastName == null) {
+                String lastName = frm.getTxtLastName().getText();
+                if (lastName.equals("")) {
                     err += "You must enter passenger's last name\n";
 
                 }
-                String passportNumber = null;
-                passportNumber = frm.getTxtPassportNumber().getText();
-                if (passportNumber == null) {
+                String passportNumber = frm.getTxtPassportNumber().getText();
+                if (passportNumber.equals("")) {
                     err += "You must enter passenger's passport number\n";
 
                 }
-                String mlb = null;
-                mlb = frm.getTxtMlb().getText();
-                if (mlb == null) {
-                    mlb = "";
+                String mlb = frm.getTxtMlb().getText().trim();
 
-                }
+                    if(!mlb.equals("") && mlb.length()!=13){
+                        err+="MLB is of wrong length";
+                    }
+                
 
                 if (err.equals("")) {
                     try {
@@ -71,6 +68,9 @@ public class CreatePassengerController {
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(frm, "Error saving the passenger", "Create Passenger", JOptionPane.ERROR_MESSAGE);
                     }
+
+                }else{
+                       JOptionPane.showMessageDialog(frm, err, "Create Passenger", JOptionPane.ERROR_MESSAGE);
 
                 }
             }

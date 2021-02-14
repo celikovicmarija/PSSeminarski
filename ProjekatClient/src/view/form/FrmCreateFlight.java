@@ -74,6 +74,7 @@ public class FrmCreateFlight extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Create Flight");
 
         jLabel1.setFont(new java.awt.Font("Calibri Light", 2, 36)); // NOI18N
         jLabel1.setText("Create Flight");

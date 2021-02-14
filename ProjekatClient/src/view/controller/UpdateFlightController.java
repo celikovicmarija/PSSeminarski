@@ -14,8 +14,10 @@ import coordinator.MainCoordinator;
 import constant.Constants;
 import domain.Airplane;
 import domain.Line;
+import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import view.form.component.table.FlightTableModel;
 
 public class UpdateFlightController {
 
@@ -31,6 +33,9 @@ public class UpdateFlightController {
     public void openForm() {
         prepareForm();
         frm.setVisible(true);
+       JOptionPane.showMessageDialog(frm, "Showing data for the chosen flight", "Message", JOptionPane.INFORMATION_MESSAGE);
+
+        
     }
 
     private void prepareForm() {
@@ -40,6 +45,8 @@ public class UpdateFlightController {
             fillCbAirplanes();
             populateForm();
         } catch (Exception ex) {
+           JOptionPane.showMessageDialog(frm, "Error while fetching data", "Form preparation", JOptionPane.INFORMATION_MESSAGE);
+
             Logger.getLogger(UpdateFlightController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -52,6 +59,33 @@ public class UpdateFlightController {
                 frm.dispose();
             }
         });
+        
+           frm.addBtnDeleteActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               delete();
+            }
+
+            private void delete() {
+           
+                    try {
+ 
+                        int result = JOptionPane.showConfirmDialog(frm, "Are you sure you want to delete this flight?", "Delete flight",
+                            JOptionPane.YES_NO_OPTION,
+                            JOptionPane.QUESTION_MESSAGE);
+                    if (result == JOptionPane.YES_OPTION) {
+                        Communication.getInstance().deleteFlight(flight);
+                        JOptionPane.showMessageDialog(frm, "Deleted successfully", "Delete flight", JOptionPane.INFORMATION_MESSAGE);
+                     frm.dispose();
+                    }
+                
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(frm, "Could not delete selected flight", "Delete flight", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                
+            }
+        });
+        
         frm.addBtnSaveActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -62,7 +96,9 @@ public class UpdateFlightController {
                 String err = "";
                 String airline = frm.getTxtAirline().getText();
                 String note = frm.getTxtNote().getText();
-
+                 if (airline.equals("")) {
+                    err += "You must enter an airline\n";
+                }
                 Date date = null;
                 try {
                     date = Date.valueOf(frm.getTxtDate().getText());
@@ -80,7 +116,7 @@ public class UpdateFlightController {
 
                 }
                 if (time == null) {
-                    err += "You must enter a departure date\n";
+                    err += "You must enter a departure time\n";
                 }
 
                 Airplane airplane = null;
@@ -109,7 +145,7 @@ public class UpdateFlightController {
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(frm, "Cannot update flight", "Update flight", JOptionPane.INFORMATION_MESSAGE);
 
-                        Logger.getLogger(UpdateFlightController.class.getName()).log(Level.SEVERE, null, ex);
+                    //    Logger.getLogger(UpdateFlightController.class.getName()).log(Level.SEVERE, null, ex);
                     }
 
                 } else {
