@@ -28,7 +28,9 @@ public class Reservation implements GenericEntity {
     public Reservation() {
     }
 
-    public Reservation(Long reservationID,Coupon coupon, BigDecimal price, Date issueDate, Date validUntil, BigDecimal discountedPrice, Flight flight, Passenger passenger) {
+    public Reservation(Long reservationID,Coupon coupon,
+            BigDecimal price, Date issueDate, Date validUntil,
+            BigDecimal discountedPrice, Flight flight, Passenger passenger) {
         this.reservationID = reservationID;
         this.price = price;
         this.issueDate = issueDate;

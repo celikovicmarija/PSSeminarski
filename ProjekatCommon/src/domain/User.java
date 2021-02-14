@@ -8,14 +8,11 @@ package domain;
 import java.io.Serializable;
 import java.util.Objects;
 
-/**
- *
- * @author laptop-02
- */
+
 public class User  implements Serializable{
     private Long id;
-    private String firstname;
-    private String lastname;
+    private String firstName;
+    private String lastName;
     private String username;
     private String password;
       private String status;
@@ -24,10 +21,10 @@ public class User  implements Serializable{
     public User() {
     }
 
-    public User(Long id, String firstname, String lastname, String username, String password) {
+    public User(Long id, String firstName, String lastName, String username, String password) {
         this.id = id;
-        this.firstname = firstname;
-        this.lastname = lastname;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.username = username;
         this.password = password;
     }
@@ -56,20 +53,20 @@ public class User  implements Serializable{
         this.id = id;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getUsername() {
@@ -82,15 +79,15 @@ public class User  implements Serializable{
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", firstname=" + firstname + ", lastname=" + lastname + ", username=" + username + ", password=" + password + '}';
+        return "User{" + "id=" + id + ", firstname=" + firstName + ", lastname=" + lastName + ", username=" + username + ", password=" + password + '}';
     }
 
     @Override
     public int hashCode() {
         int hash = 3;
         hash = 97 * hash + Objects.hashCode(this.id);
-        hash = 97 * hash + Objects.hashCode(this.firstname);
-        hash = 97 * hash + Objects.hashCode(this.lastname);
+        hash = 97 * hash + Objects.hashCode(this.firstName);
+        hash = 97 * hash + Objects.hashCode(this.lastName);
         hash = 97 * hash + Objects.hashCode(this.username);
         hash = 97 * hash + Objects.hashCode(this.password);
         return hash;

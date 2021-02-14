@@ -30,7 +30,8 @@ public class Flight implements GenericEntity {
     public Flight() {
     }
 
-    public Flight(Long flightID, Date date, Time time, String note, String airline, Line line, Airplane airplane) {
+    public Flight(Long flightID, Date date, Time time,
+            String note, String airline, Line line, Airplane airplane) {
         this.flightID = flightID;
         this.date = date;
         this.time = time;

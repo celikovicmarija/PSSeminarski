@@ -10,10 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-/**
- *
- * @author Milos Milic
- */
 public interface GenericEntity extends Serializable {
 
     String getTableName();

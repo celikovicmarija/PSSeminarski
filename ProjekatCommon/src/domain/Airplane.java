@@ -28,7 +28,8 @@ public class Airplane  implements GenericEntity{
     public Airplane() {
     }
 
-    public Airplane(Long airplaneID, String airplaneName, airplaneType airplaneType, String description, int noPlacesEconomyClass, int noPlacesBusinessClass) {
+    public Airplane(Long airplaneID, String airplaneName, airplaneType airplaneType, 
+            String description,int noPlacesEconomyClass, int noPlacesBusinessClass) {
         this.airplaneID = airplaneID;
         this.airplaneName = airplaneName;
         this.airplaneType = airplaneType;

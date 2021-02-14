@@ -30,7 +30,8 @@ public class Coupon implements   GenericEntity{
     public Coupon() {
     }
 
-    public Coupon(Long couponID,BigDecimal discountAmount, String description, Date validUntil, BigDecimal discountedPrice) {
+    public Coupon(Long couponID,BigDecimal discountAmount,
+            String description, Date validUntil, BigDecimal discountedPrice) {
         this.couponID = couponID;
         this.discountAmount = discountAmount;
         this.description = description;

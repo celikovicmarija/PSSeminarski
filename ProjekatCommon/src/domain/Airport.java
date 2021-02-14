@@ -25,7 +25,8 @@ public class Airport  implements GenericEntity{
     public Airport() {
     }
 
-    public Airport(Long airportID, String airportName, String placeName, String countryName, String airportCode) {
+    public Airport(Long airportID, String airportName, 
+            String placeName,String countryName, String airportCode) {
         this.airportID = airportID;
         this.airportName = airportName;
         this.placeName = placeName;
