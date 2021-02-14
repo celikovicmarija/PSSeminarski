@@ -27,6 +27,7 @@ public class FrmMainController {
     public void openForm() {
         frmMain.setVisible(true);
         frmMain.getTblActiveUsers().setVisible(true);
+        frmMain.getBtnStopServer().setEnabled(false);
         Controller.getInstance().fillTblUsers(frmMain);
     }
 

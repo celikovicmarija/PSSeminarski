@@ -73,6 +73,22 @@ public class Controller {
         throw new Exception("Unknown user!");
     }
 
+        public User logout(User u) throws Exception {
+        List<User> users = repositoryUser.getAll();
+        for (User user : users) {
+            if (user.getUsername().equals(u.getUsername())) {
+                user.setStatus("not active");
+                activeUsers.remove(user);
+                fillTblUsers(ServerCoordinator.getInstance().getFrmMainController().getFrmMain());
+
+                return user;
+            }
+        }
+        throw new Exception("Unknown user!");
+    }
+    
+    
+    
     public List<User> getAllUsers() {
         return repositoryUser.getAll();
     }

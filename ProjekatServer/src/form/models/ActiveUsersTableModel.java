@@ -45,9 +45,9 @@ private final List<User> korisnici;
         User k= korisnici.get(rowIndex);
         switch(columnIndex){
             case 0:
-                return k.getFirstname();
+                return k.getFirstName();
             case 1:
-                return k.getLastname();
+                return k.getLastName();
                 case 2:
                 return k.getUsername();
             case 3: {
@@ -72,9 +72,9 @@ private final List<User> korisnici;
         User korisnik = korisnici.get(rowIndex);
         switch(columnIndex){
             case 0:
-                korisnik.setFirstname(String.valueOf(value));
+                korisnik.setFirstName(String.valueOf(value));
                 break;
-            case 1: korisnik.setLastname(String.valueOf(value));break;
+            case 1: korisnik.setLastName(String.valueOf(value));break;
             case 2: korisnik.setUsername(String.valueOf(value));break;
 
             case 3:

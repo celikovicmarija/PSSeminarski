@@ -117,7 +117,7 @@ public class RepositoryDBGeneric implements DbRepository<GenericEntity> {
     }
 
     @Override
-    public List<GenericEntity> returnThreeTables(GenericEntity param) throws SQLException, Exception {
+    public List<GenericEntity> returnThreeTables(GenericEntity param) throws Exception {
         try {
             Connection connection = DbConnectionFactory.getInstance().getConnection();
             String query = "SELECT * FROM " + param.getTableName() + " JOIN "
@@ -128,7 +128,7 @@ public class RepositoryDBGeneric implements DbRepository<GenericEntity> {
             ResultSet rs = st.executeQuery(query);
             return param.getList(rs);
 
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             throw ex;
         }
 

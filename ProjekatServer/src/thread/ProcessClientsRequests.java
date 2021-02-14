@@ -60,6 +60,10 @@ public class ProcessClientsRequests extends Thread {
                             response.setResult(Controller.getInstance().login(u.getUsername(), u.getPassword()));
                             user = u;
                             break;
+                         case LOGOUT:
+                            User lu = (User) request.getArgument();
+                            response.setResult(Controller.getInstance().logout(lu));
+                            break;
                         case RETURN_AIRPLANES_ALL:
                             response.setResult(Controller.getInstance().getAllAirplanes(new Airplane()));
                             break;

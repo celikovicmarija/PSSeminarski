@@ -2,7 +2,6 @@ package repository.db.impl;
 
 import domain.User;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -24,8 +23,8 @@ public class RepositoryDbUser implements DbRepository<User> {
             while (rs.next()) {
                 User user = new User();
                 user.setId(rs.getLong("id"));
-                user.setFirstname(rs.getString("firstname"));
-                user.setLastname(rs.getString("lastname"));
+                user.setFirstName(rs.getString("firstname"));
+                user.setLastName(rs.getString("lastname"));
                 user.setPassword(rs.getString("password"));
                 user.setUsername(rs.getString("username"));
                 users.add(user);
