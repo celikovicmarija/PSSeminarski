@@ -39,6 +39,7 @@ public class FrmAbout extends javax.swing.JDialog {
         jlbStudent = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("About software");
 
         btnUnderstood.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
         btnUnderstood.setText("Understood!");
