@@ -30,6 +30,9 @@ public class FrmSearchReservations extends javax.swing.JFrame {
      public void addBtnDeleteActionListener(ActionListener actionListener) {
         btnDelete.addActionListener(actionListener);
     }
+        public void addBtnShowActionListener(ActionListener actionListener) {
+        btnShow.addActionListener(actionListener);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -45,9 +48,10 @@ public class FrmSearchReservations extends javax.swing.JFrame {
         txtSearchTerm = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbReservations = new javax.swing.JTable();
-        btnEdit = new javax.swing.JButton();
+        btnShow = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         btnSearch = new javax.swing.JButton();
+        btnEdit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Search Reservations");
@@ -72,8 +76,13 @@ public class FrmSearchReservations extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tbReservations);
 
-        btnEdit.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
-        btnEdit.setText("Edit");
+        btnShow.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
+        btnShow.setText("Show Info");
+        btnShow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnShowActionPerformed(evt);
+            }
+        });
 
         btnDelete.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
         btnDelete.setText("Delete");
@@ -81,16 +90,21 @@ public class FrmSearchReservations extends javax.swing.JFrame {
         btnSearch.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
         btnSearch.setText("Search");
 
+        btnEdit.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
+        btnEdit.setText("Edit");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(137, 137, 137)
+                .addGap(94, 94, 94)
+                .addComponent(btnShow, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(71, 71, 71)
                 .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(167, 167, 167)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(78, 78, 78))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
@@ -119,16 +133,22 @@ public class FrmSearchReservations extends javax.swing.JFrame {
                     .addComponent(txtSearchTerm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEdit)
-                    .addComponent(btnDelete))
-                .addContainerGap(145, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnDelete)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnShow)
+                        .addComponent(btnEdit)))
+                .addContainerGap(114, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnShowActionPerformed
 
 
 
@@ -136,6 +156,7 @@ public class FrmSearchReservations extends javax.swing.JFrame {
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnSearch;
+    private javax.swing.JButton btnShow;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -152,11 +173,11 @@ public class FrmSearchReservations extends javax.swing.JFrame {
     }
 
     public javax.swing.JButton getBtnEdit() {
-        return btnEdit;
+        return btnShow;
     }
 
     public void setBtnEdit(javax.swing.JButton btnEdit) {
-        this.btnEdit = btnEdit;
+        this.btnShow = btnEdit;
     }
 
     public javax.swing.JTable getTbReservations() {
@@ -181,5 +202,13 @@ public class FrmSearchReservations extends javax.swing.JFrame {
 
     public void setBtnSearch(javax.swing.JButton btnSearch) {
         this.btnSearch = btnSearch;
+    }
+
+    public javax.swing.JButton getBtnShow() {
+        return btnShow;
+    }
+
+    public void setBtnShow(javax.swing.JButton btnShow) {
+        this.btnShow = btnShow;
     }
 }

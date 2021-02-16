@@ -1,6 +1,8 @@
 package view.controller;
 
 import communication.Communication;
+import constant.Constants;
+import coordinator.MainCoordinator;
 import domain.Coupon;
 import domain.Flight;
 import domain.Passenger;
@@ -18,6 +20,7 @@ import javax.swing.JOptionPane;
 import view.form.FrmCreateReservation;
 import view.form.component.table.FlightTableModel;
 import view.form.component.table.PassengerTableModel;
+import view.form.util.FormMode;
 
 public class CreateReservationController {
 
@@ -210,7 +213,10 @@ public class CreateReservationController {
                         reservation.setCoupon(c);
                         Communication.getInstance().addReservation(reservation);
                         JOptionPane.showMessageDialog(frm, "Reservation created successfully!", "Create Reservation", JOptionPane.INFORMATION_MESSAGE);
-                        frm.dispose();
+                     MainCoordinator.getInstance().addParam(Constants.PARAM_RESERVATION,reservation );
+                     MainCoordinator.getInstance().openUpdateResevationForm(FormMode.FORM_VIEW);
+                                            
+//frm.dispose();
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(frm, "Error saving the reservation", "Create Reservation", JOptionPane.ERROR_MESSAGE);
                     }

@@ -13,15 +13,24 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import view.form.FrmSearchReservations;
 import view.form.component.table.ReservationTableModel;
+import view.form.util.FormMode;
 
 public class SearchReservationsController {
 
-    private final FrmSearchReservations frm;
+    private FrmSearchReservations frm;
 
     public SearchReservationsController(FrmSearchReservations frm) {
         this.frm = frm;
         this.frm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         addActionListeners();
+    }
+
+    public FrmSearchReservations getFrm() {
+        return frm;
+    }
+
+    public void setFrm(FrmSearchReservations frm) {
+        this.frm = frm;
     }
 
     public void openForm() {
@@ -30,6 +39,28 @@ public class SearchReservationsController {
     }
 
     private void addActionListeners() {
+        
+                 frm.addBtnShowActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                show();
+            }
+             private void show() {
+                int row = frm.getTbReservations().getSelectedRow();
+                if (row < 0) {
+                    JOptionPane.showMessageDialog(frm, "Please select a reservation to show", "Show reservation", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    ReservationTableModel rtm = (ReservationTableModel) frm.getTbReservations().getModel();
+                    List<Reservation> reservations = rtm.getReservations();
+                    Reservation r = reservations.get(row);
+                    System.out.println("Added parameter:" + r);
+                    MainCoordinator.getInstance().addParam(Constants.PARAM_RESERVATION, r);
+                    MainCoordinator.getInstance().openUpdateResevationForm(FormMode.FORM_VIEW);
+                    //  tidyReservationsTableAfterSearch(reservations);
+                    rtm.refresh();
+                }
+            }
+         });
         frm.addBtnEditActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -48,7 +79,7 @@ public class SearchReservationsController {
                     Reservation r = reservations.get(row);
                     System.out.println("Added parameter:" + r);
                     MainCoordinator.getInstance().addParam(Constants.PARAM_RESERVATION, r);
-                    MainCoordinator.getInstance().openUpdateResevationForm();
+                    MainCoordinator.getInstance().openUpdateResevationForm(FormMode.FORM_EDIT);
                     //  tidyReservationsTableAfterSearch(reservations);
                     rtm.refresh();
                 }
@@ -71,18 +102,27 @@ public class SearchReservationsController {
                         List<Reservation> reservations = rtm.getReservations();
 
                         Reservation reservation = reservations.get(row);
-
-                        int result = JOptionPane.showConfirmDialog(frm, "Are you sure you want to delete this flight?", "Delete flight",
+                    MainCoordinator.getInstance().addParam(Constants.PARAM_RESERVATION,reservation );
+                    MainCoordinator.getInstance().openUpdateResevationForm(FormMode.FORM_DELETE);
+                       /* int result = JOptionPane.showConfirmDialog(frm, "Are you sure you want to delete this flight?", "Delete flight",
                                 JOptionPane.YES_NO_OPTION,
                                 JOptionPane.QUESTION_MESSAGE);
                         if (result == JOptionPane.YES_OPTION) {
-                            Communication.getInstance().deleteReservation(reservation);
-                            JOptionPane.showMessageDialog(frm, "Deleted successfully", "Delete reservation", JOptionPane.INFORMATION_MESSAGE);
-                            rtm.deleteFlight(reservation);
-                        }
+                            List<Reservation> rs=Communication.getInstance().getAllReservations();
+                       if (!rs.contains(reservation)){
+                              JOptionPane.showMessageDialog(frm, "Could not delete selected reservation", "Delete reservation", JOptionPane.INFORMATION_MESSAGE);
 
-                        rtm.refresh();
-                    } catch (Exception ex) {
+                       }else{
+                                     Communication.getInstance().deleteReservation(reservation);
+                            JOptionPane.showMessageDialog(frm, "Deleted successfully", "Delete reservation", JOptionPane.INFORMATION_MESSAGE);
+                            rtm.deleteReservation(reservation);
+                             rtm.refresh();
+
+                       }
+                  
+                        }*/
+
+                                           } catch (Exception ex) {
                         JOptionPane.showMessageDialog(frm, "Could not delete selected reservation", "Delete reservation", JOptionPane.INFORMATION_MESSAGE);
                        // Logger.getLogger(SearchReservationsController.class.getName()).log(Level.SEVERE, null, ex);
                     }

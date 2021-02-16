@@ -18,30 +18,65 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import view.form.FrmUpdateReservation;
+import view.form.component.table.ReservationTableModel;
+import view.form.util.FormMode;
 
 public class UpdateReservationController {
 
     FrmUpdateReservation frm;
     Reservation reservation;
+    FormMode mode;
 
-    public UpdateReservationController(FrmUpdateReservation frm) {
+    public UpdateReservationController(FrmUpdateReservation frm,FormMode mode) {
         this.frm = frm;
+        this.mode=mode;
         this.frm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         addActionListeners();
     }
 
     public void openForm() {
-        prepareForm();
+        prepareForm(mode);
         frm.setVisible(true);
         JOptionPane.showMessageDialog(frm, "Showing data for the chosen reservation", "Message", JOptionPane.INFORMATION_MESSAGE);
 
     }
 
-    private void prepareForm() {
+    public FrmUpdateReservation getFrm() {
+        return frm;
+    }
+
+    public void setFrm(FrmUpdateReservation frm) {
+        this.frm = frm;
+    }
+
+    private void prepareForm(FormMode mode) {
         try {
             populateForm();
             fillCbCoupons();
             fillCbFlights();
+             switch(mode){
+                case FORM_VIEW:
+                    frm.getBtnDelete().setEnabled(false);
+                    frm.getBtnSave().setEnabled(false);
+                    frm.getBtnCancel().setEnabled(true);
+                      frm.setTitle("Reservation");
+                        frm.getLblTitle().setText("Reservation info");
+                    break;
+                case FORM_EDIT:
+                    frm.getBtnDelete().setEnabled(false);
+                    frm.getBtnSave().setEnabled(true);
+                    frm.getBtnCancel().setEnabled(true); 
+                      frm.setTitle("Reservation");
+                   frm.getLblTitle().setText("Reservation info");
+                    break;
+                case FORM_DELETE:
+                    frm.getBtnDelete().setEnabled(true);
+                    frm.getBtnSave().setEnabled(false);
+                    frm.getBtnCancel().setEnabled(true); 
+                      frm.setTitle("Reservation");
+                     frm.getLblTitle().setText("Delete reservation info");
+                    break;                    
+            }
         } catch (Exception ex) {
         }
     }
@@ -63,9 +98,19 @@ public class UpdateReservationController {
                             JOptionPane.YES_NO_OPTION,
                             JOptionPane.QUESTION_MESSAGE);
                     if (result == JOptionPane.YES_OPTION) {
+                       List<Reservation> reservations=Communication.getInstance().getAllReservations();
+                       if (!reservations.contains(reservation)){
+                              JOptionPane.showMessageDialog(frm, "Could not delete the reservation", "Delete reservation", JOptionPane.INFORMATION_MESSAGE);
+
+                       }else{
                         Communication.getInstance().deleteReservation(reservation);
                         JOptionPane.showMessageDialog(frm, "Deleted successfully", "Delete reservation", JOptionPane.INFORMATION_MESSAGE);
-                     frm.dispose();
+                     //frm.dispose();
+                       ReservationTableModel rtm = (ReservationTableModel) MainCoordinator.getInstance().getSearchReservationsController().getFrm().getTbReservations().getModel();
+                        rtm.deleteReservation(reservation);
+                        rtm.refresh();
+                       }
+        
                     }
                 
                     } catch (Exception ex) {
@@ -153,7 +198,7 @@ public class UpdateReservationController {
                      
                         Communication.getInstance().editReservation(reservationEdited);
                         JOptionPane.showMessageDialog(frm, "Reservation successfully updated", "Update reservation", JOptionPane.INFORMATION_MESSAGE);
-                        frm.dispose();
+                       // frm.dispose();
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(frm, "Cannot update reservation", "Update reservation", JOptionPane.INFORMATION_MESSAGE);
 

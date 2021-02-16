@@ -90,7 +90,7 @@ public class ReservationTableModel extends AbstractTableModel{
     public List<Reservation>getReservations(){
         return reservations;
     }   
-    public void deleteFlight(Reservation reservation) {
+    public void deleteReservation(Reservation reservation) {
         reservations.remove(reservation);
         fireTableDataChanged();
     }

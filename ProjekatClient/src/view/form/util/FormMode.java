@@ -10,5 +10,5 @@ package view.form.util;
  * @author laptop-02
  */
 public enum FormMode {
-    FORM_ADD, FORM_EDIT, FORM_VIEW
+    FORM_DELETE, FORM_EDIT, FORM_VIEW
 }

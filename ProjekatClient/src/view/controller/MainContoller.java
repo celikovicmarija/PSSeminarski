@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import view.form.FrmUserMain;
+import view.form.util.FormMode;
 
 public class MainContoller {
 
@@ -36,7 +37,7 @@ public class MainContoller {
             MainCoordinator.getInstance().openCreateFlightForm();
         });
         frmMain.miCreatePassengerAddActionListener((ActionEvent e) -> {
-            MainCoordinator.getInstance().openCreatePassengerForm();
+            MainCoordinator.getInstance().openCreatePassengerForm(FormMode.FORM_EDIT);
         });
 
         frmMain.miCreateReservationAddActionListener((java.awt.event.ActionEvent evt) -> {

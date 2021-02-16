@@ -1,6 +1,8 @@
 package view.controller;
 
 import communication.Communication;
+import constant.Constants;
+import coordinator.MainCoordinator;
 import domain.Airplane;
 import domain.Airport;
 import domain.Flight;
@@ -18,6 +20,7 @@ import view.form.FrmCreateFlight;
 import view.form.component.table.AirplaneTableModel;
 import view.form.component.table.AirportTableModel;
 import view.form.component.table.LineTableModel;
+import view.form.util.FormMode;
 
 
 public class CreateFlightController {
@@ -38,6 +41,7 @@ public class CreateFlightController {
     }
 
     private void addActionListeners() {
+        
         frm.addSaveBtnActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -54,12 +58,6 @@ public class CreateFlightController {
                     airplane = ((AirplaneTableModel) frm.getTblAirplanes().getModel()).getAirplaneAt(row);
                 } else {
                     err += "You must select an airplane\n";
-                }
-                int rowp = frm.getTblAirports().getSelectedRow();
-                if (rowp >= 0) {
-                    airport = ((AirportTableModel) frm.getTblAirports().getModel()).getAirportAt(rowp);
-                } else {
-                    err += "You must select an airport\n";
                 }
                 int rowl = frm.getTblLines().getSelectedRow();
                 if (rowl >= 0) {
@@ -106,7 +104,10 @@ public class CreateFlightController {
                         flight.setNote(note);
                         flight.setLine(line);
                         Communication.getInstance().addFlight(flight);
-                         JOptionPane.showMessageDialog(frm, "Flight created successfully!", "Create Flight", JOptionPane.INFORMATION_MESSAGE);
+                     JOptionPane.showMessageDialog(frm, "Flight created successfully!", "Create Flight", JOptionPane.INFORMATION_MESSAGE);
+                     MainCoordinator.getInstance().addParam(Constants.PARAM_FLIGHT,flight );
+                     MainCoordinator.getInstance().openUpdateFlightForm(FormMode.FORM_VIEW);
+                    
                     } catch (Exception ex) {
                       JOptionPane.showMessageDialog(frm, "Error saving the flight", "Create Flight", JOptionPane.ERROR_MESSAGE);
                     }
@@ -163,47 +164,6 @@ public class CreateFlightController {
 
         });
 
-        frm.addSearchAirportsBtnActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                searchAirports();
-            }
-
-            private void searchAirports() {
-                String criteria = frm.getTxtAirportName().getText();
-                if (criteria.isEmpty() || criteria.equals("*")) {
-                    try {
-                        List<Airport> airports = Communication.getInstance().getAllAirports();
-                        if (airports != null) {
-                            JOptionPane.showMessageDialog(frm, "Found results for the airports", "Search airports", JOptionPane.INFORMATION_MESSAGE);
-                            tidyAirportTableAfterSearch(airports);
-                        } else {
-                            JOptionPane.showMessageDialog(frm, "Could not find results for the airports", "Search airports", JOptionPane.INFORMATION_MESSAGE);
-
-                        }
-                    } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(frm, "Error while fetching airports", "Search airports", JOptionPane.INFORMATION_MESSAGE);
-                       // Logger.getLogger(CreateFlightController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                } else {
-                    try {
-                        Airport airport = new Airport();
-                        airport.setSearchCriteria(criteria);
-                        List<Airport> airports = Communication.getInstance().searchAirports(airport);
-                        if (airports != null) {
-                            JOptionPane.showMessageDialog(frm, "Found results for the airports", "Search airports", JOptionPane.INFORMATION_MESSAGE);
-                            tidyAirportTableAfterSearch(airports);
-                        } else {
-                            JOptionPane.showMessageDialog(frm, "Could not find results for the airports", "Search airports", JOptionPane.INFORMATION_MESSAGE);
-
-                        }
-                    } catch (Exception ex) {
-                     JOptionPane.showMessageDialog(frm, "Error while fetching airports", "Search airports", JOptionPane.INFORMATION_MESSAGE);
-                        //Logger.getLogger(CreateFlightController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-            }
-        });
 
         frm.addSearchLinesBtnActionListener(new ActionListener() {
             @Override
@@ -256,7 +216,7 @@ public class CreateFlightController {
     }
 
     private void prepareView() {
-        fillTblAirports();
+      //  fillTblAirports();
         fillTblAiplanes();
         fillTblLines();
     }
@@ -270,7 +230,7 @@ public class CreateFlightController {
            // Logger.getLogger(CreateFlightController.class.getName()).log(Level.SEVERE, null, ex);
         }
         AirportTableModel model = new AirportTableModel(airports);
-        frm.getTblAirports().setModel(model);
+     //   frm.getTblAirports().setModel(model);
     }
 
     private void fillTblAiplanes() {
@@ -297,12 +257,12 @@ public class CreateFlightController {
         LineTableModel model = new LineTableModel(lines);
         frm.getTblLines().setModel(model);
     }
-
+/*
     private void tidyAirportTableAfterSearch(List<Airport> list) {
         AirportTableModel model = (AirportTableModel) frm.getTblAirports().getModel();
         model.clear();
         model.addAirports(list);
-    }
+    }*/
 
     private void tidyLinesTableAfterSearch(List<Line> list) {
         LineTableModel model = (LineTableModel) frm.getTblLines().getModel();

@@ -13,15 +13,24 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import view.form.FrmSearchFlights;
 import view.form.component.table.FlightTableModel;
+import view.form.util.FormMode;
 
 public class SearchFlightsController {
 
-    private final FrmSearchFlights frm;
+    private  FrmSearchFlights frm;
 
     public SearchFlightsController(FrmSearchFlights frm) {
         this.frm = frm;
         this.frm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         addActionListeners();
+    }
+
+    public FrmSearchFlights getFrm() {
+        return frm;
+    }
+
+    public void setFrm(FrmSearchFlights frm) {
+        this.frm = frm;
     }
 
     public void openForm() {
@@ -31,6 +40,27 @@ public class SearchFlightsController {
     }
 
     private void addActionListeners() {
+        
+         frm.addBtnShowActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                show();
+            }
+             private void show() {
+                int row = frm.getTblFlights().getSelectedRow();
+                if (row < 0) {
+                    JOptionPane.showMessageDialog(frm, "Please select a flight to show", "Show flight", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    FlightTableModel ftc = (FlightTableModel) frm.getTblFlights().getModel();
+                    List<Flight> flights = ftc.getFlights();
+                    Flight flight = flights.get(row);
+                    MainCoordinator.getInstance().addParam(Constants.PARAM_FLIGHT, flight);
+                    MainCoordinator.getInstance().openUpdateFlightForm(FormMode.FORM_VIEW);
+                   // tidyFlightsTableAfterSearch(flights);
+                    ftc.refresh();
+                }
+            }
+         });
         frm.addBtnEditActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -42,13 +72,13 @@ public class SearchFlightsController {
             private void editFlight() {
                 int row = frm.getTblFlights().getSelectedRow();
                 if (row < 0) {
-                    JOptionPane.showMessageDialog(frm, "Please select a flight to change", "Delete flight", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(frm, "Please select a flight to edit", "Edit flight", JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     FlightTableModel ftc = (FlightTableModel) frm.getTblFlights().getModel();
                     List<Flight> flights = ftc.getFlights();
                     Flight flight = flights.get(row);
                     MainCoordinator.getInstance().addParam(Constants.PARAM_FLIGHT, flight);
-                    MainCoordinator.getInstance().openUpdateFlightForm();
+                    MainCoordinator.getInstance().openUpdateFlightForm(FormMode.FORM_EDIT);
                    // tidyFlightsTableAfterSearch(flights);
                     ftc.refresh();
                 }
@@ -71,15 +101,27 @@ public class SearchFlightsController {
                         List<Flight> flights = ftc.getFlights();
 
                         Flight flight = flights.get(row);
+                         MainCoordinator.getInstance().addParam(Constants.PARAM_FLIGHT, flight);
+                    MainCoordinator.getInstance().openUpdateFlightForm(FormMode.FORM_DELETE);
                         
-                        int result = JOptionPane.showConfirmDialog(frm, "Are you sure you want to delete this flight?", "Delete flight",
+                 /*
+                    int result = JOptionPane.showConfirmDialog(frm, "Are you sure you want to delete this flight?", "Delete flight",
                             JOptionPane.YES_NO_OPTION,
                             JOptionPane.QUESTION_MESSAGE);
                     if (result == JOptionPane.YES_OPTION) {
-                        Communication.getInstance().deleteFlight(flight);
+                         List<Flight> fs=Communication.getInstance().getAllFlights();
+
+                        if (!fs.contains(flight)){
+                              JOptionPane.showMessageDialog(frm, "Could not delete selected flight", "Delete flight", JOptionPane.INFORMATION_MESSAGE);
+
+                       }else{
+                              Communication.getInstance().deleteFlight(flight);
                         JOptionPane.showMessageDialog(frm, "Deleted successfully", "Delete flight", JOptionPane.INFORMATION_MESSAGE);
-                        ftc.deleteFlight(flight);ftc.refresh();
-                    }
+                         ftc.deleteFlight(flight);
+                         ftc.refresh();
+                        }
+                      
+                    }*/
                 
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(frm, "Could not delete selected flight", "Delete flight", JOptionPane.INFORMATION_MESSAGE);

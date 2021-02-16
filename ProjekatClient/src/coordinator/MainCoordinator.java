@@ -22,6 +22,7 @@ import view.form.FrmSearchReservations;
 import view.form.FrmUpdateFlight;
 import view.form.FrmUpdateReservation;
 import view.form.FrmUserMain;
+import view.form.util.FormMode;
 
 public class MainCoordinator {
 
@@ -29,6 +30,9 @@ public class MainCoordinator {
 
     private final MainContoller mainContoller;
     private final Map<String, Object> params;
+    
+    private SearchReservationsController searchReservationsController;
+    private SearchFlightsController searchFlightsController;
 
     private MainCoordinator() {
         mainContoller = new MainContoller(new FrmUserMain());
@@ -62,8 +66,8 @@ public class MainCoordinator {
         reservationController.openForm();
     }
 
-    public void openCreatePassengerForm() {
-        CreatePassengerController passengerController = new CreatePassengerController(new FrmCreatePassenger());
+    public void openCreatePassengerForm(FormMode mode) {
+        CreatePassengerController passengerController = new CreatePassengerController(new FrmCreatePassenger(),mode);
         passengerController.openForm();
     }
 
@@ -73,22 +77,22 @@ public class MainCoordinator {
     }
 
     public void openSearchFlightsForm() {
-        SearchFlightsController searchFlightsController = new SearchFlightsController(new FrmSearchFlights());
+         searchFlightsController = new SearchFlightsController(new FrmSearchFlights());
         searchFlightsController.openForm();
     }
 
     public void openSearchResevationsForm() {
-        SearchReservationsController searchReservationsController = new SearchReservationsController(new FrmSearchReservations());
+         searchReservationsController = new SearchReservationsController(new FrmSearchReservations());
         searchReservationsController.openForm();
     }
 
-    public void openUpdateFlightForm() {
-        UpdateFlightController updateFlightController = new UpdateFlightController(new FrmUpdateFlight());
+    public void openUpdateFlightForm(FormMode mode) {
+        UpdateFlightController updateFlightController = new UpdateFlightController(new FrmUpdateFlight(),mode);
         updateFlightController.openForm();
     }
 
-    public void openUpdateResevationForm() {
-        UpdateReservationController updateReservationController = new UpdateReservationController(new FrmUpdateReservation());
+    public void openUpdateResevationForm(FormMode mode) {
+        UpdateReservationController updateReservationController = new UpdateReservationController(new FrmUpdateReservation(),mode);
         updateReservationController.openForm();
     }
 
@@ -102,6 +106,22 @@ public class MainCoordinator {
 
     public Object getParam(String name) {
         return params.get(name);
+    }
+
+    public SearchReservationsController getSearchReservationsController() {
+        return searchReservationsController;
+    }
+
+    public void setSearchReservationsController(SearchReservationsController searchReservationsController) {
+        this.searchReservationsController = searchReservationsController;
+    }
+
+    public SearchFlightsController getSearchFlightsController() {
+        return searchFlightsController;
+    }
+
+    public void setSearchFlightsController(SearchFlightsController searchFlightsController) {
+        this.searchFlightsController = searchFlightsController;
     }
 
 }

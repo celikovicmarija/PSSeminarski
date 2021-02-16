@@ -6,12 +6,29 @@
 package view.form;
 
 import java.awt.event.ActionListener;
+import javax.swing.JButton;
 
 /**
  *
  * @author Marija
  */
 public class FrmCreatePassenger extends javax.swing.JFrame {
+
+    public JButton getBtnCancel() {
+        return btnCancel;
+    }
+
+    public void setBtnCancel(JButton btnCancel) {
+        this.btnCancel = btnCancel;
+    }
+
+    public JButton getBtnSave() {
+        return btnSave;
+    }
+
+    public void setBtnSave(JButton btnSave) {
+        this.btnSave = btnSave;
+    }
 
     /**
      * Creates new form FrmCreatePassenger
@@ -39,9 +56,10 @@ public class FrmCreatePassenger extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         txtPassportNumber = new javax.swing.JTextField();
         btnSave = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        lblTitle = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         txtMlb = new javax.swing.JTextField();
+        btnCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Create Passenger");
@@ -55,14 +73,17 @@ public class FrmCreatePassenger extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
         jLabel8.setText("Passport Number:");
 
-        btnSave.setFont(new java.awt.Font("Calibri Light", 2, 24)); // NOI18N
+        btnSave.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
         btnSave.setText("Save Passenger");
 
-        jLabel1.setFont(new java.awt.Font("Calibri Light", 2, 36)); // NOI18N
-        jLabel1.setText("Create Passenger");
+        lblTitle.setFont(new java.awt.Font("Calibri Light", 2, 36)); // NOI18N
+        lblTitle.setText("Create Passenger");
 
         jLabel9.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
         jLabel9.setText("MLB:");
+
+        btnCancel.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
+        btnCancel.setText("Return");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -72,8 +93,11 @@ public class FrmCreatePassenger extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel9)
@@ -81,22 +105,22 @@ public class FrmCreatePassenger extends javax.swing.JFrame {
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel6))
                                 .addGap(26, 26, 26)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtFirstName)
                                     .addComponent(txtLastName)
                                     .addComponent(txtPassportNumber)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(txtMlb, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE)))))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(btnSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(jLabel1)
+                .addComponent(lblTitle)
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -114,8 +138,10 @@ public class FrmCreatePassenger extends javax.swing.JFrame {
                     .addComponent(txtMlb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
                 .addGap(18, 18, 18)
-                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancel))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         pack();
@@ -123,12 +149,13 @@ public class FrmCreatePassenger extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnSave;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel lblTitle;
     private javax.swing.JTextField txtFirstName;
     private javax.swing.JTextField txtLastName;
     private javax.swing.JTextField txtMlb;
@@ -165,5 +192,13 @@ public class FrmCreatePassenger extends javax.swing.JFrame {
 
     public void setTxtPassportNumber(javax.swing.JTextField txtPassportNumber) {
         this.txtPassportNumber = txtPassportNumber;
+    }
+
+    public javax.swing.JLabel getLblTitle() {
+        return lblTitle;
+    }
+
+    public void setLblTitle(javax.swing.JLabel lblTitle) {
+        this.lblTitle = lblTitle;
     }
 }

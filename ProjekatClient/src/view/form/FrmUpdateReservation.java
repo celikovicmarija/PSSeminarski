@@ -38,7 +38,7 @@ public class FrmUpdateReservation extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        lblTitle = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         txtReservationID = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -62,8 +62,8 @@ public class FrmUpdateReservation extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Update Reservation");
 
-        jLabel1.setFont(new java.awt.Font("Calibri Light", 2, 36)); // NOI18N
-        jLabel1.setText("Update Reservation");
+        lblTitle.setFont(new java.awt.Font("Calibri Light", 2, 36)); // NOI18N
+        lblTitle.setText("Update Reservation");
 
         jLabel7.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
         jLabel7.setText("Reservation ID:");
@@ -110,7 +110,7 @@ public class FrmUpdateReservation extends javax.swing.JFrame {
                 .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(lblTitle)
                         .addGap(0, 226, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,7 +144,7 @@ public class FrmUpdateReservation extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(jLabel1)
+                .addComponent(lblTitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
@@ -198,7 +198,6 @@ public class FrmUpdateReservation extends javax.swing.JFrame {
     private javax.swing.JButton btnSave;
     private javax.swing.JComboBox<Object> cbCoupons;
     private javax.swing.JComboBox<Object> cbFlights;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -207,6 +206,7 @@ public class FrmUpdateReservation extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel lblTitle;
     private javax.swing.JTextField txtDiscountedPrice;
     private javax.swing.JTextField txtIssueDate;
     private javax.swing.JTextField txtPassenger;
@@ -301,5 +301,13 @@ public class FrmUpdateReservation extends javax.swing.JFrame {
 
     public void setBtnDelete(javax.swing.JButton btnDelete) {
         this.btnDelete = btnDelete;
+    }
+
+    public javax.swing.JLabel getLblTitle() {
+        return lblTitle;
+    }
+
+    public void setLblTitle(javax.swing.JLabel lblTitle) {
+        this.lblTitle = lblTitle;
     }
 }
