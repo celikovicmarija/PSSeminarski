@@ -13,15 +13,17 @@ import java.util.List;
 
 public class Communication {
 
-    Socket socket;
-    Sender sender;
-    Receiver receiver;
+     Socket socket;
+     Sender sender;
+     Receiver receiver;
+     Receiver receiverOther;
     private static Communication instance;
 
     private Communication() throws Exception {
         socket = new Socket("127.0.0.1", 9000);
         sender = new Sender(socket);
-        receiver = new Receiver(socket);
+        receiver= new Receiver(socket);
+       receiverOther = new Receiver(socket);
     }
 
     public static Communication getInstance() throws Exception {
@@ -81,6 +83,7 @@ public class Communication {
         Request request = new Request(Operation.RETURN_FLIGHTS_ALL, null);
         sender.send(request);
         Response response = (Response) receiver.receive();
+        
         if (response.getException() == null) {
             return (List<Flight>) response.getResult();
         } else {
@@ -261,6 +264,7 @@ public class Communication {
         sender.send(request);
         Response response = (Response) receiver.receive();
         if (response.getException() == null) {
+            
             return (List<Flight>) response.getResult();
         } else {
             throw response.getException();
@@ -287,6 +291,38 @@ public class Communication {
         } else {
             throw response.getException();
         }
+    }
+
+    public Socket getSocket() {
+        return socket;
+    }
+
+    public void setSocket(Socket socket) {
+        this.socket = socket;
+    }
+
+    public Sender getSender() {
+        return sender;
+    }
+
+    public void setSender(Sender sender) {
+        this.sender = sender;
+    }
+
+    public Receiver getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(Receiver receiver) {
+        this.receiver = receiver;
+    }
+
+    public Receiver getReceiverOther() {
+        return receiverOther;
+    }
+
+    public void setReceiverOther(Receiver receiverOther) {
+        this.receiverOther = receiverOther;
     }
 
 }

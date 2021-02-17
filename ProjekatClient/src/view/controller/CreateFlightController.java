@@ -26,6 +26,7 @@ import view.form.util.FormMode;
 public class CreateFlightController {
 
     private final FrmCreateFlight frm;
+    
 
     public CreateFlightController(FrmCreateFlight frm) {
         this.frm = frm;
@@ -51,7 +52,6 @@ public class CreateFlightController {
             private void save() {
                 String err = "";
                 int row = frm.getTblAirplanes().getSelectedRow();
-                Airport airport = new Airport();
                 Airplane airplane = new Airplane();
                 Line line= new Line();
                 if (row >= 0) {
@@ -181,7 +181,7 @@ public class CreateFlightController {
                             JOptionPane.showMessageDialog(frm, "Found results for the lines", "Search lines", JOptionPane.INFORMATION_MESSAGE);
                             tidyLinesTableAfterSearch(lines);
                         } else {
-                            JOptionPane.showMessageDialog(frm, "Could not find results for the lines", "Search airports", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(frm, "Could not find results for the lines", "Search lines", JOptionPane.INFORMATION_MESSAGE);
 
                         }
                     } catch (Exception ex) {
@@ -195,13 +195,14 @@ public class CreateFlightController {
                         String[] parts = criteria.split(",", 2);
                         line.setSearchCriteriaSrc(parts[0]);
                         line.setSearchCriteriaDest(parts[1]);
+                        System.out.println("Src i dest: "+parts[0]+" "+parts[1]);
 
                         List<Line> lines = Communication.getInstance().searchLines(line);
                         if (lines != null) {
                             JOptionPane.showMessageDialog(frm, "Found results for the lines", "Search lines", JOptionPane.INFORMATION_MESSAGE);
                             tidyLinesTableAfterSearch(lines);
                         } else {
-                            JOptionPane.showMessageDialog(frm, "Could not find results for the airports", "Search airports", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(frm, "Could not find results for the lines", "Search lines", JOptionPane.INFORMATION_MESSAGE);
 
                         }
                     } catch (Exception ex) {

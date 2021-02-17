@@ -103,7 +103,10 @@ public class MainCoordinator {
     public void addParam(String name, Object key) {
         params.put(name, key);
     }
-
+    public void removeParam(String name, Object key) {
+        params.remove(name, key);
+        
+    }
     public Object getParam(String name) {
         return params.get(name);
     }

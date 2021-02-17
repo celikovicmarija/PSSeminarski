@@ -32,7 +32,12 @@ public class CreatePassengerController {
     }
 
     private void addActionListeners() {
-        frm.addSaveBtnActionListener(new ActionListener() {
+          frm.addCancelBtnActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frm.dispose();
+            }});
+            frm.addSaveBtnActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 save();

@@ -49,6 +49,7 @@ public class CreateReservationController {
                 if (criteria.isEmpty() || criteria.equals("*")) {
                     try {
                         List<Flight> flights = Communication.getInstance().getAllFlights();
+                        
                         if (flights != null) {
                             JOptionPane.showMessageDialog(frm, "Found results for the flights", "Search flights", JOptionPane.INFORMATION_MESSAGE);
                             tidyFlightTableAfterSearch(flights);

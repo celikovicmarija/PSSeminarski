@@ -47,7 +47,13 @@ public class LoginController {
                     MainCoordinator.getInstance().addParam(Constants.CURRENT_USER, user);
                     MainCoordinator.getInstance().openMainForm();
                 } catch (Exception e) {
-                    JOptionPane.showMessageDialog(frmLogin, "User with the given credentials does not exist.", "Login error", JOptionPane.ERROR_MESSAGE);
+                    if (e.getMessage().equals("User already logged in")){
+                                            JOptionPane.showMessageDialog(frmLogin, e.getMessage(), "Login error", JOptionPane.ERROR_MESSAGE);
+
+                    }else{
+                                            JOptionPane.showMessageDialog(frmLogin, "User with the given credentials does not exist.", "Login error", JOptionPane.ERROR_MESSAGE);
+
+                    }
                 }
             }
 
