@@ -12,7 +12,8 @@ import java.io.Serializable;
  * @author Cartman
  */
 public enum Operation  implements Serializable{
-    LOGIN, //   ProveriPodatke
+    LOGIN, 
+    LOGOUT_AFTER_STOPPING_SERVER,
     LOGOUT,
     ADD_AIRPORT,
     CHANGE_AIRPORT,

@@ -19,6 +19,7 @@ public class User  implements Serializable{
     
 
     public User() {
+        this.setStatus("not active");
     }
 
     public User(Long id, String firstName, String lastName, String username, String password) {
@@ -27,6 +28,8 @@ public class User  implements Serializable{
         this.lastName = lastName;
         this.username = username;
         this.password = password;
+        this.setStatus("not active");
+       
     }
         public String getStatus() {
         return status;

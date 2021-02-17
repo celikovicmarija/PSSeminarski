@@ -27,7 +27,7 @@ public class Sender {
             out.writeObject(object);
             out.flush();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            //ex.printStackTrace();
             throw new Exception("Error sending object!\n"+ex.getMessage());
         }
     }
