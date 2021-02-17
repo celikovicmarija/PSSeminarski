@@ -22,6 +22,8 @@ import domain.Line;
 import domain.Passenger;
 import domain.Reservation;
 import domain.User;
+import java.net.SocketException;
+import server.StartServerThread;
 
 public class ProcessClientsRequests extends Thread {
 
@@ -51,6 +53,7 @@ public class ProcessClientsRequests extends Thread {
 
         while (true) {
             try {
+     
                 Request request = (Request) receiver.receive();
                 Response response = new Response();
                 try {
@@ -63,6 +66,7 @@ public class ProcessClientsRequests extends Thread {
                          case LOGOUT:
                             User lu = (User) request.getArgument();
                             response.setResult(Controller.getInstance().logout(lu));
+                            StartServerThread.clients.remove(this);
                             break;
                         case RETURN_AIRPLANES_ALL:
                             response.setResult(Controller.getInstance().getAllAirplanes(new Airplane()));
@@ -151,7 +155,11 @@ public class ProcessClientsRequests extends Thread {
                     response.setException(e);
                 }
                 sender.send(response);
-            } catch (Exception ex) {
+            }catch (SocketException se){
+                //  StartServerThread.clients.remove(this);
+               // interrupt();
+            } 
+            catch (Exception ex) {
                 //   Logger.getLogger(ProcessClientsRequests.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -169,11 +177,11 @@ public class ProcessClientsRequests extends Thread {
         try {
             end = true;
 
-            Request request = new Request(Operation.LOGOUT, null);
+            Request request = new Request(Operation.LOGOUT_AFTER_STOPPING_SERVER, null);
             sender.send(request);
 
         } catch (Exception ex) {
-            System.out.println("Greska pri logoutovanju prijavljenih korisnika");
+            System.out.println("Error while logging out the active users");
         }
     }
 }

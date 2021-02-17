@@ -1,5 +1,6 @@
 package server;
 
+import controller.Controller;
 import form.FrmMain;
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -35,7 +36,6 @@ public class StartServerThread extends Thread {
             DbProperties properties = new DbProperties();
             portNumber = Integer.parseInt(properties.returnDbPort());
             serverSocket = new ServerSocket(portNumber);
-            working = true;
             working = true;
             while (!isInterrupted()) {
 
@@ -83,9 +83,9 @@ public class StartServerThread extends Thread {
             working = false;
             serverSocket.close();
             for (ProcessClientsRequests clientThread : clients) {
-                System.out.println("Logg outin client no" + i);
+                System.out.println("Logg outin client no: " + i);
                 i++;
-                // Controller.getInstance().getKorisniciUlogovani().remove(clientThread.getKorisnik());
+                Controller.getInstance().getActiveUsers().remove(clientThread.getUser());
                 clients.remove(clientThread);
                 clientThread.getSocket().close();
             }

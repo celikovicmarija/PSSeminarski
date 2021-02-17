@@ -63,11 +63,16 @@ public class Controller {
         List<User> users = repositoryUser.getAll();
         for (User user : users) {
             if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+               if(activeUsers.contains(user)){      
+                   throw new Exception("User already logged in");
+               }else{
                 user.setStatus("active");
                 activeUsers.add(user);
                 fillTblUsers(ServerCoordinator.getInstance().getFrmMainController().getFrmMain());
 
                 return user;
+               }
+ 
             }
         }
         throw new Exception("Unknown user!");
@@ -80,8 +85,9 @@ public class Controller {
                 user.setStatus("not active");
                 activeUsers.remove(user);
                 fillTblUsers(ServerCoordinator.getInstance().getFrmMainController().getFrmMain());
-
                 return user;
+                
+       
             }
         }
         throw new Exception("Unknown user!");
@@ -226,14 +232,25 @@ public class Controller {
     }
 
     public void stopServer() {
-        StartServerThread.clients.stream().map((pcr) -> {
+        /*StartServerThread.clients.stream().map((pcr) -> {
             activeUsers.stream().filter((user) -> (user.getUsername().equals(pcr.getUser().getUsername()))).forEachOrdered((_item) -> {
                 Controller.getInstance().getActiveUsers().remove(pcr.getUser());
             });
             return pcr;
         }).forEachOrdered((pcr) -> {
             pcr.logoutEverybody();
-        });
+        });*/
+       for (ProcessClientsRequests obradaKlijenskihZahteva : StartServerThread.clients) {
+            for(User kor:Controller.getInstance().getActiveUsers()){
+                if(kor.getUsername().equals(obradaKlijenskihZahteva.getUser().getUsername()))
+                    activeUsers.remove(obradaKlijenskihZahteva.getUser());
+                
+          }
+            fillTblUsers(ServerCoordinator.getInstance().getFrmMainController().getFrmMain());
+         // obradaKlijenskihZahteva.logoutEverybody();
+      }
+     
+      //  pcr.zaustaviNiti();
 
         sst.stopAllThreads();
     }

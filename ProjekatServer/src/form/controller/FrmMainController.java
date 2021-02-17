@@ -10,6 +10,8 @@ import coordinator.ServerCoordinator;
 import form.FrmMain;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 /**
  *
@@ -59,6 +61,17 @@ public class FrmMainController {
 
             }
         });
+        frmMain.addWindowListener(new WindowAdapter() {
+            
+            @Override
+            public void windowClosing(WindowEvent e) {
+                if(frmMain.isRunning())
+                        stopServer();
+            }
+            
+            
+});
+        
 
         frmMain.addBtnStopServerActionListener(new ActionListener() {
             @Override
@@ -66,7 +79,10 @@ public class FrmMainController {
                 stopServer();
             }
 
-            private void stopServer() {
+        
+        });
+    }
+        private void stopServer() {
                 frmMain.setRunning(false);
                 frmMain.getBtnStartServer().setEnabled(true);
                 frmMain.getBtnStopServer().setEnabled(false);
@@ -74,7 +90,5 @@ public class FrmMainController {
                 Controller.getInstance().stopServer();
 
             }
-        });
-    }
 
 }
