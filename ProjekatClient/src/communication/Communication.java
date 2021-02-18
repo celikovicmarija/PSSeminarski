@@ -1,5 +1,6 @@
 package communication;
 
+import config.ServerProperties;
 import domain.Airplane;
 import domain.Airport;
 import domain.Coupon;
@@ -9,6 +10,7 @@ import domain.Passenger;
 import domain.Reservation;
 import java.net.Socket;
 import domain.User;
+import java.io.IOException;
 import java.util.List;
 
 public class Communication {
@@ -17,9 +19,12 @@ public class Communication {
      Sender sender;
      Receiver receiver;
     private static Communication instance;
+    int port;
+    String url;
 
     private Communication() throws Exception {
-        socket = new Socket("127.0.0.1", 9000);
+        loadData();
+        socket = new Socket(url, port);
         sender = new Sender(socket);
         receiver= new Receiver(socket);
     }
@@ -30,7 +35,15 @@ public class Communication {
         }
         return instance;
     }
-
+private void loadData() {
+        try {
+            ServerProperties sp=new ServerProperties();
+            port = Integer.parseInt(sp.returnServerPort());
+            url=sp.returnServerURL();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
     public User login(String username, String password) throws Exception {
         User user = new User();
         user.setUsername(username);
