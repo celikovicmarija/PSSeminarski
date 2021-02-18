@@ -18,9 +18,11 @@ import view.form.util.FormMode;
 public class SearchReservationsController {
 
     private FrmSearchReservations frm;
+    private FormMode mode;
 
-    public SearchReservationsController(FrmSearchReservations frm) {
+    public SearchReservationsController(FrmSearchReservations frm,FormMode mode) {
         this.frm = frm;
+        this.mode=mode;
         this.frm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         addActionListeners();
     }
@@ -34,8 +36,9 @@ public class SearchReservationsController {
     }
 
     public void openForm() {
+        prepareView();
         frm.setVisible(true);
-        fillTblReservations();
+       
     }
 
     private void addActionListeners() {
@@ -199,4 +202,27 @@ public class SearchReservationsController {
         model.clear();
         model.addReservations(list);
     }
+       private void prepareView() {
+         fillTblReservations();
+
+           switch (mode){
+            case USE_CASE_DELETE:
+                frm.getBtnDelete().setEnabled(true);
+                frm.getBtnEdit().setEnabled(false);
+                frm.getBtnShow().setEnabled(false);
+                break;
+            case USE_CASE_UPDATE:
+                frm.getBtnEdit().setEnabled(true);
+                frm.getBtnDelete().setEnabled(false);
+                frm.getBtnShow().setEnabled(false);
+                break;
+            case USE_CASE_SEARCH:
+                frm.getBtnShow().setEnabled(true);
+                frm.getBtnDelete().setEnabled(false);
+                frm.getBtnEdit().setEnabled(false);
+
+                break;  
+            
+        }
+       }
 }

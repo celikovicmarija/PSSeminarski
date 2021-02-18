@@ -18,9 +18,11 @@ import view.form.util.FormMode;
 public class SearchFlightsController {
 
     private  FrmSearchFlights frm;
+    private FormMode mode;
 
-    public SearchFlightsController(FrmSearchFlights frm) {
+    public SearchFlightsController(FrmSearchFlights frm,FormMode mode) {
         this.frm = frm;
+        this.mode=mode;
         this.frm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         addActionListeners();
     }
@@ -34,9 +36,10 @@ public class SearchFlightsController {
     }
 
     public void openForm() {
+        
+        prepareView();
+       
         frm.setVisible(true);
-
-        fillTblFlights();
     }
 
     private void addActionListeners() {
@@ -103,26 +106,7 @@ public class SearchFlightsController {
                         Flight flight = flights.get(row);
                          MainCoordinator.getInstance().addParam(Constants.PARAM_FLIGHT, flight);
                     MainCoordinator.getInstance().openUpdateFlightForm(FormMode.FORM_DELETE);
-                        
-                 /*
-                    int result = JOptionPane.showConfirmDialog(frm, "Are you sure you want to delete this flight?", "Delete flight",
-                            JOptionPane.YES_NO_OPTION,
-                            JOptionPane.QUESTION_MESSAGE);
-                    if (result == JOptionPane.YES_OPTION) {
-                         List<Flight> fs=Communication.getInstance().getAllFlights();
-
-                        if (!fs.contains(flight)){
-                              JOptionPane.showMessageDialog(frm, "Could not delete selected flight", "Delete flight", JOptionPane.INFORMATION_MESSAGE);
-
-                       }else{
-                              Communication.getInstance().deleteFlight(flight);
-                        JOptionPane.showMessageDialog(frm, "Deleted successfully", "Delete flight", JOptionPane.INFORMATION_MESSAGE);
-                         ftc.deleteFlight(flight);
-                         ftc.refresh();
-                        }
-                      
-                    }*/
-                
+                                        
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(frm, "Could not delete selected flight", "Delete flight", JOptionPane.INFORMATION_MESSAGE);
                       //  Logger.getLogger(SearchFlightsController.class.getName()).log(Level.SEVERE, null, ex);
@@ -199,6 +183,30 @@ public class SearchFlightsController {
         FlightTableModel model = (FlightTableModel) frm.getTblFlights().getModel();
         model.clear();
         model.addFlights(list);
+    }
+
+    private void prepareView() {
+         fillTblFlights();
+        switch (mode){
+            case USE_CASE_DELETE:
+                frm.getBtnDelete().setEnabled(true);
+                frm.getBtnEdit().setEnabled(false);
+                frm.getBtnShow().setEnabled(false);
+                break;
+            case USE_CASE_UPDATE:
+                frm.getBtnDelete().setEnabled(false);
+                frm.getBtnEdit().setEnabled(true);
+                frm.getBtnShow().setEnabled(false);
+                break;
+            case USE_CASE_SEARCH:
+                frm.getBtnEdit().setEnabled(false);
+                frm.getBtnDelete().setEnabled(false);
+                frm.getBtnShow().setEnabled(true);
+                break;
+            
+            
+        }
+    
     }
 
 }

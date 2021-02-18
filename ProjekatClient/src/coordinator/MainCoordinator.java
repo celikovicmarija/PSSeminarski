@@ -76,13 +76,13 @@ public class MainCoordinator {
 
     }
 
-    public void openSearchFlightsForm() {
-         searchFlightsController = new SearchFlightsController(new FrmSearchFlights());
+    public void openSearchFlightsForm(FormMode mode) {
+         searchFlightsController = new SearchFlightsController(new FrmSearchFlights(),mode);
         searchFlightsController.openForm();
     }
 
-    public void openSearchResevationsForm() {
-         searchReservationsController = new SearchReservationsController(new FrmSearchReservations());
+    public void openSearchResevationsForm(FormMode mode) {
+         searchReservationsController = new SearchReservationsController(new FrmSearchReservations(),mode);
         searchReservationsController.openForm();
     }
 

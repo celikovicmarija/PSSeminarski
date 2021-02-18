@@ -16,14 +16,12 @@ public class Communication {
      Socket socket;
      Sender sender;
      Receiver receiver;
-     Receiver receiverOther;
     private static Communication instance;
 
     private Communication() throws Exception {
         socket = new Socket("127.0.0.1", 9000);
         sender = new Sender(socket);
         receiver= new Receiver(socket);
-       receiverOther = new Receiver(socket);
     }
 
     public static Communication getInstance() throws Exception {
@@ -315,14 +313,6 @@ public class Communication {
 
     public void setReceiver(Receiver receiver) {
         this.receiver = receiver;
-    }
-
-    public Receiver getReceiverOther() {
-        return receiverOther;
-    }
-
-    public void setReceiverOther(Receiver receiverOther) {
-        this.receiverOther = receiverOther;
     }
 
 }

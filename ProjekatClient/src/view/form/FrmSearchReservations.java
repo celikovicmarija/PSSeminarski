@@ -55,7 +55,7 @@ public class FrmSearchReservations extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Search Reservations");
-        setPreferredSize(new java.awt.Dimension(800, 440));
+        setPreferredSize(new java.awt.Dimension(1000, 440));
 
         jLabel2.setFont(new java.awt.Font("Calibri Light", 2, 36)); // NOI18N
         jLabel2.setText("Search Reservations");
@@ -120,7 +120,7 @@ public class FrmSearchReservations extends javax.swing.JFrame {
                                 .addComponent(txtSearchTerm, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,11 +173,11 @@ public class FrmSearchReservations extends javax.swing.JFrame {
     }
 
     public javax.swing.JButton getBtnEdit() {
-        return btnShow;
+        return btnEdit;
     }
 
     public void setBtnEdit(javax.swing.JButton btnEdit) {
-        this.btnShow = btnEdit;
+        this.btnEdit = btnEdit;
     }
 
     public javax.swing.JTable getTbReservations() {

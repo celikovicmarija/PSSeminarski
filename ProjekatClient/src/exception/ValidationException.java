@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view.form.util;
+package exception;
 
 /**
  *
- * @author laptop-02
+ * @author Marija
  */
-public enum FormMode {
-    FORM_DELETE, FORM_EDIT, FORM_VIEW,
-    USE_CASE_SEARCH,USE_CASE_DELETE,USE_CASE_UPDATE
+public class ValidationException extends Exception{
+
+    public ValidationException(String message) {
+        super(message);
+    }
 }

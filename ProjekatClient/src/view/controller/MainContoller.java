@@ -33,8 +33,8 @@ public class MainContoller {
     public void openForm() {
         User user = (User) MainCoordinator.getInstance().getParam(Constants.CURRENT_USER);
         frmMain.getLblLoggedUser().setText(user.getFirstName() + " " + user.getLastName());
-    //    psr= new ProcessServerRequests();
-    //    psr.start();
+      //  psr= new ProcessServerRequests();
+     //  psr.start();
         frmMain.setVisible(true);
        
     }
@@ -51,22 +51,30 @@ public class MainContoller {
             MainCoordinator.getInstance().openCreateReservationForm();
         });
         frmMain.miSearchFlightsAddActionListener((java.awt.event.ActionEvent evt) -> {
-            MainCoordinator.getInstance().openSearchFlightsForm();
+            MainCoordinator.getInstance().openSearchFlightsForm(FormMode.USE_CASE_SEARCH);
         });
         frmMain.miSearchReservationsAddActionListener((java.awt.event.ActionEvent evt) -> {
-            MainCoordinator.getInstance().openSearchResevationsForm();
+            MainCoordinator.getInstance().openSearchResevationsForm(FormMode.USE_CASE_SEARCH);
         });
 
         frmMain.miDeleteFlightAddActionListener((java.awt.event.ActionEvent evt) -> {
-            //check to see how are you going to implement disabled buttons
-            MainCoordinator.getInstance().openSearchFlightsForm();
+            MainCoordinator.getInstance().openSearchFlightsForm(FormMode.USE_CASE_DELETE);
         });
         frmMain.miDeleteReservationAddActionListener((java.awt.event.ActionEvent evt) -> {
-            MainCoordinator.getInstance().openSearchResevationsForm();
+            MainCoordinator.getInstance().openSearchResevationsForm(FormMode.USE_CASE_DELETE);
         });
         frmMain.miAboutAddActionListener((java.awt.event.ActionEvent evt) -> {
             MainCoordinator.getInstance().openAboutForm();
         });
+        
+        frmMain.miUpdateFlightAddActionListener((java.awt.event.ActionEvent evt) -> {
+            MainCoordinator.getInstance().openSearchFlightsForm(FormMode.USE_CASE_UPDATE);
+        });
+        frmMain.miUpdateReservationAddActionListener((java.awt.event.ActionEvent evt) -> {
+            MainCoordinator.getInstance().openSearchResevationsForm(FormMode.USE_CASE_UPDATE);
+        });
+        
+        
           frmMain.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {

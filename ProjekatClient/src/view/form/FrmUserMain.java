@@ -35,14 +35,16 @@ public class FrmUserMain extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         menuBarMain = new javax.swing.JMenuBar();
         menuFlight = new javax.swing.JMenu();
-        miCreateFlight = new javax.swing.JMenuItem();
         miSearchFlights = new javax.swing.JMenuItem();
+        miCreateFlight = new javax.swing.JMenuItem();
+        miUpdateFlight = new javax.swing.JMenuItem();
         miDeleteFlight = new javax.swing.JMenuItem();
         menuPassenger = new javax.swing.JMenu();
         miCreatePassenger = new javax.swing.JMenuItem();
         menuReservation = new javax.swing.JMenu();
-        miCreateReservation = new javax.swing.JMenuItem();
         miSearchReservations = new javax.swing.JMenuItem();
+        miCreateReservation = new javax.swing.JMenuItem();
+        miUpdateReservation = new javax.swing.JMenuItem();
         miDeleteReservation = new javax.swing.JMenuItem();
         menuOptions = new javax.swing.JMenu();
         miLogout = new javax.swing.JMenuItem();
@@ -65,11 +67,14 @@ public class FrmUserMain extends javax.swing.JFrame {
 
         menuFlight.setText("Flight");
 
+        miSearchFlights.setText("Search Flights");
+        menuFlight.add(miSearchFlights);
+
         miCreateFlight.setText("Create Flight");
         menuFlight.add(miCreateFlight);
 
-        miSearchFlights.setText("Search Flights");
-        menuFlight.add(miSearchFlights);
+        miUpdateFlight.setText("Update Flight");
+        menuFlight.add(miUpdateFlight);
 
         miDeleteFlight.setText("Delete Flight");
         menuFlight.add(miDeleteFlight);
@@ -85,11 +90,14 @@ public class FrmUserMain extends javax.swing.JFrame {
 
         menuReservation.setText("Reservation");
 
+        miSearchReservations.setText("Search Reservations");
+        menuReservation.add(miSearchReservations);
+
         miCreateReservation.setText("Create Reservation");
         menuReservation.add(miCreateReservation);
 
-        miSearchReservations.setText("Search Reservations");
-        menuReservation.add(miSearchReservations);
+        miUpdateReservation.setText("Update Reservation");
+        menuReservation.add(miUpdateReservation);
 
         miDeleteReservation.setText("Delete Reservation");
         menuReservation.add(miDeleteReservation);
@@ -158,6 +166,8 @@ public class FrmUserMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem miLogout;
     private javax.swing.JMenuItem miSearchFlights;
     private javax.swing.JMenuItem miSearchReservations;
+    private javax.swing.JMenuItem miUpdateFlight;
+    private javax.swing.JMenuItem miUpdateReservation;
     // End of variables declaration//GEN-END:variables
 
     public javax.swing.JMenuItem getMiCreateFlight() {
@@ -203,6 +213,13 @@ public class FrmUserMain extends javax.swing.JFrame {
     }
     public void miLogoutAddActionListener(ActionListener actionListener) {
         miLogout.addActionListener(actionListener);
+    }
+    public void miUpdateReservationAddActionListener(ActionListener actionListener) {
+        miUpdateReservation.addActionListener(actionListener);
+    }
+    
+      public void miUpdateFlightAddActionListener(ActionListener actionListener) {
+        miUpdateFlight.addActionListener(actionListener);
     }
     public javax.swing.JMenuItem getMiSearchFlights() {
         return miSearchFlights;
@@ -251,4 +268,5 @@ public class FrmUserMain extends javax.swing.JFrame {
     public void setLblLoggedUser(javax.swing.JLabel lblLoggedUser) {
         this.lblLoggedUser = lblLoggedUser;
     }
+    
 }

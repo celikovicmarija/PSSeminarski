@@ -9,14 +9,19 @@
             <Property name="text" type="java.lang.String" value="Flight"/>
           </Properties>
           <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="miSearchFlights">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Search Flights"/>
+              </Properties>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="miCreateFlight">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Create Flight"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="miSearchFlights">
+            <MenuItem class="javax.swing.JMenuItem" name="miUpdateFlight">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Search Flights"/>
+                <Property name="text" type="java.lang.String" value="Update Flight"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="miDeleteFlight">
@@ -43,14 +48,19 @@
             <Property name="text" type="java.lang.String" value="Reservation"/>
           </Properties>
           <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="miSearchReservations">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Search Reservations"/>
+              </Properties>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="miCreateReservation">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Create Reservation"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="miSearchReservations">
+            <MenuItem class="javax.swing.JMenuItem" name="miUpdateReservation">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Search Reservations"/>
+                <Property name="text" type="java.lang.String" value="Update Reservation"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="miDeleteReservation">
