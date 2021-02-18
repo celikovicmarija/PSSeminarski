@@ -30,7 +30,7 @@ public class ProcessClientsRequests extends Thread {
     private Socket socket;
     Sender sender;
     Receiver receiver;
-    boolean end = true;
+    boolean end = false;
     User user;
 
     public ProcessClientsRequests(Socket socket) {
@@ -51,7 +51,7 @@ public class ProcessClientsRequests extends Thread {
     @Override
     public void run() {
 
-        while (true) {
+        while (!end) {
             try {
      
                 Request request = (Request) receiver.receive();

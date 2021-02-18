@@ -33,6 +33,7 @@ public class ThreadUpdateTable extends Thread{
                 int korisniciUlogovaniNovi=Controller.getInstance().getActiveUsers().size();
                 if( korisniciUlogovaniNovi!=korisniciUlogovani){
                     korisniciUlogovani=korisniciUlogovaniNovi;
+                    frm.getTblActiveUsers().setAutoCreateRowSorter(true);
 
                }
            

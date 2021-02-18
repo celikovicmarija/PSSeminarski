@@ -34,7 +34,7 @@ public class StartServerThread extends Thread {
     public void run() {
         try {
             DbProperties properties = new DbProperties();
-            portNumber = Integer.parseInt(properties.returnDbPort());
+           // portNumber = Integer.parseInt(properties.returnDbPort());
             serverSocket = new ServerSocket(portNumber);
             working = true;
             while (!isInterrupted()) {

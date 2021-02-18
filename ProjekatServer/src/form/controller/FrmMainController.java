@@ -31,6 +31,7 @@ public class FrmMainController {
         frmMain.getTblActiveUsers().setVisible(true);
         frmMain.getBtnStopServer().setEnabled(false);
         Controller.getInstance().fillTblUsers(frmMain);
+        frmMain.getTblActiveUsers().setAutoCreateRowSorter(true); 
     }
 
     public FrmMain getFrmMain() {
