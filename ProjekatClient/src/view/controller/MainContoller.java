@@ -5,20 +5,17 @@ import java.awt.event.ActionEvent;
 import domain.User;
 import constant.Constants;
 import coordinator.MainCoordinator;
+import exception.CommunicationException;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import thread.ProcessServerRequests;
 import view.form.FrmUserMain;
 import view.form.util.FormMode;
 
 public class MainContoller {
 
     private final FrmUserMain frmMain;
-      ProcessServerRequests psr;
 
     public FrmUserMain getFrmMain() {
         return frmMain;
@@ -33,10 +30,8 @@ public class MainContoller {
     public void openForm() {
         User user = (User) MainCoordinator.getInstance().getParam(Constants.CURRENT_USER);
         frmMain.getLblLoggedUser().setText(user.getFirstName() + " " + user.getLastName());
-      //  psr= new ProcessServerRequests();
-     //  psr.start();
         frmMain.setVisible(true);
-       
+
     }
 
     private void addActionListener() {
@@ -66,25 +61,22 @@ public class MainContoller {
         frmMain.miAboutAddActionListener((java.awt.event.ActionEvent evt) -> {
             MainCoordinator.getInstance().openAboutForm();
         });
-        
+
         frmMain.miUpdateFlightAddActionListener((java.awt.event.ActionEvent evt) -> {
             MainCoordinator.getInstance().openSearchFlightsForm(FormMode.USE_CASE_UPDATE);
         });
         frmMain.miUpdateReservationAddActionListener((java.awt.event.ActionEvent evt) -> {
             MainCoordinator.getInstance().openSearchResevationsForm(FormMode.USE_CASE_UPDATE);
         });
-        
-        
-          frmMain.addWindowListener(new WindowAdapter() {
+
+        frmMain.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 logoutUser();
                 //super.windowClosing(e); //To change body of generated methods, choose Tools | Templates.
             }
-           
-              
-})
-                  ;
+
+        });
         frmMain.miLogoutAddActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,37 +85,41 @@ public class MainContoller {
 
             }
 
-
-
         });
 
     }
-     public void logout(){
-   JOptionPane.showMessageDialog(frmMain, "Server stopped working. Bye!", "Logout", JOptionPane.INFORMATION_MESSAGE);
-   MainCoordinator.getInstance().removeParam(Constants.CURRENT_USER, MainCoordinator.getInstance().getParam(Constants.CURRENT_USER));
+
+    public void logout() {
+        JOptionPane.showMessageDialog(frmMain, "Server stopped working. Bye!", "Logout", JOptionPane.INFORMATION_MESSAGE);
+        MainCoordinator.getInstance().removeParam(Constants.CURRENT_USER, MainCoordinator.getInstance().getParam(Constants.CURRENT_USER));
         frmMain.dispose();
     }
+
     /*
     public FrmMain getFrmMain() {
         return frmMain;
     }*/
-     
-     
-                 private void logoutUser() {
-                try {
-                    int result = JOptionPane.showConfirmDialog(frmMain, "Are you sure you want to exit?", "Log out",
-                            JOptionPane.YES_NO_OPTION,
-                            JOptionPane.QUESTION_MESSAGE);
-                    if (result == JOptionPane.YES_OPTION) {
-                        Communication.getInstance().logout((User) MainCoordinator.getInstance().getParam(Constants.CURRENT_USER));
-                        JOptionPane.showMessageDialog(frmMain, "Goodbye!", "Logout", JOptionPane.INFORMATION_MESSAGE);
-                        frmMain.dispose();
-                    }
 
-                } catch (Exception ex) {
-                  JOptionPane.showMessageDialog(frmMain, "Error while trying to perform the request op", "Logout ", JOptionPane.INFORMATION_MESSAGE);
-
-                   // Logger.getLogger(MainContoller.class.getName()).log(Level.SEVERE, null, ex);
-                }
+    private void logoutUser() {
+        try {
+            int result = JOptionPane.showConfirmDialog(frmMain, "Are you sure you want to exit?", "Log out",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE);
+            if (result == JOptionPane.YES_OPTION) {
+                Communication.getInstance().logout((User) MainCoordinator.getInstance().getParam(Constants.CURRENT_USER));
+                JOptionPane.showMessageDialog(frmMain, "Goodbye!", "Logout", JOptionPane.INFORMATION_MESSAGE);
+                frmMain.dispose();
             }
+
+        } catch (CommunicationException e) {
+            closeProgramOnSocketException();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(frmMain, "Error while trying to perform the request op", "Logout ", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+
+    private void closeProgramOnSocketException() {
+        JOptionPane.showMessageDialog(null, "Server closed the connection!\n Program will now exit!", "Error!", JOptionPane.INFORMATION_MESSAGE);
+        System.exit(0);
+    }
 }

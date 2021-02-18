@@ -7,6 +7,7 @@ import domain.Airplane;
 import domain.Airport;
 import domain.Flight;
 import domain.Line;
+import exception.CommunicationException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
@@ -108,7 +109,9 @@ public class CreateFlightController {
                      MainCoordinator.getInstance().addParam(Constants.PARAM_FLIGHT,flight );
                      MainCoordinator.getInstance().openUpdateFlightForm(FormMode.FORM_VIEW);
                     
-                    } catch (Exception ex) {
+                    }  catch(CommunicationException e){
+                        closeProgramOnSocketException();
+                    }catch (Exception ex) {
                       JOptionPane.showMessageDialog(frm, "Error saving the flight", "Create Flight", JOptionPane.ERROR_MESSAGE);
                     }
                 } else {
@@ -137,6 +140,8 @@ public class CreateFlightController {
                             JOptionPane.showMessageDialog(frm, "Could not find results for the airplanes", "Search airplanes", JOptionPane.INFORMATION_MESSAGE);
 
                         }
+                    }catch(CommunicationException e){
+                        closeProgramOnSocketException();
                     } catch (Exception ex) {
                          JOptionPane.showMessageDialog(frm, "Error while fetching airplanes", "Search airplanes", JOptionPane.INFORMATION_MESSAGE);
                        // Logger.getLogger(CreateFlightController.class.getName()).log(Level.SEVERE, null, ex);
@@ -153,6 +158,8 @@ public class CreateFlightController {
                             JOptionPane.showMessageDialog(frm, "Could not find results for the airplanes", "Search airplanes", JOptionPane.INFORMATION_MESSAGE);
 
                         }
+                    }catch(CommunicationException e){
+                        closeProgramOnSocketException();
                     } catch (Exception ex) {
                           JOptionPane.showMessageDialog(frm, "Error while fetching airplanes", "Search airplanes", JOptionPane.INFORMATION_MESSAGE);
 
@@ -184,6 +191,8 @@ public class CreateFlightController {
                             JOptionPane.showMessageDialog(frm, "Could not find results for the lines", "Search lines", JOptionPane.INFORMATION_MESSAGE);
 
                         }
+                    }catch(CommunicationException e){
+                        closeProgramOnSocketException();
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(frm, "Error while fetching lines", "Search lines", JOptionPane.INFORMATION_MESSAGE);
                        // Logger.getLogger(CreateFlightController.class.getName()).log(Level.SEVERE, null, ex);
@@ -205,7 +214,9 @@ public class CreateFlightController {
                             JOptionPane.showMessageDialog(frm, "Could not find results for the lines", "Search lines", JOptionPane.INFORMATION_MESSAGE);
 
                         }
-                    } catch (Exception ex) {
+                    } catch(CommunicationException e){
+                        closeProgramOnSocketException();
+                    }catch (Exception ex) {
                         JOptionPane.showMessageDialog(frm, "Error while fetching lines", "Search lines", JOptionPane.INFORMATION_MESSAGE);
                         //Logger.getLogger(CreateFlightController.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -226,7 +237,9 @@ public class CreateFlightController {
         List<Airport> airports = null;
         try {
             airports = Communication.getInstance().getAllAirports();
-        } catch (Exception ex) {
+        } catch(CommunicationException e){
+                        closeProgramOnSocketException();
+                    }catch (Exception ex) {
            JOptionPane.showMessageDialog(frm, "Error while fetching airports", "Fill airports", JOptionPane.INFORMATION_MESSAGE);
            // Logger.getLogger(CreateFlightController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -238,7 +251,9 @@ public class CreateFlightController {
         List<Airplane> airplanes = null;
         try {
             airplanes = Communication.getInstance().getAllAirplanes();
-        } catch (Exception ex) {
+        }catch(CommunicationException e){
+                        closeProgramOnSocketException();
+                    } catch (Exception ex) {
           JOptionPane.showMessageDialog(frm, "Error while fetching airplanes", "Fill airplanes", JOptionPane.INFORMATION_MESSAGE);
 
            // Logger.getLogger(CreateFlightController.class.getName()).log(Level.SEVERE, null, ex);
@@ -251,7 +266,9 @@ public class CreateFlightController {
         List<Line> lines = null;
         try {
             lines = Communication.getInstance().getAllLines();
-        } catch (Exception ex) {
+        } catch(CommunicationException e){
+                        closeProgramOnSocketException();
+                    }catch (Exception ex) {
             JOptionPane.showMessageDialog(frm, "Error while fetching lines", "Search lines", JOptionPane.INFORMATION_MESSAGE);
            // Logger.getLogger(CreateFlightController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -275,6 +292,10 @@ public class CreateFlightController {
         AirplaneTableModel model = (AirplaneTableModel) frm.getTblAirplanes().getModel();
         model.clear();
         model.addAirplanes(list);
+    }
+            private void closeProgramOnSocketException() {
+        JOptionPane.showMessageDialog(null, "Server closed the connection!\n Program will now exit!", "Error!", JOptionPane.INFORMATION_MESSAGE);
+        System.exit(0);
     }
 
 }

@@ -4,6 +4,7 @@ import communication.Communication;
 import constant.Constants;
 import coordinator.MainCoordinator;
 import domain.Reservation;
+import exception.CommunicationException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -107,23 +108,7 @@ public class SearchReservationsController {
                         Reservation reservation = reservations.get(row);
                     MainCoordinator.getInstance().addParam(Constants.PARAM_RESERVATION,reservation );
                     MainCoordinator.getInstance().openUpdateResevationForm(FormMode.FORM_DELETE);
-                       /* int result = JOptionPane.showConfirmDialog(frm, "Are you sure you want to delete this flight?", "Delete flight",
-                                JOptionPane.YES_NO_OPTION,
-                                JOptionPane.QUESTION_MESSAGE);
-                        if (result == JOptionPane.YES_OPTION) {
-                            List<Reservation> rs=Communication.getInstance().getAllReservations();
-                       if (!rs.contains(reservation)){
-                              JOptionPane.showMessageDialog(frm, "Could not delete selected reservation", "Delete reservation", JOptionPane.INFORMATION_MESSAGE);
 
-                       }else{
-                                     Communication.getInstance().deleteReservation(reservation);
-                            JOptionPane.showMessageDialog(frm, "Deleted successfully", "Delete reservation", JOptionPane.INFORMATION_MESSAGE);
-                            rtm.deleteReservation(reservation);
-                             rtm.refresh();
-
-                       }
-                  
-                        }*/
 
                                            } catch (Exception ex) {
                         JOptionPane.showMessageDialog(frm, "Could not delete selected reservation", "Delete reservation", JOptionPane.INFORMATION_MESSAGE);
@@ -153,7 +138,9 @@ public class SearchReservationsController {
                             JOptionPane.showMessageDialog(frm, "Could not find results for the reservations", "Search reservations", JOptionPane.INFORMATION_MESSAGE);
 
                         }
-                    } catch (Exception ex) {
+                    }  catch(CommunicationException e){
+                        closeProgramOnSocketException();
+                    }catch (Exception ex) {
                        JOptionPane.showMessageDialog(frm, "Error while fetching reservations", "Search reservations", JOptionPane.INFORMATION_MESSAGE);
                        // Logger.getLogger(SearchReservationsController.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -171,6 +158,8 @@ public class SearchReservationsController {
                             JOptionPane.showMessageDialog(frm, "Could not find results for the reservations", "Search reservations", JOptionPane.INFORMATION_MESSAGE);
 
                         }
+                    } catch(CommunicationException e){
+                        closeProgramOnSocketException();
                     } catch (Exception ex) {
              JOptionPane.showMessageDialog(frm, "Error while fetching reservations", "Search reservations", JOptionPane.INFORMATION_MESSAGE);
 
@@ -187,7 +176,9 @@ public class SearchReservationsController {
         List<Reservation> reservations = null;
         try {
             reservations = Communication.getInstance().getAllReservations();
-        } catch (Exception ex) {
+        } catch(CommunicationException e){
+                        closeProgramOnSocketException();
+                    } catch (Exception ex) {
          JOptionPane.showMessageDialog(frm, "Error while fetching reservations", "Fill reservations", JOptionPane.INFORMATION_MESSAGE);
 
           //  Logger.getLogger(SearchFlightsController.class.getName()).log(Level.SEVERE, null, ex);
@@ -225,4 +216,8 @@ public class SearchReservationsController {
             
         }
        }
+                   private void closeProgramOnSocketException() {
+        JOptionPane.showMessageDialog(null, "Server closed the connection!\n Program will now exit!", "Error!", JOptionPane.INFORMATION_MESSAGE);
+        System.exit(0);
+    }
 }

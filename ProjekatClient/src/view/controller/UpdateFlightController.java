@@ -14,6 +14,7 @@ import coordinator.MainCoordinator;
 import constant.Constants;
 import domain.Airplane;
 import domain.Line;
+import exception.CommunicationException;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -69,7 +70,10 @@ public class UpdateFlightController {
                         frm.getLblTitle().setText("Delete flight info");
                     break;                    
             }
-        } catch (Exception ex) {
+        } catch(CommunicationException e){
+                        closeProgramOnSocketException();
+                    }
+        catch (Exception ex) {
             JOptionPane.showMessageDialog(frm, "Error while fetching data", "Form preparation", JOptionPane.INFORMATION_MESSAGE);
 
             Logger.getLogger(UpdateFlightController.class.getName()).log(Level.SEVERE, null, ex);
@@ -116,7 +120,9 @@ public class UpdateFlightController {
 
                     }
 
-                } catch (Exception ex) {
+                } catch(CommunicationException e){
+                        closeProgramOnSocketException();
+                    } catch (Exception ex) {
                     JOptionPane.showMessageDialog(frm, "Could not delete selected flight", "Delete flight", JOptionPane.INFORMATION_MESSAGE);
                 }
 
@@ -179,6 +185,8 @@ public class UpdateFlightController {
                         Communication.getInstance().editFlight(flightEdited);
                         JOptionPane.showMessageDialog(frm, "Flight successfully updated", "Update flight", JOptionPane.INFORMATION_MESSAGE);
                         //  frm.dispose();
+                    } catch(CommunicationException e){
+                        closeProgramOnSocketException();
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(frm, "Cannot update flight", "Update flight", JOptionPane.INFORMATION_MESSAGE);
 
@@ -215,5 +223,8 @@ public class UpdateFlightController {
         frm.getCbLines().setSelectedItem(flight.getLine());
 
     }
-
+            private void closeProgramOnSocketException() {
+        JOptionPane.showMessageDialog(null, "Server closed the connection!\n Program will now exit!", "Error!", JOptionPane.INFORMATION_MESSAGE);
+        System.exit(0);
+    }
 }

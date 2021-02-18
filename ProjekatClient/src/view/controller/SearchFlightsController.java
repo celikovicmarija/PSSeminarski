@@ -4,6 +4,7 @@ import communication.Communication;
 import domain.Flight;
 import constant.Constants;
 import coordinator.MainCoordinator;
+import exception.CommunicationException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -136,7 +137,9 @@ public class SearchFlightsController {
                             JOptionPane.showMessageDialog(frm, "Could not find results for the flights", "Search flights", JOptionPane.INFORMATION_MESSAGE);
 
                         }
-                    } catch (Exception ex) {
+                    } catch(CommunicationException e){
+                        closeProgramOnSocketException();
+                    }catch (Exception ex) {
                   JOptionPane.showMessageDialog(frm, "Error while fetching flights", "Search flights", JOptionPane.INFORMATION_MESSAGE);
 
                      //   Logger.getLogger(SearchFlightsController.class.getName()).log(Level.SEVERE, null, ex);
@@ -155,6 +158,8 @@ public class SearchFlightsController {
                             JOptionPane.showMessageDialog(frm, "Could not find results for the flights", "Search flights", JOptionPane.INFORMATION_MESSAGE);
 
                         }
+                    }catch(CommunicationException e){
+                        closeProgramOnSocketException();
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(frm, "Error while fetching flights", "Search flights", JOptionPane.INFORMATION_MESSAGE);
 
@@ -170,7 +175,9 @@ public class SearchFlightsController {
         List<Flight> flights = null;
         try {
             flights = Communication.getInstance().getAllFlights();
-        } catch (Exception ex) {
+        }catch(CommunicationException e){
+                        closeProgramOnSocketException();
+                    } catch (Exception ex) {
          JOptionPane.showMessageDialog(frm, "Error while fetching flights", "Fill flights", JOptionPane.INFORMATION_MESSAGE);
 
            // Logger.getLogger(SearchFlightsController.class.getName()).log(Level.SEVERE, null, ex);
@@ -207,6 +214,10 @@ public class SearchFlightsController {
             
         }
     
+    }
+                private void closeProgramOnSocketException() {
+        JOptionPane.showMessageDialog(null, "Server closed the connection!\n Program will now exit!", "Error!", JOptionPane.INFORMATION_MESSAGE);
+        System.exit(0);
     }
 
 }

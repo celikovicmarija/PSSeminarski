@@ -7,6 +7,7 @@ import domain.Coupon;
 import domain.Flight;
 import domain.Passenger;
 import domain.Reservation;
+import exception.CommunicationException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
@@ -49,7 +50,7 @@ public class CreateReservationController {
                 if (criteria.isEmpty() || criteria.equals("*")) {
                     try {
                         List<Flight> flights = Communication.getInstance().getAllFlights();
-                        
+
                         if (flights != null) {
                             JOptionPane.showMessageDialog(frm, "Found results for the flights", "Search flights", JOptionPane.INFORMATION_MESSAGE);
                             tidyFlightTableAfterSearch(flights);
@@ -58,7 +59,7 @@ public class CreateReservationController {
 
                         }
                     } catch (Exception ex) {
-                       JOptionPane.showMessageDialog(frm, "Error while fetching flights", "Search flights", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(frm, "Error while fetching flights", "Search flights", JOptionPane.INFORMATION_MESSAGE);
                         //Logger.getLogger(CreateReservationController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 } else {
@@ -73,8 +74,10 @@ public class CreateReservationController {
                             JOptionPane.showMessageDialog(frm, "Could not find results for the flights", "Search flights", JOptionPane.INFORMATION_MESSAGE);
 
                         }
+                    } catch (CommunicationException e) {
+                        closeProgramOnSocketException();
                     } catch (Exception ex) {
-                   JOptionPane.showMessageDialog(frm, "Error while fetching flights", "Search flights", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(frm, "Error while fetching flights", "Search flights", JOptionPane.INFORMATION_MESSAGE);
 
                         //Logger.getLogger(CreateReservationController.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -100,10 +103,12 @@ public class CreateReservationController {
                             JOptionPane.showMessageDialog(frm, "Could not find results for the passengers", "Search passengers", JOptionPane.INFORMATION_MESSAGE);
 
                         }
+                    } catch (CommunicationException e) {
+                        closeProgramOnSocketException();
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(frm, "Error while fetching passengers", "Search passengers", JOptionPane.INFORMATION_MESSAGE);
 
-                       // Logger.getLogger(CreateReservationController.class.getName()).log(Level.SEVERE, null, ex);
+                        // Logger.getLogger(CreateReservationController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 } else {
                     try {
@@ -117,8 +122,10 @@ public class CreateReservationController {
                             JOptionPane.showMessageDialog(frm, "Could not find results for the passengers", "Search passengers", JOptionPane.INFORMATION_MESSAGE);
 
                         }
+                    } catch (CommunicationException e) {
+                        closeProgramOnSocketException();
                     } catch (Exception ex) {
-                       JOptionPane.showMessageDialog(frm, "Error while fetching passengers", "Search passengers", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(frm, "Error while fetching passengers", "Search passengers", JOptionPane.INFORMATION_MESSAGE);
                         //Logger.getLogger(CreateReservationController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
@@ -214,10 +221,12 @@ public class CreateReservationController {
                         reservation.setCoupon(c);
                         Communication.getInstance().addReservation(reservation);
                         JOptionPane.showMessageDialog(frm, "Reservation created successfully!", "Create Reservation", JOptionPane.INFORMATION_MESSAGE);
-                     MainCoordinator.getInstance().addParam(Constants.PARAM_RESERVATION,reservation );
-                     MainCoordinator.getInstance().openUpdateResevationForm(FormMode.FORM_VIEW);
-                                            
+                        MainCoordinator.getInstance().addParam(Constants.PARAM_RESERVATION, reservation);
+                        MainCoordinator.getInstance().openUpdateResevationForm(FormMode.FORM_VIEW);
+
 //frm.dispose();
+                    } catch (CommunicationException e) {
+                        closeProgramOnSocketException();
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(frm, "Error saving the reservation", "Create Reservation", JOptionPane.ERROR_MESSAGE);
                     }
@@ -239,9 +248,11 @@ public class CreateReservationController {
         List<Flight> flights = null;
         try {
             flights = Communication.getInstance().getAllFlights();
+        } catch (CommunicationException e) {
+            closeProgramOnSocketException();
         } catch (Exception ex) {
-           JOptionPane.showMessageDialog(frm, "Error while fetching flights", "Fill flights", JOptionPane.INFORMATION_MESSAGE);
-           // Logger.getLogger(CreateFlightController.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(frm, "Error while fetching flights", "Fill flights", JOptionPane.INFORMATION_MESSAGE);
+            // Logger.getLogger(CreateFlightController.class.getName()).log(Level.SEVERE, null, ex);
         }
         FlightTableModel model = new FlightTableModel(flights);
         frm.getTblFlights().setModel(model);
@@ -252,8 +263,10 @@ public class CreateReservationController {
         List<Passenger> passengers = null;
         try {
             passengers = Communication.getInstance().getAllPassengers();
+        } catch (CommunicationException e) {
+            closeProgramOnSocketException();
         } catch (Exception ex) {
-        JOptionPane.showMessageDialog(frm, "Error while fetching passengers", "Fill passengers", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(frm, "Error while fetching passengers", "Fill passengers", JOptionPane.INFORMATION_MESSAGE);
 
             //Logger.getLogger(CreateFlightController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -278,10 +291,15 @@ public class CreateReservationController {
         try {
             frm.getCbCoupons().removeAllItems();
             frm.getCbCoupons().setModel(new DefaultComboBoxModel(Communication.getInstance().getAllCoupons().toArray()));
-        } catch (Exception ex) {       
+        } catch (CommunicationException e) {
+            closeProgramOnSocketException();
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(frm, "Error while fetching coupons", "Fill flights", JOptionPane.INFORMATION_MESSAGE);
-
-           // Logger.getLogger(CreateReservationController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private void closeProgramOnSocketException() {
+        JOptionPane.showMessageDialog(null, "Server closed the connection!\n Program will now exit!", "Error!", JOptionPane.INFORMATION_MESSAGE);
+        System.exit(0);
     }
 }
