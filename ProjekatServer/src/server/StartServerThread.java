@@ -16,7 +16,7 @@ import thread.ThreadUpdateTable;
 public class StartServerThread extends Thread {
 
     private ServerSocket serverSocket;
-    public  int portNumber = 9000;
+    public int portNumber = 9000;
     public static List<ProcessClientsRequests> clients = new ArrayList<>();
     private static boolean working = false;
     FrmMain frm;
@@ -24,6 +24,7 @@ public class StartServerThread extends Thread {
     public StartServerThread(FrmMain frm) {
         try {
             loadPort();
+            serverSocket = new ServerSocket(portNumber);
             this.frm = frm;
         } catch (Exception ex) {
             System.out.println("There has been an error. Server socket has not been created.");
@@ -34,10 +35,9 @@ public class StartServerThread extends Thread {
     @Override
     public void run() {
         try {
-            
-            serverSocket = new ServerSocket(portNumber);
+
             working = true;
-            while (!isInterrupted()) {
+            while (serverSocket.isClosed() == false) {
 
                 System.out.println("Server has been started");
                 Socket socket = serverSocket.accept();
@@ -51,14 +51,16 @@ public class StartServerThread extends Thread {
                 System.out.println("Client connected to the server!");
             }
         } catch (SocketException ex) {
-            interrupt();
             System.out.println("Connection with the server has been broken.");
             working = false;
         } catch (IOException e) {
-            interrupt();
+            //   interrupt();
             System.out.println("Error while trying to establish connection with the client.");
             working = false;
+        } catch (Exception e) {
+
         }
+
     }
 
     public ServerSocket getServerSocket() {
@@ -94,10 +96,10 @@ public class StartServerThread extends Thread {
             working = false;
         }
     }
-    
+
     private void loadPort() {
         try {
-            ServerProperties sp=new ServerProperties();
+            ServerProperties sp = new ServerProperties();
             portNumber = Integer.parseInt(sp.returnServerPort());
 
         } catch (IOException ex) {

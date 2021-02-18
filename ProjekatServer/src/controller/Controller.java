@@ -232,14 +232,7 @@ public class Controller {
     }
 
     public void stopServer() {
-        /*StartServerThread.clients.stream().map((pcr) -> {
-            activeUsers.stream().filter((user) -> (user.getUsername().equals(pcr.getUser().getUsername()))).forEachOrdered((_item) -> {
-                Controller.getInstance().getActiveUsers().remove(pcr.getUser());
-            });
-            return pcr;
-        }).forEachOrdered((pcr) -> {
-            pcr.logoutEverybody();
-        });*/
+
        for (ProcessClientsRequests obradaKlijenskihZahteva : StartServerThread.clients) {
             for(User kor:Controller.getInstance().getActiveUsers()){
                 if(kor.getUsername().equals(obradaKlijenskihZahteva.getUser().getUsername()))
@@ -247,10 +240,8 @@ public class Controller {
                 
           }
             fillTblUsers(ServerCoordinator.getInstance().getFrmMainController().getFrmMain());
-         // obradaKlijenskihZahteva.logoutEverybody();
       }
      
-      //  pcr.zaustaviNiti();
 
         sst.stopAllThreads();
     }

@@ -5,7 +5,6 @@
  */
 package thread;
 
-import communication.Operation;
 import static communication.Operation.LOGIN;
 import java.net.Socket;
 import communication.Receiver;
@@ -22,7 +21,6 @@ import domain.Line;
 import domain.Passenger;
 import domain.Reservation;
 import domain.User;
-import java.net.SocketException;
 import server.StartServerThread;
 
 public class ProcessClientsRequests extends Thread {
@@ -53,7 +51,7 @@ public class ProcessClientsRequests extends Thread {
 
         while (!end) {
             try {
-     
+
                 Request request = (Request) receiver.receive();
                 Response response = new Response();
                 try {
@@ -63,7 +61,7 @@ public class ProcessClientsRequests extends Thread {
                             response.setResult(Controller.getInstance().login(u.getUsername(), u.getPassword()));
                             user = u;
                             break;
-                         case LOGOUT:
+                        case LOGOUT:
                             User lu = (User) request.getArgument();
                             response.setResult(Controller.getInstance().logout(lu));
                             StartServerThread.clients.remove(this);
@@ -151,15 +149,10 @@ public class ProcessClientsRequests extends Thread {
                             break;
                     }
                 } catch (Exception e) {
-                    // e.printStackTrace();
                     response.setException(e);
                 }
                 sender.send(response);
-            }catch (SocketException se){
-                //  StartServerThread.clients.remove(this);
-               // interrupt();
-            } 
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 //   Logger.getLogger(ProcessClientsRequests.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -173,15 +166,4 @@ public class ProcessClientsRequests extends Thread {
         this.socket = socket;
     }
 
-    public void logoutEverybody() {
-        try {
-            end = true;
-
-            Request request = new Request(Operation.LOGOUT_AFTER_STOPPING_SERVER, null);
-            sender.send(request);
-
-        } catch (Exception ex) {
-            System.out.println("Error while logging out the active users");
-        }
-    }
 }
