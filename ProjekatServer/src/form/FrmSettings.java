@@ -31,78 +31,176 @@ public class FrmSettings extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
-        txtURL = new javax.swing.JTextField();
+        pnlDbProperties = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        txtURLDatabase = new javax.swing.JTextField();
         txtUsername = new javax.swing.JTextField();
-        btnSaveSettings = new javax.swing.JButton();
         txtPassword = new javax.swing.JPasswordField();
-        txtPort = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        lblErrorUrlD = new javax.swing.JLabel();
+        btnSaveSettingsDatabase = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        lblErrorUsername = new javax.swing.JLabel();
+        pnlServerProperties = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        txtURLServer = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
+        txtPort = new javax.swing.JTextField();
+        btnSaveSettingsServer = new javax.swing.JButton();
+        lblErrorUrlS = new javax.swing.JLabel();
+        lblErrorPort = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Settings");
 
+        pnlDbProperties.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("Logged Admin"), "Database properties"));
+        pnlDbProperties.setToolTipText("Database properties");
+
+        jLabel8.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
+        jLabel8.setText("Username:");
+
+        jLabel3.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
+        jLabel3.setText("URL:");
+
+        lblErrorUrlD.setFont(new java.awt.Font("Calibri Light", 2, 14)); // NOI18N
+        lblErrorUrlD.setForeground(new java.awt.Color(255, 0, 0));
+        lblErrorUrlD.setText("Error text:");
+
+        btnSaveSettingsDatabase.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
+        btnSaveSettingsDatabase.setText("Save");
+
+        jLabel10.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
+        jLabel10.setText("Password:");
+
+        lblErrorUsername.setFont(new java.awt.Font("Calibri Light", 2, 14)); // NOI18N
+        lblErrorUsername.setForeground(new java.awt.Color(255, 0, 0));
+        lblErrorUsername.setText("Error text:");
+
+        javax.swing.GroupLayout pnlDbPropertiesLayout = new javax.swing.GroupLayout(pnlDbProperties);
+        pnlDbProperties.setLayout(pnlDbPropertiesLayout);
+        pnlDbPropertiesLayout.setHorizontalGroup(
+            pnlDbPropertiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDbPropertiesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlDbPropertiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblErrorUrlD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblErrorUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSaveSettingsDatabase, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlDbPropertiesLayout.createSequentialGroup()
+                        .addGroup(pnlDbPropertiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel10))
+                        .addGap(69, 69, 69)
+                        .addGroup(pnlDbPropertiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtURLDatabase)
+                            .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
+                            .addComponent(txtPassword))))
+                .addContainerGap())
+        );
+        pnlDbPropertiesLayout.setVerticalGroup(
+            pnlDbPropertiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDbPropertiesLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnlDbPropertiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtURLDatabase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblErrorUrlD, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlDbPropertiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblErrorUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlDbPropertiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDbPropertiesLayout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addGap(6, 6, 6)))
+                .addComponent(btnSaveSettingsDatabase)
+                .addGap(25, 25, 25))
+        );
+
+        pnlServerProperties.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("Logged Admin"), "Server properties"));
+        pnlServerProperties.setToolTipText("Server properties");
+
         jLabel2.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
         jLabel2.setText("URL:");
 
-        btnSaveSettings.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
-        btnSaveSettings.setText("Save");
-
-        jLabel5.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
-        jLabel5.setText("Password:");
-
-        jLabel6.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
-        jLabel6.setText("Username:");
-
         jLabel7.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
         jLabel7.setText("Port no:");
+
+        btnSaveSettingsServer.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
+        btnSaveSettingsServer.setText("Save");
+
+        lblErrorUrlS.setFont(new java.awt.Font("Calibri Light", 2, 14)); // NOI18N
+        lblErrorUrlS.setForeground(new java.awt.Color(255, 0, 0));
+        lblErrorUrlS.setText("Error text:");
+
+        lblErrorPort.setFont(new java.awt.Font("Calibri Light", 2, 14)); // NOI18N
+        lblErrorPort.setForeground(new java.awt.Color(255, 0, 0));
+        lblErrorPort.setText("Error text:");
+
+        javax.swing.GroupLayout pnlServerPropertiesLayout = new javax.swing.GroupLayout(pnlServerProperties);
+        pnlServerProperties.setLayout(pnlServerPropertiesLayout);
+        pnlServerPropertiesLayout.setHorizontalGroup(
+            pnlServerPropertiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlServerPropertiesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlServerPropertiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnSaveSettingsServer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnlServerPropertiesLayout.createSequentialGroup()
+                        .addGroup(pnlServerPropertiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(pnlServerPropertiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtPort, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE)
+                            .addComponent(txtURLServer)))
+                    .addComponent(lblErrorUrlS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblErrorPort, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        pnlServerPropertiesLayout.setVerticalGroup(
+            pnlServerPropertiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlServerPropertiesLayout.createSequentialGroup()
+                .addGroup(pnlServerPropertiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtURLServer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblErrorUrlS, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlServerPropertiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(txtPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblErrorPort, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSaveSettingsServer)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnSaveSettings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtURL)
-                            .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
-                            .addComponent(txtPassword)
-                            .addComponent(txtPort))))
-                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlDbProperties, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlServerProperties, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(34, 34, 34))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtURL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
+                .addContainerGap()
+                .addComponent(pnlDbProperties, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSaveSettings)
-                .addContainerGap())
+                .addComponent(pnlServerProperties, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -110,16 +208,49 @@ public class FrmSettings extends javax.swing.JDialog {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnSaveSettings;
+    private javax.swing.JButton btnSaveSettingsDatabase;
+    private javax.swing.JButton btnSaveSettingsServer;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel lblErrorPort;
+    private javax.swing.JLabel lblErrorUrlD;
+    private javax.swing.JLabel lblErrorUrlS;
+    private javax.swing.JLabel lblErrorUsername;
+    private javax.swing.JPanel pnlDbProperties;
+    private javax.swing.JPanel pnlServerProperties;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtPort;
-    private javax.swing.JTextField txtURL;
+    private javax.swing.JTextField txtURLDatabase;
+    private javax.swing.JTextField txtURLServer;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
+
+
+    public void btnSaveSettingsDatabaseAddActionListener(ActionListener actionListener) {
+        btnSaveSettingsDatabase.addActionListener(actionListener);
+    }
+        public void btnSaveSettingsServerAddActionListener(ActionListener actionListener) {
+        btnSaveSettingsServer.addActionListener(actionListener);
+    }
+
+    public javax.swing.JButton getBtnSaveSettingsDatabase() {
+        return btnSaveSettingsDatabase;
+    }
+
+    public void setBtnSaveSettingsDatabase(javax.swing.JButton btnSaveSettingsDatabase) {
+        this.btnSaveSettingsDatabase = btnSaveSettingsDatabase;
+    }
+
+    public javax.swing.JButton getBtnSaveSettingsServer() {
+        return btnSaveSettingsServer;
+    }
+
+    public void setBtnSaveSettingsServer(javax.swing.JButton btnSaveSettingsServer) {
+        this.btnSaveSettingsServer = btnSaveSettingsServer;
+    }
 
     public javax.swing.JPasswordField getTxtPassword() {
         return txtPassword;
@@ -127,22 +258,6 @@ public class FrmSettings extends javax.swing.JDialog {
 
     public void setTxtPassword(javax.swing.JPasswordField txtPassword) {
         this.txtPassword = txtPassword;
-    }
-
-    public javax.swing.JTextField getTxtURL() {
-        return txtURL;
-    }
-
-    public void setTxtURL(javax.swing.JTextField txtURL) {
-        this.txtURL = txtURL;
-    }
-
-    public javax.swing.JTextField getTxtUsername() {
-        return txtUsername;
-    }
-
-    public void setTxtUsername(javax.swing.JTextField txtUsername) {
-        this.txtUsername = txtUsername;
     }
 
     public javax.swing.JTextField getTxtPort() {
@@ -153,15 +268,76 @@ public class FrmSettings extends javax.swing.JDialog {
         this.txtPort = txtPort;
     }
 
-    public javax.swing.JButton getBtnSaveSettings() {
-        return btnSaveSettings;
+    public javax.swing.JTextField getTxtURLDatabase() {
+        return txtURLDatabase;
     }
 
-    public void setBtnSaveSettings(javax.swing.JButton btnSaveSettings) {
-        this.btnSaveSettings = btnSaveSettings;
+    public void setTxtURLDatabase(javax.swing.JTextField txtURLDatabase) {
+        this.txtURLDatabase = txtURLDatabase;
     }
-    public void btnSaveSettingsAddActionListener(ActionListener actionListener) {
-        btnSaveSettings.addActionListener(actionListener);
+
+    public javax.swing.JTextField getTxtURLServer() {
+        return txtURLServer;
+    }
+
+    public void setTxtURLServer(javax.swing.JTextField txtURLServer) {
+        this.txtURLServer = txtURLServer;
+    }
+
+    public javax.swing.JTextField getTxtUsername() {
+        return txtUsername;
+    }
+
+    public void setTxtUsername(javax.swing.JTextField txtUsername) {
+        this.txtUsername = txtUsername;
+    }
+
+    public javax.swing.JPanel getPnlDbProperties() {
+        return pnlDbProperties;
+    }
+
+    public void setPnlDbProperties(javax.swing.JPanel pnlDbProperties) {
+        this.pnlDbProperties = pnlDbProperties;
+    }
+
+    public javax.swing.JPanel getPnlServerProperties() {
+        return pnlServerProperties;
+    }
+
+    public void setPnlServerProperties(javax.swing.JPanel pnlServerProperties) {
+        this.pnlServerProperties = pnlServerProperties;
+    }
+
+    public javax.swing.JLabel getLblErrorPort() {
+        return lblErrorPort;
+    }
+
+    public void setLblErrorPort(javax.swing.JLabel lblErrorPort) {
+        this.lblErrorPort = lblErrorPort;
+    }
+
+    public javax.swing.JLabel getLblErrorUrlD() {
+        return lblErrorUrlD;
+    }
+
+    public void setLblErrorUrlD(javax.swing.JLabel lblErrorUrlD) {
+        this.lblErrorUrlD = lblErrorUrlD;
+    }
+
+    public javax.swing.JLabel getLblErrorUrlS() {
+        return lblErrorUrlS;
+    }
+
+    public void setLblErrorUrlS(javax.swing.JLabel lblErrorUrlS) {
+        this.lblErrorUrlS = lblErrorUrlS;
+    }
+
+    public javax.swing.JLabel getLblErrorUsername() {
+        return lblErrorUsername;
+    }
+
+    public void setLblErrorUsername(javax.swing.JLabel lblErrorUsername) {
+        this.lblErrorUsername = lblErrorUsername;
     }
 
     

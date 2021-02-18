@@ -1,6 +1,6 @@
 package repository.db;
 
-import java.io.FileInputStream;
+import config.DbProperties;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Properties;
@@ -22,11 +22,11 @@ public class DbConnectionFactory {
 
     public Connection getConnection() throws Exception {
         if (connection == null || connection.isClosed()) {
+            DbProperties dbp=new DbProperties();
             Properties properties = new Properties();
-            properties.load(new FileInputStream("config/dbconfig.properties"));
-            String url = properties.getProperty("url");
-            String username = properties.getProperty("username");
-            String password = properties.getProperty("password");
+            String url = dbp.returnDbURL();
+            String username = dbp.returnDbUser();
+            String password =dbp.returnDbPassword();
             connection = DriverManager.getConnection(url, username, password);
             connection.setAutoCommit(false);
         }

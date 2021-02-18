@@ -8,21 +8,22 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.List;
-import repository.db.DbProperties;
+import config.DbProperties;
+import config.ServerProperties;
 import thread.ProcessClientsRequests;
 import thread.ThreadUpdateTable;
 
 public class StartServerThread extends Thread {
 
     private ServerSocket serverSocket;
-    public static int portNumber = 9000;
+    public  int portNumber = 9000;
     public static List<ProcessClientsRequests> clients = new ArrayList<>();
     private static boolean working = false;
     FrmMain frm;
 
     public StartServerThread(FrmMain frm) {
         try {
-
+            loadPort();
             this.frm = frm;
         } catch (Exception ex) {
             System.out.println("There has been an error. Server socket has not been created.");
@@ -33,8 +34,7 @@ public class StartServerThread extends Thread {
     @Override
     public void run() {
         try {
-            DbProperties properties = new DbProperties();
-           // portNumber = Integer.parseInt(properties.returnDbPort());
+            
             serverSocket = new ServerSocket(portNumber);
             working = true;
             while (!isInterrupted()) {
@@ -92,6 +92,16 @@ public class StartServerThread extends Thread {
         } catch (Exception ex) {
             System.out.println("Server has been stopped");
             working = false;
+        }
+    }
+    
+    private void loadPort() {
+        try {
+            ServerProperties sp=new ServerProperties();
+            portNumber = Integer.parseInt(sp.returnServerPort());
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 
