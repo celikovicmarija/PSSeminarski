@@ -8,6 +8,7 @@ package communication;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,7 +27,10 @@ public class Receiver {
         try {
             ObjectInputStream in=new ObjectInputStream(socket.getInputStream());
             return in.readObject();
-        } catch (Exception ex) {
+        }catch(SocketException e){
+            throw e;
+        } 
+        catch (Exception ex) {
             throw new Exception("Error receiving object!\n"+ex.getMessage());
         }
     }

@@ -9,6 +9,7 @@ import java.io.BufferedOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.net.SocketException;
 
 /**
  *
@@ -26,7 +27,11 @@ public class Sender {
             ObjectOutputStream out=new ObjectOutputStream(socket.getOutputStream());
             out.writeObject(object);
             out.flush();
-        } catch (Exception ex) {
+        }catch(SocketException e){
+            throw e;
+        }
+                
+        catch (Exception ex) {
             //ex.printStackTrace();
             throw new Exception("Error sending object!\n"+ex.getMessage());
         }
