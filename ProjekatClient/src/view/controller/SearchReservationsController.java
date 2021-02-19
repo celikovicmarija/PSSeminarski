@@ -8,6 +8,8 @@ import exception.CommunicationException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import view.form.FrmSearchReservations;
@@ -53,12 +55,20 @@ public class SearchReservationsController {
                 if (row < 0) {
                     JOptionPane.showMessageDialog(frm, "Please select a reservation to show", "Show reservation", JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    ReservationTableModel rtm = (ReservationTableModel) frm.getTbReservations().getModel();
-                    List<Reservation> reservations = rtm.getReservations();
-                    Reservation r = reservations.get(row);
-                    MainCoordinator.getInstance().addParam(Constants.PARAM_RESERVATION, r);
-                    MainCoordinator.getInstance().openUpdateResevationForm(FormMode.FORM_VIEW);
-                    rtm.refresh();
+                    try {
+                        ReservationTableModel rtm = (ReservationTableModel) frm.getTbReservations().getModel();
+                        List<Reservation> reservations = rtm.getReservations();
+                        Reservation r = reservations.get(row);
+                        Reservation selectedReservation = Communication.getInstance().selectReservation(r);
+                        MainCoordinator.getInstance().addParam(Constants.PARAM_RESERVATION, selectedReservation);
+                        MainCoordinator.getInstance().openUpdateResevationForm(FormMode.FORM_VIEW);
+                        rtm.refresh();
+                    } catch (CommunicationException e) {
+                        closeProgramOnSocketException();
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(frm, "Cannot show the selected reservation", "Show flight", JOptionPane.INFORMATION_MESSAGE);
+
+                    }
                 }
             }
         });
@@ -75,12 +85,20 @@ public class SearchReservationsController {
                 if (row < 0) {
                     JOptionPane.showMessageDialog(frm, "Please select a reservation to change", "Delete reservation", JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    ReservationTableModel rtm = (ReservationTableModel) frm.getTbReservations().getModel();
-                    List<Reservation> reservations = rtm.getReservations();
-                    Reservation r = reservations.get(row);
-                    MainCoordinator.getInstance().addParam(Constants.PARAM_RESERVATION, r);
-                    MainCoordinator.getInstance().openUpdateResevationForm(FormMode.FORM_EDIT);
-                    rtm.refresh();
+                    try {
+                        ReservationTableModel rtm = (ReservationTableModel) frm.getTbReservations().getModel();
+                        List<Reservation> reservations = rtm.getReservations();
+                        Reservation r = reservations.get(row);
+                        Reservation selectedReservation = Communication.getInstance().selectReservation(r);
+
+                        MainCoordinator.getInstance().addParam(Constants.PARAM_RESERVATION, selectedReservation);
+                        MainCoordinator.getInstance().openUpdateResevationForm(FormMode.FORM_EDIT);
+                        rtm.refresh();
+                    } catch (CommunicationException e) {
+                        closeProgramOnSocketException();
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(frm, "Cannot show the selected reservation", "Show flight", JOptionPane.INFORMATION_MESSAGE);
+                    }
                 }
             }
         });
@@ -100,12 +118,17 @@ public class SearchReservationsController {
                         ReservationTableModel rtm = (ReservationTableModel) frm.getTbReservations().getModel();
                         List<Reservation> reservations = rtm.getReservations();
 
-                        Reservation reservation = reservations.get(row);
-                        MainCoordinator.getInstance().addParam(Constants.PARAM_RESERVATION, reservation);
+                        Reservation r = reservations.get(row);
+                        Reservation selectedReservation = Communication.getInstance().selectReservation(r);
+
+                        MainCoordinator.getInstance().addParam(Constants.PARAM_RESERVATION, selectedReservation);
                         MainCoordinator.getInstance().openUpdateResevationForm(FormMode.FORM_DELETE);
 
+                    } catch (CommunicationException e) {
+                        closeProgramOnSocketException();
                     } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(frm, "Could not delete selected reservation", "Delete reservation", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(frm, "Cannot preview the selected reservation", "Show flight", JOptionPane.INFORMATION_MESSAGE);
+
                     }
                 }
             }
@@ -135,7 +158,6 @@ public class SearchReservationsController {
                         closeProgramOnSocketException();
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(frm, "Error while fetching reservations", "Search reservations", JOptionPane.INFORMATION_MESSAGE);
-                        // Logger.getLogger(SearchReservationsController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 } else {
                     try {
@@ -176,8 +198,7 @@ public class SearchReservationsController {
         }
         ReservationTableModel model = new ReservationTableModel(reservations);
         frm.getTbReservations().setModel(model);
-                        frm.getTbReservations().setAutoCreateRowSorter(true); 
-
+        frm.getTbReservations().setAutoCreateRowSorter(true);
 
     }
 
@@ -185,8 +206,7 @@ public class SearchReservationsController {
         ReservationTableModel model = (ReservationTableModel) frm.getTbReservations().getModel();
         model.clear();
         model.addReservations(list);
-                frm.getTbReservations().setAutoCreateRowSorter(true); 
-
+        frm.getTbReservations().setAutoCreateRowSorter(true);
     }
 
     private void prepareView() {

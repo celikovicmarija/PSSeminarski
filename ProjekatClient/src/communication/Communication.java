@@ -86,68 +86,64 @@ public class Communication {
 
     public void editFlight(Flight flight) throws Exception {
         Request request = new Request(Operation.CHANGE_FLIGHT, flight);
-        try{
-                    sender.send(request);
-        Response response = (Response) receiver.receive();
-        if (response.getException() == null) {
+        try {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            if (response.getException() == null) {
 
-        } else {
-            throw response.getException();
-        }
+            } else {
+                throw response.getException();
+            }
         } catch (SocketException ex) {
             throw new CommunicationException("Server got disconnected");
         }
-
-        
 
     }
 
     public void editReservation(Reservation reservation) throws Exception {
         Request request = new Request(Operation.CHANGE_RESERVATION, reservation);
-        try{
-               sender.send(request);
-        Response response = (Response) receiver.receive();
-        if (response.getException() == null) {
+        try {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            if (response.getException() == null) {
 
-        } else {
-            throw response.getException();
-        }
-        }catch (SocketException ex) {
+            } else {
+                throw response.getException();
+            }
+        } catch (SocketException ex) {
             throw new CommunicationException("Server got disconnected");
         }
-     
+
     }
 
     public List<Flight> getAllFlights() throws Exception {
         Request request = new Request(Operation.RETURN_FLIGHTS_ALL, null);
-        try{
-                    sender.send(request);
-        Response response = (Response) receiver.receive();
+        try {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
 
-        if (response.getException() == null) {
-            return (List<Flight>) response.getResult();
-        } else {
-            throw response.getException();
-        }
-        }catch (SocketException ex) {
+            if (response.getException() == null) {
+                return (List<Flight>) response.getResult();
+            } else {
+                throw response.getException();
+            }
+        } catch (SocketException ex) {
             throw new CommunicationException("Server got disconnected");
         }
-     
 
     }
 
-
     public List<Airplane> getAllAirplanes() throws Exception {
         Request request = new Request(Operation.RETURN_AIRPLANES_ALL, null);
-        try{
-                    sender.send(request);
-        Response response = (Response) receiver.receive();
-        if (response.getException() == null) {
-            return (List<Airplane>) response.getResult();
-        } else {
-            throw response.getException();
-        }
-        }catch (SocketException ex) {
+        try {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            if (response.getException() == null) {
+                return (List<Airplane>) response.getResult();
+            } else {
+                throw response.getException();
+            }
+        } catch (SocketException ex) {
             throw new CommunicationException("Server got disconnected");
         }
 
@@ -155,16 +151,15 @@ public class Communication {
 
     public List<Line> getAllLines() throws Exception {
         Request request = new Request(Operation.RETURN_LINES_ALL, null);
-        try{
-                    sender.send(request);
-        Response response = (Response) receiver.receive();
-        if (response.getException() == null) {
-            return (List<Line>) response.getResult();
-        } else {
-            throw response.getException();
-        }
-        }
-        catch (SocketException ex) {
+        try {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            if (response.getException() == null) {
+                return (List<Line>) response.getResult();
+            } else {
+                throw response.getException();
+            }
+        } catch (SocketException ex) {
             throw new CommunicationException("Server got disconnected");
         }
 
@@ -172,14 +167,14 @@ public class Communication {
 
     public List<Coupon> getAllCoupons() throws Exception {
         Request request = new Request(Operation.RETURN_COUPONS_ALL, null);
-        try{
-                    sender.send(request);
-        Response response = (Response) receiver.receive();
-        if (response.getException() == null) {
-            return (List<Coupon>) response.getResult();
-        } else {
-            throw response.getException();
-        }
+        try {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            if (response.getException() == null) {
+                return (List<Coupon>) response.getResult();
+            } else {
+                throw response.getException();
+            }
         } catch (SocketException ex) {
             throw new CommunicationException("Server got disconnected");
         }
@@ -188,16 +183,15 @@ public class Communication {
 
     public List<Passenger> getAllPassengers() throws Exception {
         Request request = new Request(Operation.RETURN_PASSENGERS_ALL, null);
-        try{
-                    sender.send(request);
-        Response response = (Response) receiver.receive();
-        if (response.getException() == null) {
-            return (List<Passenger>) response.getResult();
-        } else {
-            throw response.getException();
-        }
-        }
- catch (SocketException ex) {
+        try {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            if (response.getException() == null) {
+                return (List<Passenger>) response.getResult();
+            } else {
+                throw response.getException();
+            }
+        } catch (SocketException ex) {
             throw new CommunicationException("Server got disconnected");
         }
 
@@ -205,14 +199,48 @@ public class Communication {
 
     public List<Reservation> getAllReservations() throws Exception {
         Request request = new Request(Operation.RETURN_RESERVATIONS_ALL, null);
-        try{
-                    sender.send(request);
-        Response response = (Response) receiver.receive();
-        if (response.getException() == null) {
-            return (List<Reservation>) response.getResult();
-        } else {
-            throw response.getException();
+        try {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            if (response.getException() == null) {
+                return (List<Reservation>) response.getResult();
+            } else {
+                throw response.getException();
+            }
+        } catch (SocketException ex) {
+            throw new CommunicationException("Server got disconnected");
         }
+
+    }
+
+    public Flight selectFlight(Flight flight) throws Exception {
+        Request request = new Request(Operation.LOAD_FLIGHT, flight);
+        try {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            if (response.getException() == null) {
+
+                return (Flight) response.getResult();
+            } else {
+                throw response.getException();
+            }
+        } catch (SocketException ex) {
+            throw new CommunicationException("Server got disconnected");
+        }
+
+    }
+
+    public Reservation selectReservation(Reservation reservation) throws Exception {
+        Request request = new Request(Operation.LOAD_RESERVATION, reservation);
+        try {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            if (response.getException() == null) {
+
+                return (Reservation) response.getResult();
+            } else {
+                throw response.getException();
+            }
         } catch (SocketException ex) {
             throw new CommunicationException("Server got disconnected");
         }
@@ -221,16 +249,16 @@ public class Communication {
 
     public void addFlight(Flight flight) throws Exception {
         Request request = new Request(Operation.ADD_FLIGHT, flight);
-        try{
-                    sender.send(request);
-        Response response = (Response) receiver.receive();
-        if (response.getException() == null) {
-            Flight newFlight = (Flight) response.getResult();
-            flight.setId(newFlight.getFlightID());
-        } else {
-            throw response.getException();
-        }
-        }catch (SocketException ex) {
+        try {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            if (response.getException() == null) {
+                Flight newFlight = (Flight) response.getResult();
+                flight.setId(newFlight.getFlightID());
+            } else {
+                throw response.getException();
+            }
+        } catch (SocketException ex) {
             throw new CommunicationException("Server got disconnected");
         }
 
@@ -238,84 +266,80 @@ public class Communication {
 
     public void addPassenger(Passenger passenger) throws Exception {
         Request request = new Request(Operation.ADD_PASSENGER, passenger);
-        try{
+        try {
             sender.send(request);
             Response response = (Response) receiver.receive();
-        if (response.getException() == null) {
-            Passenger newPassenger = (Passenger) response.getResult();
-        } else {
-            throw response.getException();
-        }
-        }catch (SocketException ex) {
+            if (response.getException() == null) {
+                Passenger newPassenger = (Passenger) response.getResult();
+            } else {
+                throw response.getException();
+            }
+        } catch (SocketException ex) {
             throw new CommunicationException("Server got disconnected");
         }
-        
+
     }
 
     public void addReservation(Reservation reservation) throws Exception {
         Request request = new Request(Operation.ADD_RESERVATION, reservation);
-        try{
-                 sender.send(request);
-        
-        Response response = (Response) receiver.receive();
-        if (response.getException() == null) {
-            Reservation newReservation = (Reservation) response.getResult();
-            reservation.setReservationID(newReservation.getReservationID());
-        } else {
-            throw response.getException();
-        }
-        }catch (SocketException ex) {
+        try {
+            sender.send(request);
+
+            Response response = (Response) receiver.receive();
+            if (response.getException() == null) {
+                Reservation newReservation = (Reservation) response.getResult();
+                reservation.setReservationID(newReservation.getReservationID());
+            } else {
+                throw response.getException();
+            }
+        } catch (SocketException ex) {
             throw new CommunicationException("Server got disconnected");
         }
-   
+
     }
 
     public void deleteReservation(Reservation reservation) throws Exception {
         Request request = new Request(Operation.DELETE_RESERVATION, reservation);
-        try{
+        try {
             sender.send(request);
-                    Response response = (Response) receiver.receive();
-        if (response.getException() == null) {
+            Response response = (Response) receiver.receive();
+            if (response.getException() == null) {
 
-        } else {
-            throw response.getException();
-        }
-        }
-
-        catch (SocketException ex) {
+            } else {
+                throw response.getException();
+            }
+        } catch (SocketException ex) {
             throw new CommunicationException("Server got disconnected");
         }
     }
 
     public void deleteFlight(Flight flight) throws Exception {
         Request request = new Request(Operation.DELETE_FLIGHT, flight);
-        try{
-                    sender.send(request);
-        Response response = (Response) receiver.receive();
-        if (response.getException() == null) {
+        try {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            if (response.getException() == null) {
 
-        } else {
-            throw response.getException();
-        }
-        }    catch (SocketException ex) {
+            } else {
+                throw response.getException();
+            }
+        } catch (SocketException ex) {
             throw new CommunicationException("Server got disconnected");
         }
 
     }
 
-
-
     public List<Airplane> searchAirplanes(Airplane airplane) throws Exception {
         Request request = new Request(Operation.SEARCH_AIRPLANES, airplane);
-        try{
-                    sender.send(request);
-        Response response = (Response) receiver.receive();
-        if (response.getException() == null) {
-            return (List<Airplane>) response.getResult();
-        } else {
-            throw response.getException();
-        }
-        }     catch (SocketException ex) {
+        try {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            if (response.getException() == null) {
+                return (List<Airplane>) response.getResult();
+            } else {
+                throw response.getException();
+            }
+        } catch (SocketException ex) {
             throw new CommunicationException("Server got disconnected");
         }
 
@@ -323,48 +347,47 @@ public class Communication {
 
     public List<Line> searchLines(Line line) throws Exception {
         Request request = new Request(Operation.SEARCH_LINES, line);
-        try{
-                   sender.send(request);
-        Response response = (Response) receiver.receive();
-        if (response.getException() == null) {
-            return (List<Line>) response.getResult();
-        } else {
-            throw response.getException();
-        } 
-        }
-     catch (SocketException ex) {
+        try {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            if (response.getException() == null) {
+                return (List<Line>) response.getResult();
+            } else {
+                throw response.getException();
+            }
+        } catch (SocketException ex) {
             throw new CommunicationException("Server got disconnected");
         }
     }
 
     public List<Coupon> searchCoupons(Coupon coupon) throws Exception {
         Request request = new Request(Operation.SEARCH_COUPONS, coupon);
-        try{
-                   sender.send(request);
-        Response response = (Response) receiver.receive();
-        if (response.getException() == null) {
-            return (List<Coupon>) response.getResult();
-        } else {
-            throw response.getException();
-        }
-        }     catch (SocketException ex) {
+        try {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            if (response.getException() == null) {
+                return (List<Coupon>) response.getResult();
+            } else {
+                throw response.getException();
+            }
+        } catch (SocketException ex) {
             throw new CommunicationException("Server got disconnected");
         }
- 
+
     }
 
     public List<Flight> searchFlights(Flight flight) throws Exception {
         Request request = new Request(Operation.SEARCH_FLIGHTS, flight);
-        try{
-                    sender.send(request);
-        Response response = (Response) receiver.receive();
-        if (response.getException() == null) {
+        try {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            if (response.getException() == null) {
 
-            return (List<Flight>) response.getResult();
-        } else {
-            throw response.getException();
-        }
-        }  catch (SocketException ex) {
+                return (List<Flight>) response.getResult();
+            } else {
+                throw response.getException();
+            }
+        } catch (SocketException ex) {
             throw new CommunicationException("Server got disconnected");
         }
 
@@ -372,32 +395,30 @@ public class Communication {
 
     public List<Passenger> searchPassengers(Passenger passenger) throws Exception {
         Request request = new Request(Operation.SEARCH_PASSENGERS, passenger);
-        try{
-                    sender.send(request);
-        Response response = (Response) receiver.receive();
-        if (response.getException() == null) {
-            return (List<Passenger>) response.getResult();
-        } else {
-            throw response.getException();
-        }
-        }
-
-          catch (SocketException ex) {
+        try {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            if (response.getException() == null) {
+                return (List<Passenger>) response.getResult();
+            } else {
+                throw response.getException();
+            }
+        } catch (SocketException ex) {
             throw new CommunicationException("Server got disconnected");
         }
     }
 
     public List<Reservation> searchReservations(Reservation reservation) throws Exception {
         Request request = new Request(Operation.SEARCH_RESERVATIONS, reservation);
-        try{
-                    sender.send(request);
-        Response response = (Response) receiver.receive();
-        if (response.getException() == null) {
-            return (List<Reservation>) response.getResult();
-        } else {
-            throw response.getException();
-        }
-        }   catch (SocketException ex) {
+        try {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            if (response.getException() == null) {
+                return (List<Reservation>) response.getResult();
+            } else {
+                throw response.getException();
+            }
+        } catch (SocketException ex) {
             throw new CommunicationException("Server got disconnected");
         }
 

@@ -8,6 +8,8 @@ import exception.CommunicationException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import view.form.FrmSearchFlights;
@@ -54,12 +56,20 @@ public class SearchFlightsController {
                 if (row < 0) {
                     JOptionPane.showMessageDialog(frm, "Please select a flight to show", "Show flight", JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    FlightTableModel ftc = (FlightTableModel) frm.getTblFlights().getModel();
-                    List<Flight> flights = ftc.getFlights();
-                    Flight flight = flights.get(row);
-                    MainCoordinator.getInstance().addParam(Constants.PARAM_FLIGHT, flight);
-                    MainCoordinator.getInstance().openUpdateFlightForm(FormMode.FORM_VIEW);
-                    ftc.refresh();
+                    try {
+                        FlightTableModel ftc = (FlightTableModel) frm.getTblFlights().getModel();
+                        List<Flight> flights = ftc.getFlights();
+                        Flight flight = flights.get(row);
+                        Flight selectedFlight=Communication.getInstance().selectFlight(flight);
+                        MainCoordinator.getInstance().addParam(Constants.PARAM_FLIGHT, selectedFlight);
+                        MainCoordinator.getInstance().openUpdateFlightForm(FormMode.FORM_VIEW);
+                        ftc.refresh();
+                    }catch (CommunicationException e) {
+                        closeProgramOnSocketException();
+                    } catch (Exception ex) {
+                      JOptionPane.showMessageDialog(frm, "Cannot show the selected flight", "Show flight", JOptionPane.INFORMATION_MESSAGE);
+
+                    }
                 }
             }
         });
@@ -76,12 +86,21 @@ public class SearchFlightsController {
                 if (row < 0) {
                     JOptionPane.showMessageDialog(frm, "Please select a flight to edit", "Edit flight", JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    FlightTableModel ftc = (FlightTableModel) frm.getTblFlights().getModel();
-                    List<Flight> flights = ftc.getFlights();
-                    Flight flight = flights.get(row);
-                    MainCoordinator.getInstance().addParam(Constants.PARAM_FLIGHT, flight);
-                    MainCoordinator.getInstance().openUpdateFlightForm(FormMode.FORM_EDIT);
-                    ftc.refresh();
+                    try {
+                        FlightTableModel ftc = (FlightTableModel) frm.getTblFlights().getModel();
+                        List<Flight> flights = ftc.getFlights();
+                        Flight flight = flights.get(row);
+                        Flight selectedFlight=Communication.getInstance().selectFlight(flight);
+                        
+                        MainCoordinator.getInstance().addParam(Constants.PARAM_FLIGHT, selectedFlight);
+                        MainCoordinator.getInstance().openUpdateFlightForm(FormMode.FORM_EDIT);
+                        ftc.refresh();
+                    }catch (CommunicationException e) {
+                        closeProgramOnSocketException();
+                    } 
+                    catch (Exception ex) {
+                        JOptionPane.showMessageDialog(frm, "Cannot show the selected flight", "Show flight", JOptionPane.INFORMATION_MESSAGE);
+                    }
                 }
             }
         });
@@ -100,13 +119,18 @@ public class SearchFlightsController {
                     try {
                         FlightTableModel ftc = (FlightTableModel) frm.getTblFlights().getModel();
                         List<Flight> flights = ftc.getFlights();
-
+                        
                         Flight flight = flights.get(row);
-                        MainCoordinator.getInstance().addParam(Constants.PARAM_FLIGHT, flight);
+                       Flight selectedFlight=Communication.getInstance().selectFlight(flight);
+                       
+                        MainCoordinator.getInstance().addParam(Constants.PARAM_FLIGHT, selectedFlight);
                         MainCoordinator.getInstance().openUpdateFlightForm(FormMode.FORM_DELETE);
 
-                    } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(frm, "Could not delete selected flight", "Delete flight", JOptionPane.INFORMATION_MESSAGE);
+                    }catch (CommunicationException e) {
+                        closeProgramOnSocketException();
+                    }
+                    catch (Exception ex) {
+                        JOptionPane.showMessageDialog(frm, "Could not preview selected  flight", "Delete flight", JOptionPane.INFORMATION_MESSAGE);
                     }
                 }
             }

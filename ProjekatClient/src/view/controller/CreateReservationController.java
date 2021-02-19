@@ -214,6 +214,7 @@ public class CreateReservationController {
                         reservation.setIssueDate(issuedDate);
                         reservation.setValidUntil(validUntil);
                         reservation.setCoupon(c);
+                        reservation.calculatePrice();
                         Communication.getInstance().addReservation(reservation);
                         JOptionPane.showMessageDialog(frm, "Reservation created successfully!", "Create Reservation", JOptionPane.INFORMATION_MESSAGE);
                         MainCoordinator.getInstance().addParam(Constants.PARAM_RESERVATION, reservation);
