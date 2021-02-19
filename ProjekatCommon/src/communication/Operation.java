@@ -30,6 +30,7 @@ public enum Operation implements Serializable{
     SEARCH_COUPONS,
     RETURN_COUPONS_ALL,
     ADD_PASSENGER,
+    LOAD_PASSENGER,
     SEARCH_PASSENGERS,
     RETURN_PASSENGERS_ALL,
     ADD_RESERVATION,
