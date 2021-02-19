@@ -10,8 +10,6 @@ import java.util.LinkedList;
 import operation.AbstractGenericOperation;
 import operation.airplane.GetAllAirplanes;
 import operation.airplane.SearchAirplanes;
-import operation.airport.GetAllAirports;
-import operation.airport.SearchAirports;
 import repository.Repository;
 import repository.db.impl.RepositoryDbUser;
 import server.StartServerThread;
@@ -105,11 +103,7 @@ public class Controller {
         return ((GetAllAirplanes) operation).getList();
     }
 
-    public List<GenericEntity> getAllAirports(GenericEntity entity) throws Exception {
-        AbstractGenericOperation operation = new GetAllAirports();
-        operation.execute(entity);
-        return ((GetAllAirports) operation).getList();
-    }
+ 
 
     public List<GenericEntity> getAllLines(GenericEntity entity) throws Exception {
         AbstractGenericOperation operation = new GetAllLines();
@@ -194,11 +188,6 @@ public class Controller {
         return ((SearchLines) operation).getList();
     }
 
-    public List<GenericEntity> searchAirports(GenericEntity entity) throws Exception {
-        AbstractGenericOperation operation = new SearchAirports();
-        operation.execute(entity);
-        return ((SearchAirports) operation).getList();
-    }
 
     public List<GenericEntity> searchAirplanes(GenericEntity entity) throws Exception {
         AbstractGenericOperation operation = new SearchAirplanes();

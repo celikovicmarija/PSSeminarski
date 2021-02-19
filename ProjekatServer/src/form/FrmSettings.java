@@ -7,19 +7,16 @@ package form;
 
 import java.awt.event.ActionListener;
 
-/**
- *
- * @author Milos Milic
- */
+
 public class FrmSettings extends javax.swing.JDialog {
 
-    /**
-     * Creates new form FrmSettings
-     */
+ 
     public FrmSettings(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setLocationRelativeTo(null);
+        setModal(true);
+        pack();
+        setLocationRelativeTo(parent);
     }
 
     /**
@@ -64,7 +61,7 @@ public class FrmSettings extends javax.swing.JDialog {
 
         lblErrorUrlD.setFont(new java.awt.Font("Calibri Light", 2, 14)); // NOI18N
         lblErrorUrlD.setForeground(new java.awt.Color(255, 0, 0));
-        lblErrorUrlD.setText("Error text:");
+        lblErrorUrlD.setToolTipText("");
 
         btnSaveSettingsDatabase.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
         btnSaveSettingsDatabase.setText("Save");
@@ -74,7 +71,6 @@ public class FrmSettings extends javax.swing.JDialog {
 
         lblErrorUsername.setFont(new java.awt.Font("Calibri Light", 2, 14)); // NOI18N
         lblErrorUsername.setForeground(new java.awt.Color(255, 0, 0));
-        lblErrorUsername.setText("Error text:");
 
         javax.swing.GroupLayout pnlDbPropertiesLayout = new javax.swing.GroupLayout(pnlDbProperties);
         pnlDbProperties.setLayout(pnlDbPropertiesLayout);
@@ -137,11 +133,9 @@ public class FrmSettings extends javax.swing.JDialog {
 
         lblErrorUrlS.setFont(new java.awt.Font("Calibri Light", 2, 14)); // NOI18N
         lblErrorUrlS.setForeground(new java.awt.Color(255, 0, 0));
-        lblErrorUrlS.setText("Error text:");
 
         lblErrorPort.setFont(new java.awt.Font("Calibri Light", 2, 14)); // NOI18N
         lblErrorPort.setForeground(new java.awt.Color(255, 0, 0));
-        lblErrorPort.setText("Error text:");
 
         javax.swing.GroupLayout pnlServerPropertiesLayout = new javax.swing.GroupLayout(pnlServerProperties);
         pnlServerProperties.setLayout(pnlServerPropertiesLayout);

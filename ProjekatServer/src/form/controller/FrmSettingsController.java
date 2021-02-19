@@ -209,6 +209,8 @@ public class FrmSettingsController {
     }
 
     private void prepareView() {
+                 frmSettings.setLocationRelativeTo(null);
+
         FileInputStream fileInputStream = null;
         try {
             Properties properties = new Properties();

@@ -23,7 +23,6 @@ public class DbConnectionFactory {
     public Connection getConnection() throws Exception {
         if (connection == null || connection.isClosed()) {
             DbProperties dbp=new DbProperties();
-            Properties properties = new Properties();
             String url = dbp.returnDbURL();
             String username = dbp.returnDbUser();
             String password =dbp.returnDbPassword();

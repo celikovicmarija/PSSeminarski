@@ -15,17 +15,9 @@ public interface Repository<T> {
 
     List<T> returnThreeTablesWithCondition(T param) throws Exception;
 
-    List<T> returnTwoTables(T param) throws Exception;
-
-    List<T> returnTwoTablesWithCondition(T param) throws Exception;
-
     List<T> returnFiveTablesWithCondition(T param) throws Exception;
 
     List<T> returnFiveTables(T param) throws Exception;
-
-    List<T> returnSevenTables(T param) throws Exception;
-
-    List<T> returnSevenTablesWithCondition(T param) throws Exception;
 
     List<T> returnEightTables(T param) throws Exception;
 

@@ -13,7 +13,6 @@ import communication.Response;
 import communication.Sender;
 import controller.Controller;
 import domain.Airplane;
-import domain.Airport;
 import domain.Coupon;
 import domain.Flight;
 import domain.GenericEntity;
@@ -69,9 +68,6 @@ public class ProcessClientsRequests extends Thread {
                         case RETURN_AIRPLANES_ALL:
                             response.setResult(Controller.getInstance().getAllAirplanes(new Airplane()));
                             break;
-                        case RETURN_AIRPORTS_ALL:
-                            response.setResult(Controller.getInstance().getAllAirports(new Airport()));
-                            break;
                         case RETURN_LINES_ALL:
                             response.setResult(Controller.getInstance().getAllLines(new Line()));
                             break;
@@ -122,10 +118,6 @@ public class ProcessClientsRequests extends Thread {
                             GenericEntity airplaneSearch = (GenericEntity) request.getArgument();
                             response.setResult(Controller.getInstance().searchAirplanes(airplaneSearch));
                             break;
-                        case SEARCH_AIRPORTS:
-                            GenericEntity airportSearch = (GenericEntity) request.getArgument();
-                            response.setResult(Controller.getInstance().searchAirports(airportSearch));
-                            break;
                         case SEARCH_COUPONS:
                             GenericEntity couponSearch = (GenericEntity) request.getArgument();
                             response.setResult(Controller.getInstance().searchCoupons(couponSearch));
@@ -153,7 +145,6 @@ public class ProcessClientsRequests extends Thread {
                 }
                 sender.send(response);
             } catch (Exception ex) {
-                //   Logger.getLogger(ProcessClientsRequests.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }

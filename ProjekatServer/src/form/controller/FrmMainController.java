@@ -28,6 +28,8 @@ public class FrmMainController {
     }
 
     public void openForm() {
+                 frmMain.setLocationRelativeTo(null);
+
         frmMain.setVisible(true);
         frmMain.getTblActiveUsers().setVisible(true);
         frmMain.getBtnStopServer().setEnabled(false);
@@ -60,6 +62,7 @@ public class FrmMainController {
                 frmMain.getBtnStopServer().setEnabled(true);
                 frmMain.getLblStatus().setText("Server is running.");
                 Controller.getInstance().startServer(frmMain);
+                
 
             }
         });

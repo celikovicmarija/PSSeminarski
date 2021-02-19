@@ -8,7 +8,6 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.List;
-import config.DbProperties;
 import config.ServerProperties;
 import thread.ProcessClientsRequests;
 import thread.ThreadUpdateTable;
@@ -54,11 +53,10 @@ public class StartServerThread extends Thread {
             System.out.println("Connection with the server has been broken.");
             working = false;
         } catch (IOException e) {
-            //   interrupt();
             System.out.println("Error while trying to establish connection with the client.");
             working = false;
         } catch (Exception e) {
-
+            working=false;
         }
 
     }
@@ -103,7 +101,6 @@ public class StartServerThread extends Thread {
             portNumber = Integer.parseInt(sp.returnServerPort());
 
         } catch (IOException ex) {
-            ex.printStackTrace();
         }
     }
 

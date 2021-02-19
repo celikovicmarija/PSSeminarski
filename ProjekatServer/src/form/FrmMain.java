@@ -8,15 +8,10 @@ package form;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 
-/**
- *
- * @author Milos Milic
- */
+
 public class FrmMain extends javax.swing.JFrame {
     private boolean running;
-    /**
-     * Creates new form FrmMain
-     */
+
     public FrmMain() {
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
