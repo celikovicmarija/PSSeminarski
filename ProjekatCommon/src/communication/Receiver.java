@@ -5,33 +5,30 @@
  */
 package communication;
 
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
 import java.net.SocketException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
- * @author Cartman
+ * @author Marija
  */
 public class Receiver {
+
     private Socket socket;
 
     public Receiver(Socket socket) {
         this.socket = socket;
     }
-    
-    public Object receive() throws Exception{
+
+    public Object receive() throws Exception {
         try {
-            ObjectInputStream in=new ObjectInputStream(socket.getInputStream());
+            ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
             return in.readObject();
-        }catch(SocketException e){
+        } catch (SocketException e) {
             throw e;
-        } 
-        catch (Exception ex) {
-            throw new Exception("Error receiving object!\n"+ex.getMessage());
+        } catch (Exception ex) {
+            throw new Exception("Error receiving object!\n" + ex.getMessage());
         }
     }
 }

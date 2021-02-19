@@ -7,10 +7,6 @@ package communication;
 
 import java.io.Serializable;
 
-/**
- *
- * @author Cartman
- */
 public class Request implements Serializable{
     private Operation operation;
     private Object argument;

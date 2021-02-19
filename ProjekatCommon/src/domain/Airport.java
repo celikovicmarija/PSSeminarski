@@ -145,20 +145,6 @@ public class Airport  implements GenericEntity{
        return airports;
     }
     
-        /*
-    
-        @Override
-    public List<OpstiDomenskiObjekat> ucitajListu(ResultSet rs) throws SQLException {
-        List<OpstiDomenskiObjekat> listaAutora = new LinkedList<>();
-        while(rs.next()){
-          Autor autor = new Autor(rs.getInt("autorID"), rs.getString("ime"), rs.getString("prezime"), rs.getDate("datumRodjenja"));
-          listaAutora.add(autor);
-        }
-        return listaAutora;
-    }
-
-    
-    */
 
     @Override
     public String getDeleteCondition() {

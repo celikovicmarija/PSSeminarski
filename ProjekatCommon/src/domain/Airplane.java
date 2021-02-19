@@ -183,10 +183,9 @@ public class Airplane  implements GenericEntity{
     public String returnJoinTableTwo() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-//"airportFrom LIKE "+"'%"+searchCriteriaSrc+"%'"+ "OR airportTo LIKE"+"'%"+searchCriteriaDest+"%'";
     @Override
     public String returnSearchCondition() {
-        return "airplaneName LIKE"+"'%"+searchCriteria+"%'";
+        return "airplaneName LIKE "+"'%"+searchCriteria+"%' OR airplaneType LIKE "+"'%"+searchCriteria+"%'";
     }
 
     @Override

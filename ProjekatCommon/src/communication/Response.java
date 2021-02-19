@@ -7,10 +7,6 @@ package communication;
 
 import java.io.Serializable;
 
-/**
- *
- * @author Cartman
- */
 public class Response  implements Serializable{
     private Object result;
     private Exception exception;

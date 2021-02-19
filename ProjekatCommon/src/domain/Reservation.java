@@ -270,7 +270,12 @@ public class Reservation implements GenericEntity {
 
     @Override
     public String returnSearchCondition() {
-         return "reservation.couponID="+searchCriteria+" OR reservation.reservationID="+searchCriteria+" OR reservation.flightID="+searchCriteria+" OR reservation.passengerID LIKE '%"+searchCriteria+"%'"; 
+        if (allDigits(searchCriteria)){
+             return "reservation.couponID="+searchCriteria+" OR reservation.reservationID="+searchCriteria+" OR reservation.flightID="+searchCriteria+" OR reservation.passengerID LIKE '%"+searchCriteria+"%'";
+        }else{
+           return   "coupon.description LIKE '%"+searchCriteria+"%' OR passenger.firstName LIKE '%"+searchCriteria+"%' OR passenger.lastName LIKE '%"+searchCriteria+"%'"; 
+ 
+        }
     }
 
     @Override
@@ -340,5 +345,18 @@ public class Reservation implements GenericEntity {
     public void setCoupon(Coupon coupon) {
         this.coupon = coupon;
     }
+         boolean allDigits(String s) {
+      if (s == null)
+      {
+         return false;
+      }
+      int len = s.length();
+      for (int i = 0; i < len; i++) {
 
+         if ((Character.isDigit(s.charAt(i)) == false)) {
+            return false;
+         }
+      }
+      return true;
+   }
 }

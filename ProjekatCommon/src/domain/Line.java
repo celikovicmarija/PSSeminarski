@@ -180,7 +180,9 @@ public class Line implements GenericEntity{
         return "a.placeName LIKE "+"'%"+searchCriteriaSrc+"%'"+
                 " OR a.placeName LIKE "+"'%"+searchCriteriaDest+"%'"+
                 " OR b.placeName LIKE "+"'%"+searchCriteriaDest+"%'"  +  
-                " OR b.placeName LIKE "+"'%"+searchCriteriaSrc+"%'";
+                " OR b.countryName LIKE "+"'%"+searchCriteriaSrc+"%'"+
+                " OR a.countryName LIKE "+"'%"+searchCriteriaDest+"%'"+
+                " OR b.placeName LIKE "+"'%"+searchCriteriaDest+"%'";
     }
 
     @Override

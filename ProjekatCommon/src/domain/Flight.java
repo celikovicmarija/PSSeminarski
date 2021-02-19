@@ -246,24 +246,15 @@ public class Flight implements GenericEntity {
 
     @Override
     public String returnSearchCondition()  {    
-     //return "airportFrom LIKE "+"'%"+searchCriteriaSrc+"%'"+ "OR airportTo LIKE"+"'%"+searchCriteriaDest+"%'";
-     //DOPUNI!!!!!!!!!!!!
-        return "flight.airline LIKE "+"'%"+searchCriteria+"%'";
+        return "flight.airline LIKE "+"'%"+searchCriteria+"%'"+" OR a.placeName LIKE "+"'%"+searchCriteria+"%'"+ " OR b.placeName LIKE "+"'%"+searchCriteria+"%'"+
+                " OR a.countryName LIKE "+"'%"+searchCriteria+"%'"+" OR b.countryName LIKE "+"'%"+searchCriteria+"%'";
     }
-/*
-         return "'" + brojClanskeKarte + "','" + ime + "','" + prezime + "', '" + jmbg + "', '" + new java.sql.Date(datumRodjenja.getTime()) + "',"
-                + "'" + adresa + "', '" + brojTelefona + "','" + grad.getGradID()+ "'";
-   
-    */
+
     @Override
     public String returnUpdateValues() {
         return "flightID= "+flightID+", date='"+String.valueOf(date)+"', time='"+String.valueOf(time)+"',airline='"+airline+"',airplaneID="+String.valueOf(airplane.getAirplaneID())+",lineID="+String.valueOf(line.getLineID())+",note= '"+note+"'";
     }
-/*
-           return "brojClanskeKarte = '" + brojClanskeKarte + "', ime = '" + ime + "', prezime = '" + prezime + 
-                "', jmbg = '" + jmbg + "', datumRodjenja = '" + new java.sql.Date(datumRodjenja.getTime()) + "', adresa = '" + adresa +"', brojTelefona = '" + brojTelefona + "', gradID = '" + grad.getGradID() + "'";
-  
-    */
+
     @Override
     public String returnUpdateCondition() {
         return "flightID="+flightID;

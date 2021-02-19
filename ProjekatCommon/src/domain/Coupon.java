@@ -162,10 +162,7 @@ public class Coupon implements   GenericEntity{
 
     @Override
     public String returnSearchCondition() {
-       // return "coupon.reservation=reservation.reservation";
-        //dopuni
-        //return "airportFrom LIKE "+"'%"+searchCriteriaSrc+"%'"+ "OR airportTo LIKE"+"'%"+searchCriteriaDest+"%'";{
-        return " coupon.description LIKE " +"'%"+searchCriteria+"%' ";
+  return " coupon.description LIKE " +"'%"+searchCriteria+"%' ";
     }
 
     @Override
@@ -188,71 +185,6 @@ public class Coupon implements   GenericEntity{
            c.setDescription(rs.getString("coupon.description"));
            c.setDiscountAmount(rs.getBigDecimal("coupon.discountAmount"));
            c.setValidUntil(rs.getDate("coupon.validUntil"));
-         
-           /*Reservation r=new Reservation();
-           r.setReservationID(rs.getLong("reservation.reservationID"));
-           r.setIssueDate(rs.getDate("reservation.issueDate"));
-           r.setValidUntil(rs.getDate("reservation.validUntil"));
-           r.setPrice(rs.getBigDecimal("reservation.price"));
-           r.setDiscountedPrice(rs.getBigDecimal("reservation.discountedPrice"));
- 
-           Passenger p=new Passenger();
-           Flight f=new Flight();
-           
-           p.setFirstName(rs.getString("passenger.firstName"));
-           p.setLastName(rs.getString("passenger.lastName"));
-           p.setPassportNumber(rs.getString("passenger.passportNumber"));
-           p.setMlb(rs.getString("passenger.mlb"));
-           
-           f.setFlightID(rs.getLong("flight.flightID"));
-           f.setNote(rs.getString("flight.note"));
-           f.setDate(rs.getDate("flight.date"));
-           f.setTime(rs.getTime("flight.time"));
-           f.setAirline(rs.getString("flight.airline"));
-           
-           
-           Airplane a=new Airplane();
-           a.setAirplaneID(rs.getLong("airplane.airplaneID"));
-           a.setAirplaneName(rs.getString("airplane.airplaneName"));
-           a.setAirplaneType(airplaneType.valueOf(rs.getString("airplane.airplaneType")));
-           a.setDescription(rs.getString("airplane.description"));
-           a.setNoPlacesBusinessClass(rs.getInt("airplane.noPlacesBusinessClass"));
-           a.setNoPlacesEconomyClass(rs.getInt("airplane.noPlacesEconomyClass"));
-           f.setAirplane(a);
-           
-           
-           Line line= new Line();
-            
-           line.setLineID(rs.getLong("line.lineID"));
-           line.setLineName(rs.getString("line.lineName"));
-           
-           Airport src= new Airport();
-           Airport dest= new Airport();
-           
-         
-          src.setAirportID(rs.getLong("a.airportID"));
-          src.setAirportName(rs.getString("a.airportName"));
-          src.setPlaceName(rs.getString("a.placeName"));
-          src.setCountryName(rs.getString("a.countryName"));
-          src.setAirportCode(rs.getString("a.airportCode"));
-          line.setAirportFrom(src);
-          
-         dest.setAirportID(rs.getLong("b.airportID"));
-          dest.setAirportName(rs.getString("b.airportName"));
-          dest.setPlaceName(rs.getString("b.placeName"));
-          dest.setCountryName(rs.getString("b.countryName"));
-          dest.setAirportCode(rs.getString("b.airportCode"));
-          line.setAirportTo(dest);
-           
-           f.setLine(line);
-            r.setPassenger(p);
-            r.setFlight(f);
-          
-           
-          c.setReservation(r);
-      
-           
-           System.out.println(""+c.toString());*/
           coupons.add(c);
        }
        return coupons;
