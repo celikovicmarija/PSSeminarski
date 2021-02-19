@@ -83,6 +83,14 @@ public class ProcessClientsRequests extends Thread {
                         case RETURN_FLIGHTS_ALL:
                             response.setResult(Controller.getInstance().getAllFlights(new Flight()));
                             break;
+                        case LOAD_FLIGHT:
+                            GenericEntity flightLoad=(GenericEntity) request.getArgument();
+                            response.setResult(Controller.getInstance().loadFlight(flightLoad));
+                            break;
+                        case LOAD_RESERVATION:
+                            GenericEntity reservationLoad=(GenericEntity) request.getArgument();
+                            response.setResult(Controller.getInstance().loadReservation(reservationLoad));
+                            break;
                         case ADD_FLIGHT:
                             GenericEntity flightInsert = (GenericEntity) request.getArgument();
                             Controller.getInstance().addFlight(flightInsert);
@@ -133,7 +141,7 @@ public class ProcessClientsRequests extends Thread {
                         case SEARCH_FLIGHTS:
                             GenericEntity flightSearch = (GenericEntity) request.getArgument();
                             response.setResult(Controller.getInstance().searchFlights(flightSearch));
-
+                            
                             break;
                         case SEARCH_RESERVATIONS:
                             GenericEntity reservationSearch = (GenericEntity) request.getArgument();

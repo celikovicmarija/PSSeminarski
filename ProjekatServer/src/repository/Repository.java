@@ -10,7 +10,8 @@ public interface Repository<T> {
     List<T> getAll(T param) throws Exception;
 
     List<T> get(T param) throws Exception;
-
+    List<T> select (T param) throws Exception;
+    List<T> selectMoreComplex (T param) throws Exception;
     List<T> returnThreeTables(T param) throws Exception;
 
     List<T> returnThreeTablesWithCondition(T param) throws Exception;

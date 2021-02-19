@@ -5,11 +5,20 @@
  */
 package operation.reservation;
 
+import domain.GenericEntity;
 import domain.Reservation;
+import java.util.List;
 import operation.AbstractGenericOperation;
 
 public class LoadReservation extends AbstractGenericOperation{
+    
+    private List<GenericEntity> result;
 
+    public List<GenericEntity> getResult() {
+        return result;
+    }
+    
+    
     @Override
     protected void preconditions(Object param) throws Exception {
     
@@ -17,7 +26,7 @@ public class LoadReservation extends AbstractGenericOperation{
 
     @Override
     protected void executeOperation(Object param) throws Exception {
-       repository.get((Reservation) param);
+       result=repository.selectMoreComplex((Reservation) param);
     }
     
 }

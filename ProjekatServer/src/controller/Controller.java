@@ -20,6 +20,7 @@ import operation.coupon.SearchCoupons;
 import operation.flight.CreateFlight;
 import operation.flight.DeleteFlight;
 import operation.flight.GetAllFlights;
+import operation.flight.LoadFlight;
 import operation.flight.SaveFlight;
 import operation.flight.SearchFlights;
 import operation.line.SearchLines;
@@ -29,6 +30,7 @@ import operation.passenger.SearchPassengers;
 import operation.reservation.CreateReservation;
 import operation.reservation.DeleteReservation;
 import operation.reservation.GetAllReservations;
+import operation.reservation.LoadReservation;
 import operation.reservation.SaveReservation;
 import operation.reservation.SearchReservations;
 import repository.db.impl.RepositoryDBGeneric;
@@ -134,6 +136,17 @@ public class Controller {
         operation.execute(entity);
         return ((GetAllReservations) operation).getList();
     }
+    public GenericEntity loadFlight(GenericEntity entity) throws Exception{
+        AbstractGenericOperation operation= new LoadFlight();
+        operation.execute(entity);
+        return ((LoadFlight) operation).getResult().get(0);
+    }
+      public GenericEntity loadReservation(GenericEntity entity) throws Exception{
+        AbstractGenericOperation operation= new LoadReservation();
+        operation.execute(entity);
+        return ((LoadReservation) operation).getResult().get(0);
+    }
+    
 
     public void addFlight(GenericEntity entity) throws Exception {
         AbstractGenericOperation operation = new CreateFlight();
