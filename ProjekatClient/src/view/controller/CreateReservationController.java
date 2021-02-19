@@ -13,8 +13,6 @@ import java.awt.event.ActionListener;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -34,8 +32,8 @@ public class CreateReservationController {
     }
 
     public void openForm() {
-        frm.setVisible(true);
         prepareView();
+        frm.setVisible(true);
     }
 
     private void addActionListeners() {
@@ -108,7 +106,6 @@ public class CreateReservationController {
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(frm, "Error while fetching passengers", "Search passengers", JOptionPane.INFORMATION_MESSAGE);
 
-                        // Logger.getLogger(CreateReservationController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 } else {
                     try {
@@ -126,7 +123,6 @@ public class CreateReservationController {
                         closeProgramOnSocketException();
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(frm, "Error while fetching passengers", "Search passengers", JOptionPane.INFORMATION_MESSAGE);
-                        //Logger.getLogger(CreateReservationController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             }
@@ -155,7 +151,6 @@ public class CreateReservationController {
                     passenger = ((PassengerTableModel) frm.getTblPassengers().getModel()).getPassengerAt(rowp);
                 } else {
                     err += "You must select a passenger\n";
-                    // JOptionPane.showMessageDialog(frm,err , "Create Flight", JOptionPane.ERROR_MESSAGE);
                 }
 
                 String price = null;
@@ -224,7 +219,6 @@ public class CreateReservationController {
                         MainCoordinator.getInstance().addParam(Constants.PARAM_RESERVATION, reservation);
                         MainCoordinator.getInstance().openUpdateResevationForm(FormMode.FORM_VIEW);
 
-//frm.dispose();
                     } catch (CommunicationException e) {
                         closeProgramOnSocketException();
                     } catch (Exception ex) {
@@ -239,6 +233,7 @@ public class CreateReservationController {
     }
 
     private void prepareView() {
+        frm.setLocationRelativeTo(null);
         fillTblFlights();
         fillTblPassengers();
         fillCbCoupons();
@@ -252,10 +247,11 @@ public class CreateReservationController {
             closeProgramOnSocketException();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(frm, "Error while fetching flights", "Fill flights", JOptionPane.INFORMATION_MESSAGE);
-            // Logger.getLogger(CreateFlightController.class.getName()).log(Level.SEVERE, null, ex);
         }
         FlightTableModel model = new FlightTableModel(flights);
         frm.getTblFlights().setModel(model);
+        frm.getTblFlights().setAutoCreateRowSorter(true); 
+
 
     }
 
@@ -268,10 +264,11 @@ public class CreateReservationController {
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(frm, "Error while fetching passengers", "Fill passengers", JOptionPane.INFORMATION_MESSAGE);
 
-            //Logger.getLogger(CreateFlightController.class.getName()).log(Level.SEVERE, null, ex);
         }
         PassengerTableModel model = new PassengerTableModel(passengers);
         frm.getTblPassengers().setModel(model);
+       frm.getTblPassengers().setAutoCreateRowSorter(true); 
+
 
     }
 
@@ -279,23 +276,29 @@ public class CreateReservationController {
         PassengerTableModel model = (PassengerTableModel) frm.getTblPassengers().getModel();
         model.clear();
         model.addPassengers(list);
+        frm.getTblPassengers().setAutoCreateRowSorter(true); 
+
     }
 
     private void tidyFlightTableAfterSearch(List<Flight> list) {
         FlightTableModel model = (FlightTableModel) frm.getTblFlights().getModel();
         model.clear();
         model.addFlights(list);
+        frm.getTblFlights().setAutoCreateRowSorter(true); 
+
     }
 
     private void fillCbCoupons() {
         try {
             frm.getCbCoupons().removeAllItems();
             frm.getCbCoupons().setModel(new DefaultComboBoxModel(Communication.getInstance().getAllCoupons().toArray()));
+       
         } catch (CommunicationException e) {
             closeProgramOnSocketException();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(frm, "Error while fetching coupons", "Fill flights", JOptionPane.INFORMATION_MESSAGE);
         }
+
     }
 
     private void closeProgramOnSocketException() {

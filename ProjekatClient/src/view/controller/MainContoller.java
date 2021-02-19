@@ -6,6 +6,7 @@ import domain.User;
 import constant.Constants;
 import coordinator.MainCoordinator;
 import exception.CommunicationException;
+import java.awt.Frame;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
@@ -28,11 +29,17 @@ public class MainContoller {
     }
 
     public void openForm() {
-        User user = (User) MainCoordinator.getInstance().getParam(Constants.CURRENT_USER);
-        frmMain.getLblLoggedUser().setText(user.getFirstName() + " " + user.getLastName());
+        prepareForm();
         frmMain.setVisible(true);
 
     }
+    private void prepareForm(){
+        User user = (User) MainCoordinator.getInstance().getParam(Constants.CURRENT_USER);
+        frmMain.getLblLoggedUser().setText(user.getFirstName() + " " + user.getLastName());
+        frmMain.setLocationRelativeTo(null);
+        frmMain.setExtendedState(Frame.MAXIMIZED_BOTH);
+    }
+        
 
     private void addActionListener() {
         frmMain.miCreateFlightAddActionListener((ActionEvent e) -> {
@@ -73,7 +80,6 @@ public class MainContoller {
             @Override
             public void windowClosing(WindowEvent e) {
                 logoutUser();
-                //super.windowClosing(e); //To change body of generated methods, choose Tools | Templates.
             }
 
         });
@@ -94,11 +100,6 @@ public class MainContoller {
         MainCoordinator.getInstance().removeParam(Constants.CURRENT_USER, MainCoordinator.getInstance().getParam(Constants.CURRENT_USER));
         frmMain.dispose();
     }
-
-    /*
-    public FrmMain getFrmMain() {
-        return frmMain;
-    }*/
 
     private void logoutUser() {
         try {

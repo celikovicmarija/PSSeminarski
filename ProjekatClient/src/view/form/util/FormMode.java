@@ -5,10 +5,6 @@
  */
 package view.form.util;
 
-/**
- *
- * @author laptop-02
- */
 public enum FormMode {
     FORM_DELETE, FORM_EDIT, FORM_VIEW,
     USE_CASE_SEARCH,USE_CASE_DELETE,USE_CASE_UPDATE

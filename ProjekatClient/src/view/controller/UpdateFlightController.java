@@ -29,25 +29,29 @@ public class UpdateFlightController {
 
     public UpdateFlightController(FrmUpdateFlight frm, FormMode mode) {
         this.frm = frm;
-        this.mode=mode;
+        this.mode = mode;
         this.frm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         addActionListeners();
     }
 
     public void openForm() {
         prepareForm(mode);
-        frm.setVisible(true);
         JOptionPane.showMessageDialog(frm, "Showing data for the chosen flight", "Message", JOptionPane.INFORMATION_MESSAGE);
+
+        frm.setVisible(true);
+
 
     }
 
     private void prepareForm(FormMode mode) {
+        frm.setLocationRelativeTo(null);
+
         try {
 
             fillCbLines();
             fillCbAirplanes();
             populateForm();
-            switch(mode){
+            switch (mode) {
                 case FORM_VIEW:
                     frm.getBtnDelete().setEnabled(false);
                     frm.getBtnSave().setEnabled(false);
@@ -58,22 +62,21 @@ public class UpdateFlightController {
                 case FORM_EDIT:
                     frm.getBtnDelete().setEnabled(false);
                     frm.getBtnSave().setEnabled(true);
-                    frm.getBtnCancel().setEnabled(true); 
+                    frm.getBtnCancel().setEnabled(true);
                     frm.setTitle("Flight");
-                       frm.getLblTitle().setText("Flight info");
+                    frm.getLblTitle().setText("Flight info");
                     break;
                 case FORM_DELETE:
                     frm.getBtnDelete().setEnabled(true);
                     frm.getBtnSave().setEnabled(false);
-                    frm.getBtnCancel().setEnabled(true); 
-                  frm.setTitle("Flight");
-                        frm.getLblTitle().setText("Delete flight info");
-                    break;                    
+                    frm.getBtnCancel().setEnabled(true);
+                    frm.setTitle("Flight");
+                    frm.getLblTitle().setText("Delete flight info");
+                    break;
             }
-        } catch(CommunicationException e){
-                        closeProgramOnSocketException();
-                    }
-        catch (Exception ex) {
+        } catch (CommunicationException e) {
+            closeProgramOnSocketException();
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(frm, "Error while fetching data", "Form preparation", JOptionPane.INFORMATION_MESSAGE);
 
             Logger.getLogger(UpdateFlightController.class.getName()).log(Level.SEVERE, null, ex);
@@ -115,14 +118,13 @@ public class UpdateFlightController {
                             ftm.deleteFlight(flight);
                             ftm.refresh();
 
-                        //  frm.dispose();
                         }
 
                     }
 
-                } catch(CommunicationException e){
-                        closeProgramOnSocketException();
-                    } catch (Exception ex) {
+                } catch (CommunicationException e) {
+                    closeProgramOnSocketException();
+                } catch (Exception ex) {
                     JOptionPane.showMessageDialog(frm, "Could not delete selected flight", "Delete flight", JOptionPane.INFORMATION_MESSAGE);
                 }
 
@@ -184,13 +186,11 @@ public class UpdateFlightController {
                         flightEdited.setAirline(airline);
                         Communication.getInstance().editFlight(flightEdited);
                         JOptionPane.showMessageDialog(frm, "Flight successfully updated", "Update flight", JOptionPane.INFORMATION_MESSAGE);
-                        //  frm.dispose();
-                    } catch(CommunicationException e){
+                    } catch (CommunicationException e) {
                         closeProgramOnSocketException();
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(frm, "Cannot update flight", "Update flight", JOptionPane.INFORMATION_MESSAGE);
 
-                        //    Logger.getLogger(UpdateFlightController.class.getName()).log(Level.SEVERE, null, ex);
                     }
 
                 } else {
@@ -223,7 +223,8 @@ public class UpdateFlightController {
         frm.getCbLines().setSelectedItem(flight.getLine());
 
     }
-            private void closeProgramOnSocketException() {
+
+    private void closeProgramOnSocketException() {
         JOptionPane.showMessageDialog(null, "Server closed the connection!\n Program will now exit!", "Error!", JOptionPane.INFORMATION_MESSAGE);
         System.exit(0);
     }

@@ -11,15 +11,18 @@ import java.awt.event.ActionListener;
  *
  * @author Marija
  */
-public class FrmUpdateFlight extends javax.swing.JFrame {
+public class FrmUpdateFlight extends javax.swing.JDialog {
 
     /**
-     * Creates new form FrmUpdateFlight
+     * Creates new form FrmUpdateFlightt
      */
-    public FrmUpdateFlight() {
+    public FrmUpdateFlight(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
+        setLocationRelativeTo(parent);
+        setModal(true);
     }
-        public void addBtnSaveActionListener(ActionListener actionListener) {
+     public void addBtnSaveActionListener(ActionListener actionListener) {
         btnSave.addActionListener(actionListener);
     }
      public void addBtnCancelActionListener(ActionListener actionListener) {
@@ -38,28 +41,32 @@ public class FrmUpdateFlight extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblTitle = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtNote = new javax.swing.JTextArea();
         txtAirline = new javax.swing.JTextField();
+        lblTitle = new javax.swing.JLabel();
         txtDate = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
         txtTime = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
         txtFlightID = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
         btnSave = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
         btnCancel = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
         cbAirplanes = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
         cbLines = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
         btnDelete = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Update Flight");
+
+        txtNote.setColumns(20);
+        txtNote.setRows(5);
+        jScrollPane1.setViewportView(txtNote);
 
         lblTitle.setFont(new java.awt.Font("Calibri Light", 2, 36)); // NOI18N
         lblTitle.setText("Update Flight");
@@ -73,31 +80,27 @@ public class FrmUpdateFlight extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
         jLabel4.setText("Airline:");
 
-        jLabel5.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
-        jLabel5.setText("Note:");
-
-        jLabel6.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
-        jLabel6.setText("Airplane:");
-
-        jLabel7.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
-        jLabel7.setText("Flight ID:");
-
-        jLabel8.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
-        jLabel8.setText("Line:");
-
-        txtNote.setColumns(20);
-        txtNote.setRows(5);
-        jScrollPane1.setViewportView(txtNote);
-
         btnSave.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
         btnSave.setText("Save changes");
+
+        jLabel5.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
+        jLabel5.setText("Note:");
 
         btnCancel.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
         btnCancel.setText("Return");
 
+        jLabel6.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
+        jLabel6.setText("Airplane:");
+
         cbAirplanes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        jLabel7.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
+        jLabel7.setText("Flight ID:");
+
         cbLines.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel8.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
+        jLabel8.setText("Line:");
 
         btnDelete.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
         btnDelete.setText("Delete");
@@ -138,7 +141,7 @@ public class FrmUpdateFlight extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,12 +182,13 @@ public class FrmUpdateFlight extends javax.swing.JFrame {
                             .addComponent(btnCancel)
                             .addComponent(btnDelete)))
                     .addComponent(jLabel5))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
@@ -217,6 +221,14 @@ public class FrmUpdateFlight extends javax.swing.JFrame {
         this.btnCancel = btnCancel;
     }
 
+    public javax.swing.JButton getBtnDelete() {
+        return btnDelete;
+    }
+
+    public void setBtnDelete(javax.swing.JButton btnDelete) {
+        this.btnDelete = btnDelete;
+    }
+
     public javax.swing.JButton getBtnSave() {
         return btnSave;
     }
@@ -239,8 +251,16 @@ public class FrmUpdateFlight extends javax.swing.JFrame {
         return cbLines;
     }
 
-    public void setCbLines(javax.swing.JComboBox<Object> cbLine) {
-        this.cbLines = cbLine;
+    public void setCbLines(javax.swing.JComboBox<Object> cbLines) {
+        this.cbLines = cbLines;
+    }
+
+    public javax.swing.JLabel getLblTitle() {
+        return lblTitle;
+    }
+
+    public void setLblTitle(javax.swing.JLabel lblTitle) {
+        this.lblTitle = lblTitle;
     }
 
     public javax.swing.JTextField getTxtAirline() {
@@ -281,21 +301,5 @@ public class FrmUpdateFlight extends javax.swing.JFrame {
 
     public void setTxtTime(javax.swing.JTextField txtTime) {
         this.txtTime = txtTime;
-    }
-
-    public javax.swing.JButton getBtnDelete() {
-        return btnDelete;
-    }
-
-    public void setBtnDelete(javax.swing.JButton btnDelete) {
-        this.btnDelete = btnDelete;
-    }
-
-    public javax.swing.JLabel getLblTitle() {
-        return lblTitle;
-    }
-
-    public void setLblTitle(javax.swing.JLabel lblTitle) {
-        this.lblTitle = lblTitle;
     }
 }

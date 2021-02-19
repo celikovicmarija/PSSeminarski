@@ -62,53 +62,69 @@ public class FrmUserMain extends javax.swing.JFrame {
         lblDescription.setFont(new java.awt.Font("Calibri Light", 2, 14)); // NOI18N
         lblDescription.setText("Please select menu option for any operation that you wish to perform.");
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo.jpg"))); // NOI18N
-        jLabel3.setText("jLabel3");
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/baloons.jpg"))); // NOI18N
+
+        menuBarMain.setFont(new java.awt.Font("Calibri Light", 2, 14)); // NOI18N
 
         menuFlight.setText("Flight");
+        menuFlight.setFont(new java.awt.Font("Calibri Light", 2, 22)); // NOI18N
 
+        miSearchFlights.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
         miSearchFlights.setText("Search Flights");
         menuFlight.add(miSearchFlights);
 
+        miCreateFlight.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
         miCreateFlight.setText("Create Flight");
         menuFlight.add(miCreateFlight);
 
+        miUpdateFlight.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
         miUpdateFlight.setText("Update Flight");
         menuFlight.add(miUpdateFlight);
 
+        miDeleteFlight.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
         miDeleteFlight.setText("Delete Flight");
         menuFlight.add(miDeleteFlight);
 
         menuBarMain.add(menuFlight);
 
         menuPassenger.setText("Passenger");
+        menuPassenger.setFont(new java.awt.Font("Calibri Light", 2, 22)); // NOI18N
 
+        miCreatePassenger.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
         miCreatePassenger.setText("Create Passenger");
         menuPassenger.add(miCreatePassenger);
 
         menuBarMain.add(menuPassenger);
 
         menuReservation.setText("Reservation");
+        menuReservation.setFont(new java.awt.Font("Calibri Light", 2, 22)); // NOI18N
 
+        miSearchReservations.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
         miSearchReservations.setText("Search Reservations");
         menuReservation.add(miSearchReservations);
 
+        miCreateReservation.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
         miCreateReservation.setText("Create Reservation");
         menuReservation.add(miCreateReservation);
 
+        miUpdateReservation.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
         miUpdateReservation.setText("Update Reservation");
         menuReservation.add(miUpdateReservation);
 
+        miDeleteReservation.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
         miDeleteReservation.setText("Delete Reservation");
         menuReservation.add(miDeleteReservation);
 
         menuBarMain.add(menuReservation);
 
         menuOptions.setText("Options");
+        menuOptions.setFont(new java.awt.Font("Calibri Light", 2, 22)); // NOI18N
 
+        miLogout.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
         miLogout.setText("Logout");
         menuOptions.add(miLogout);
 
+        miAbout.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
         miAbout.setText("About Software");
         menuOptions.add(miAbout);
 
@@ -128,8 +144,10 @@ public class FrmUserMain extends javax.swing.JFrame {
                         .addGap(32, 32, 32)
                         .addComponent(lblLoggedUser))
                     .addComponent(lblDescription))
-                .addContainerGap(225, Short.MAX_VALUE))
-            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 2124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,8 +158,8 @@ public class FrmUserMain extends javax.swing.JFrame {
                     .addComponent(lblLoggedUser))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblDescription)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 1132, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();

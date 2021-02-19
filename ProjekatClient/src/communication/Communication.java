@@ -136,22 +136,6 @@ public class Communication {
 
     }
 
-    public List<Airport> getAllAirports() throws Exception {
-        Request request = new Request(Operation.RETURN_AIRPORTS_ALL, null);
-        try{
-                    sender.send(request);
-        Response response = (Response) receiver.receive();
-        if (response.getException() == null) {
-            return (List<Airport>) response.getResult();
-        } else {
-            System.out.println("Error");
-            throw response.getException();
-        }
-        }catch (SocketException ex) {
-            throw new CommunicationException("Server got disconnected");
-        }
-
-    }
 
     public List<Airplane> getAllAirplanes() throws Exception {
         Request request = new Request(Operation.RETURN_AIRPLANES_ALL, null);
@@ -319,21 +303,7 @@ public class Communication {
 
     }
 
-    public List<Airport> searchAirports(Airport airport) throws Exception {
-        Request request = new Request(Operation.SEARCH_AIRPORTS, airport);
-        try{
-                  sender.send(request);
-        Response response = (Response) receiver.receive();
-        if (response.getException() == null) {
-            return (List<Airport>) response.getResult();
-        } else {
-            throw response.getException();
-        } 
-        }
-     catch (SocketException ex) {
-            throw new CommunicationException("Server got disconnected");
-        }
-    }
+
 
     public List<Airplane> searchAirplanes(Airplane airplane) throws Exception {
         Request request = new Request(Operation.SEARCH_AIRPLANES, airplane);

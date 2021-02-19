@@ -49,24 +49,28 @@ public class CreatePassengerController {
                 String firstName = frm.getTxtFirstName().getText();
                 if (firstName.equals("")) {
                     err += "You must enter passenger's name\n";
+                    frm.getLblFirstNameError().setText("Passenger's first name cannot be empty");
 
                 }
                 String lastName = frm.getTxtLastName().getText();
                 if (lastName.equals("")) {
                     err += "You must enter passenger's last name\n";
+                     frm.getLblLastNameError().setText("Passenger's last name cannot be empty");
 
                 }
                 String passportNumber = frm.getTxtPassportNumber().getText();
                 if (passportNumber.equals("")) {
                     err += "You must enter passenger's passport number\n";
+                    frm.getLblPassportError().setText("Passenger's passport number cannot be empty");
 
                 }
                 String mlb = frm.getTxtMlb().getText().trim();
-
-                if (!mlb.equals("") && mlb.length() != 13) {
-                    err += "MLB is of wrong length";
+                if(!mlb.equals("")){
+                    if (mlb.length()!=13){
+                          err += "MLB is of wrong length";
+                          frm.getLblMLBError().setText("MLB must be the length of 13");
+                    }
                 }
-
                 if (err.equals("")) {
                     try {
                         Passenger passenger = new Passenger();
@@ -76,7 +80,6 @@ public class CreatePassengerController {
                         passenger.setMlb(mlb);
                         Communication.getInstance().addPassenger(passenger);
                         JOptionPane.showMessageDialog(frm, "Passenger created successfully!", "Create Passenger", JOptionPane.INFORMATION_MESSAGE);
-                        //   frm.dispose();
                         setupForm(FormMode.FORM_VIEW);
                     } catch (CommunicationException e) {
                         closeProgramOnSocketException();
@@ -93,6 +96,7 @@ public class CreatePassengerController {
     }
 
     private void setupForm(FormMode mode) {
+         frm.setLocationRelativeTo(null);
         newPassenger = (Passenger) MainCoordinator.getInstance().getParam(Constants.PARAM_CREATED_PASSENGER);
         switch (mode) {
             case FORM_VIEW:

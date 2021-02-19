@@ -87,12 +87,12 @@ public class MainCoordinator {
     }
 
     public void openUpdateFlightForm(FormMode mode) {
-        UpdateFlightController updateFlightController = new UpdateFlightController(new FrmUpdateFlight(),mode);
+        UpdateFlightController updateFlightController = new UpdateFlightController(new FrmUpdateFlight(mainContoller.getFrmMain(), true),mode);
         updateFlightController.openForm();
     }
 
     public void openUpdateResevationForm(FormMode mode) {
-        UpdateReservationController updateReservationController = new UpdateReservationController(new FrmUpdateReservation(),mode);
+        UpdateReservationController updateReservationController = new UpdateReservationController(new FrmUpdateReservation(mainContoller.getFrmMain(),true),mode);
         updateReservationController.openForm();
     }
 

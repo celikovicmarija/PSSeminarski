@@ -11,15 +11,18 @@ import java.awt.event.ActionListener;
  *
  * @author Marija
  */
-public class FrmUpdateReservation extends javax.swing.JFrame {
+public class FrmUpdateReservation extends javax.swing.JDialog {
 
     /**
-     * Creates new form FrmUpdateReservation
+     * Creates new form FrmUpdateReservationn
      */
-    public FrmUpdateReservation() {
+    public FrmUpdateReservation(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
+         setLocationRelativeTo(parent);
+        setModal(true);
     }
-        public void addBtnSaveActionListener(ActionListener actionListener) {
+            public void addBtnSaveActionListener(ActionListener actionListener) {
         btnSave.addActionListener(actionListener);
     }
      public void addBtnCancelActionListener(ActionListener actionListener) {
@@ -28,7 +31,7 @@ public class FrmUpdateReservation extends javax.swing.JFrame {
        public void addBtnDeleteActionListener(ActionListener actionListener) {
         btnDelete.addActionListener(actionListener);
     }
-       
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,50 +41,38 @@ public class FrmUpdateReservation extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblTitle = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        txtReservationID = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        txtPrice = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        txtDiscountedPrice = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        txtIssueDate = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
         txtValidUntil = new javax.swing.JTextField();
+        lblTitle = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        txtReservationID = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         cbCoupons = new javax.swing.JComboBox<>();
+        txtPrice = new javax.swing.JTextField();
         btnCancel = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         btnSave = new javax.swing.JButton();
+        txtDiscountedPrice = new javax.swing.JTextField();
         txtPassenger = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
         cbFlights = new javax.swing.JComboBox<>();
+        txtIssueDate = new javax.swing.JTextField();
         btnDelete = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Update Reservation");
 
         lblTitle.setFont(new java.awt.Font("Calibri Light", 2, 36)); // NOI18N
         lblTitle.setText("Update Reservation");
 
-        jLabel7.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
-        jLabel7.setText("Reservation ID:");
-
-        jLabel2.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
-        jLabel2.setText("Price:");
-
-        jLabel3.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
-        jLabel3.setText("Discounted price:");
-
-        jLabel4.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
-        jLabel4.setText("Issue Date:");
-
-        jLabel5.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
-        jLabel5.setText("Flight:");
-
         jLabel6.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
         jLabel6.setText("Valid Until:");
+
+        jLabel7.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
+        jLabel7.setText("Reservation ID:");
 
         jLabel8.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
         jLabel8.setText("Passenger:");
@@ -89,18 +80,30 @@ public class FrmUpdateReservation extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
         jLabel9.setText("Coupon:");
 
+        jLabel2.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
+        jLabel2.setText("Price:");
+
         cbCoupons.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         btnCancel.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
         btnCancel.setText("Return");
 
+        jLabel3.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
+        jLabel3.setText("Discounted price:");
+
         btnSave.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
         btnSave.setText("Save changes");
+
+        jLabel4.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
+        jLabel4.setText("Issue Date:");
 
         cbFlights.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         btnDelete.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
         btnDelete.setText("Delete");
+
+        jLabel5.setFont(new java.awt.Font("Calibri Light", 2, 18)); // NOI18N
+        jLabel5.setText("Flight:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -111,7 +114,7 @@ public class FrmUpdateReservation extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblTitle)
-                        .addGap(0, 226, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
@@ -184,12 +187,11 @@ public class FrmUpdateReservation extends javax.swing.JFrame {
                     .addComponent(btnCancel)
                     .addComponent(btnSave)
                     .addComponent(btnDelete))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -221,6 +223,14 @@ public class FrmUpdateReservation extends javax.swing.JFrame {
 
     public void setBtnCancel(javax.swing.JButton btnCancel) {
         this.btnCancel = btnCancel;
+    }
+
+    public javax.swing.JButton getBtnDelete() {
+        return btnDelete;
+    }
+
+    public void setBtnDelete(javax.swing.JButton btnDelete) {
+        this.btnDelete = btnDelete;
     }
 
     public javax.swing.JButton getBtnSave() {
@@ -293,14 +303,6 @@ public class FrmUpdateReservation extends javax.swing.JFrame {
 
     public void setTxtValidUntil(javax.swing.JTextField txtValidUntil) {
         this.txtValidUntil = txtValidUntil;
-    }
-
-    public javax.swing.JButton getBtnDelete() {
-        return btnDelete;
-    }
-
-    public void setBtnDelete(javax.swing.JButton btnDelete) {
-        this.btnDelete = btnDelete;
     }
 
     public javax.swing.JLabel getLblTitle() {

@@ -20,6 +20,10 @@ public class FrmAbout extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setModal(true);
+        pack();
+        setLocationRelativeTo(parent);
+
 
     }
 

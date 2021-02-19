@@ -13,8 +13,6 @@ import java.awt.event.ActionListener;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -37,8 +35,8 @@ public class UpdateReservationController {
 
     public void openForm() {
         prepareForm(mode);
+      JOptionPane.showMessageDialog(frm, "Showing data for the chosen reservation", "Message", JOptionPane.INFORMATION_MESSAGE);
         frm.setVisible(true);
-        JOptionPane.showMessageDialog(frm, "Showing data for the chosen reservation", "Message", JOptionPane.INFORMATION_MESSAGE);
 
     }
 
@@ -51,6 +49,8 @@ public class UpdateReservationController {
     }
 
     private void prepareForm(FormMode mode) {
+        frm.setLocationRelativeTo(null);
+
         try {
             populateForm();
             fillCbCoupons();
@@ -108,7 +108,6 @@ public class UpdateReservationController {
                         } else {
                             Communication.getInstance().deleteReservation(reservation);
                             JOptionPane.showMessageDialog(frm, "Deleted successfully", "Delete reservation", JOptionPane.INFORMATION_MESSAGE);
-                            //frm.dispose();
                             ReservationTableModel rtm = (ReservationTableModel) MainCoordinator.getInstance().getSearchReservationsController().getFrm().getTbReservations().getModel();
                             rtm.deleteReservation(reservation);
                             rtm.refresh();
@@ -203,7 +202,6 @@ public class UpdateReservationController {
 
                         Communication.getInstance().editReservation(reservationEdited);
                         JOptionPane.showMessageDialog(frm, "Reservation successfully updated", "Update reservation", JOptionPane.INFORMATION_MESSAGE);
-                        // frm.dispose();
                     } catch (CommunicationException e) {
                         closeProgramOnSocketException();
                     } catch (Exception ex) {

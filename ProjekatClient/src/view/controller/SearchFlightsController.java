@@ -8,8 +8,6 @@ import exception.CommunicationException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import view.form.FrmSearchFlights;
@@ -18,12 +16,12 @@ import view.form.util.FormMode;
 
 public class SearchFlightsController {
 
-    private  FrmSearchFlights frm;
+    private FrmSearchFlights frm;
     private FormMode mode;
 
-    public SearchFlightsController(FrmSearchFlights frm,FormMode mode) {
+    public SearchFlightsController(FrmSearchFlights frm, FormMode mode) {
         this.frm = frm;
-        this.mode=mode;
+        this.mode = mode;
         this.frm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         addActionListeners();
     }
@@ -37,20 +35,21 @@ public class SearchFlightsController {
     }
 
     public void openForm() {
-        
+
         prepareView();
-       
+
         frm.setVisible(true);
     }
 
     private void addActionListeners() {
-        
-         frm.addBtnShowActionListener(new ActionListener() {
+
+        frm.addBtnShowActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 show();
             }
-             private void show() {
+
+            private void show() {
                 int row = frm.getTblFlights().getSelectedRow();
                 if (row < 0) {
                     JOptionPane.showMessageDialog(frm, "Please select a flight to show", "Show flight", JOptionPane.INFORMATION_MESSAGE);
@@ -60,11 +59,10 @@ public class SearchFlightsController {
                     Flight flight = flights.get(row);
                     MainCoordinator.getInstance().addParam(Constants.PARAM_FLIGHT, flight);
                     MainCoordinator.getInstance().openUpdateFlightForm(FormMode.FORM_VIEW);
-                   // tidyFlightsTableAfterSearch(flights);
                     ftc.refresh();
                 }
             }
-         });
+        });
         frm.addBtnEditActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -83,7 +81,6 @@ public class SearchFlightsController {
                     Flight flight = flights.get(row);
                     MainCoordinator.getInstance().addParam(Constants.PARAM_FLIGHT, flight);
                     MainCoordinator.getInstance().openUpdateFlightForm(FormMode.FORM_EDIT);
-                   // tidyFlightsTableAfterSearch(flights);
                     ftc.refresh();
                 }
             }
@@ -105,12 +102,11 @@ public class SearchFlightsController {
                         List<Flight> flights = ftc.getFlights();
 
                         Flight flight = flights.get(row);
-                         MainCoordinator.getInstance().addParam(Constants.PARAM_FLIGHT, flight);
-                    MainCoordinator.getInstance().openUpdateFlightForm(FormMode.FORM_DELETE);
-                                        
+                        MainCoordinator.getInstance().addParam(Constants.PARAM_FLIGHT, flight);
+                        MainCoordinator.getInstance().openUpdateFlightForm(FormMode.FORM_DELETE);
+
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(frm, "Could not delete selected flight", "Delete flight", JOptionPane.INFORMATION_MESSAGE);
-                      //  Logger.getLogger(SearchFlightsController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             }
@@ -128,21 +124,19 @@ public class SearchFlightsController {
                     try {
                         List<Flight> flights = Communication.getInstance().getAllFlights();
                         if (flights != null) {
-                       
-                                     JOptionPane.showMessageDialog(frm, "Found results for the flights", "Search flights", JOptionPane.INFORMATION_MESSAGE);
+
+                            JOptionPane.showMessageDialog(frm, "Found results for the flights", "Search flights", JOptionPane.INFORMATION_MESSAGE);
                             tidyFlightsTableAfterSearch(flights);
-                       
-                           
-                       } else {
+
+                        } else {
                             JOptionPane.showMessageDialog(frm, "Could not find results for the flights", "Search flights", JOptionPane.INFORMATION_MESSAGE);
 
                         }
-                    } catch(CommunicationException e){
+                    } catch (CommunicationException e) {
                         closeProgramOnSocketException();
-                    }catch (Exception ex) {
-                  JOptionPane.showMessageDialog(frm, "Error while fetching flights", "Search flights", JOptionPane.INFORMATION_MESSAGE);
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(frm, "Error while fetching flights", "Search flights", JOptionPane.INFORMATION_MESSAGE);
 
-                     //   Logger.getLogger(SearchFlightsController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 } else {
                     try {
@@ -158,12 +152,11 @@ public class SearchFlightsController {
                             JOptionPane.showMessageDialog(frm, "Could not find results for the flights", "Search flights", JOptionPane.INFORMATION_MESSAGE);
 
                         }
-                    }catch(CommunicationException e){
+                    } catch (CommunicationException e) {
                         closeProgramOnSocketException();
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(frm, "Error while fetching flights", "Search flights", JOptionPane.INFORMATION_MESSAGE);
 
-                       // Logger.getLogger(SearchFlightsController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             }
@@ -175,26 +168,29 @@ public class SearchFlightsController {
         List<Flight> flights = null;
         try {
             flights = Communication.getInstance().getAllFlights();
-        }catch(CommunicationException e){
-                        closeProgramOnSocketException();
-                    } catch (Exception ex) {
-         JOptionPane.showMessageDialog(frm, "Error while fetching flights", "Fill flights", JOptionPane.INFORMATION_MESSAGE);
+        } catch (CommunicationException e) {
+            closeProgramOnSocketException();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(frm, "Error while fetching flights", "Fill flights", JOptionPane.INFORMATION_MESSAGE);
 
-           // Logger.getLogger(SearchFlightsController.class.getName()).log(Level.SEVERE, null, ex);
         }
         FlightTableModel model = new FlightTableModel(flights);
         frm.getTblFlights().setModel(model);
+        frm.getTblFlights().setAutoCreateRowSorter(true); 
     }
 
     private void tidyFlightsTableAfterSearch(List<Flight> list) {
         FlightTableModel model = (FlightTableModel) frm.getTblFlights().getModel();
         model.clear();
         model.addFlights(list);
+       frm.getTblFlights().setAutoCreateRowSorter(true); 
+
     }
 
-    private void prepareView() {
-         fillTblFlights();
-        switch (mode){
+    private void prepareView() {   
+        frm.setLocationRelativeTo(null);
+        fillTblFlights();
+        switch (mode) {
             case USE_CASE_DELETE:
                 frm.getBtnDelete().setEnabled(true);
                 frm.getBtnEdit().setEnabled(false);
@@ -210,12 +206,12 @@ public class SearchFlightsController {
                 frm.getBtnDelete().setEnabled(false);
                 frm.getBtnShow().setEnabled(true);
                 break;
-            
-            
+
         }
-    
+
     }
-                private void closeProgramOnSocketException() {
+
+    private void closeProgramOnSocketException() {
         JOptionPane.showMessageDialog(null, "Server closed the connection!\n Program will now exit!", "Error!", JOptionPane.INFORMATION_MESSAGE);
         System.exit(0);
     }

@@ -4,7 +4,6 @@ import communication.Communication;
 import constant.Constants;
 import coordinator.MainCoordinator;
 import domain.Airplane;
-import domain.Airport;
 import domain.Flight;
 import domain.Line;
 import exception.CommunicationException;
@@ -13,13 +12,11 @@ import java.awt.event.ActionListener;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.regex.PatternSyntaxException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import view.form.FrmCreateFlight;
 import view.form.component.table.AirplaneTableModel;
-import view.form.component.table.AirportTableModel;
 import view.form.component.table.LineTableModel;
 import view.form.util.FormMode;
 
@@ -36,9 +33,9 @@ public class CreateFlightController {
     }
 
     public void openForm() {
-      
+         prepareView();
         frm.setVisible(true);
-          prepareView();
+       
         
     }
 
@@ -144,7 +141,6 @@ public class CreateFlightController {
                         closeProgramOnSocketException();
                     } catch (Exception ex) {
                          JOptionPane.showMessageDialog(frm, "Error while fetching airplanes", "Search airplanes", JOptionPane.INFORMATION_MESSAGE);
-                       // Logger.getLogger(CreateFlightController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 } else {
                     try {
@@ -163,7 +159,6 @@ public class CreateFlightController {
                     } catch (Exception ex) {
                           JOptionPane.showMessageDialog(frm, "Error while fetching airplanes", "Search airplanes", JOptionPane.INFORMATION_MESSAGE);
 
-                       // Logger.getLogger(CreateFlightController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
 
@@ -195,16 +190,19 @@ public class CreateFlightController {
                         closeProgramOnSocketException();
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(frm, "Error while fetching lines", "Search lines", JOptionPane.INFORMATION_MESSAGE);
-                       // Logger.getLogger(CreateFlightController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 } else {
                     try {
                         Line line = new Line();
-                        //check for errors
-                        String[] parts = criteria.split(",", 2);
+                         String[] parts=null;
+                        try{
+                         parts = criteria.split(",", 2);
                         line.setSearchCriteriaSrc(parts[0]);
                         line.setSearchCriteriaDest(parts[1]);
-                        System.out.println("Src i dest: "+parts[0]+" "+parts[1]);
+                        } catch (PatternSyntaxException pse){
+                            line.setSearchCriteriaDest(criteria);
+                            line.setSearchCriteriaSrc(criteria);
+                        }
 
                         List<Line> lines = Communication.getInstance().searchLines(line);
                         if (lines != null) {
@@ -218,7 +216,6 @@ public class CreateFlightController {
                         closeProgramOnSocketException();
                     }catch (Exception ex) {
                         JOptionPane.showMessageDialog(frm, "Error while fetching lines", "Search lines", JOptionPane.INFORMATION_MESSAGE);
-                        //Logger.getLogger(CreateFlightController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             }
@@ -228,23 +225,9 @@ public class CreateFlightController {
     }
 
     private void prepareView() {
-      //  fillTblAirports();
+         frm.setLocationRelativeTo(null);
         fillTblAiplanes();
         fillTblLines();
-    }
-
-    private void fillTblAirports() {
-        List<Airport> airports = null;
-        try {
-            airports = Communication.getInstance().getAllAirports();
-        } catch(CommunicationException e){
-                        closeProgramOnSocketException();
-                    }catch (Exception ex) {
-           JOptionPane.showMessageDialog(frm, "Error while fetching airports", "Fill airports", JOptionPane.INFORMATION_MESSAGE);
-           // Logger.getLogger(CreateFlightController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        AirportTableModel model = new AirportTableModel(airports);
-     //   frm.getTblAirports().setModel(model);
     }
 
     private void fillTblAiplanes() {
@@ -255,11 +238,10 @@ public class CreateFlightController {
                         closeProgramOnSocketException();
                     } catch (Exception ex) {
           JOptionPane.showMessageDialog(frm, "Error while fetching airplanes", "Fill airplanes", JOptionPane.INFORMATION_MESSAGE);
-
-           // Logger.getLogger(CreateFlightController.class.getName()).log(Level.SEVERE, null, ex);
         }
         AirplaneTableModel model = new AirplaneTableModel(airplanes);
         frm.getTblAirplanes().setModel(model);
+        frm.getTblAirplanes().setAutoCreateRowSorter(true);
     }
 
     private void fillTblLines() {
@@ -270,28 +252,24 @@ public class CreateFlightController {
                         closeProgramOnSocketException();
                     }catch (Exception ex) {
             JOptionPane.showMessageDialog(frm, "Error while fetching lines", "Search lines", JOptionPane.INFORMATION_MESSAGE);
-           // Logger.getLogger(CreateFlightController.class.getName()).log(Level.SEVERE, null, ex);
         }
         LineTableModel model = new LineTableModel(lines);
         frm.getTblLines().setModel(model);
+        frm.getTblLines().setAutoCreateRowSorter(true);
     }
-/*
-    private void tidyAirportTableAfterSearch(List<Airport> list) {
-        AirportTableModel model = (AirportTableModel) frm.getTblAirports().getModel();
-        model.clear();
-        model.addAirports(list);
-    }*/
 
     private void tidyLinesTableAfterSearch(List<Line> list) {
         LineTableModel model = (LineTableModel) frm.getTblLines().getModel();
         model.clear();
         model.addLines(list);
+       frm.getTblLines().setAutoCreateRowSorter(true);
     }
 
     private void tidyAirplaneTableAfterSearch(List<Airplane> list) {
         AirplaneTableModel model = (AirplaneTableModel) frm.getTblAirplanes().getModel();
         model.clear();
         model.addAirplanes(list);
+        frm.getTblAirplanes().setAutoCreateRowSorter(true);
     }
             private void closeProgramOnSocketException() {
         JOptionPane.showMessageDialog(null, "Server closed the connection!\n Program will now exit!", "Error!", JOptionPane.INFORMATION_MESSAGE);
