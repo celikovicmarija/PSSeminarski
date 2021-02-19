@@ -110,6 +110,9 @@ public class Reservation implements GenericEntity {
     public String toString() {
         return "(" + reservationID + "), price=" + price + ", issueDate=" + issueDate + ", validUntil=" + validUntil + ", discountedPrice=" + discountedPrice + ", flight=" + flight + ", passenger=" + passenger + '}';
     }
+    public void calculatePrice(){
+        discountedPrice=price.multiply(BigDecimal.ONE.subtract(coupon.getDiscountAmount().divide(BigDecimal.valueOf(100))));
+    }
 
  
 
@@ -359,4 +362,9 @@ public class Reservation implements GenericEntity {
       }
       return true;
    }
+
+    @Override
+    public String getSelectCondition() {
+        return " reservation.reservationID="+reservationID;
+    }
 }

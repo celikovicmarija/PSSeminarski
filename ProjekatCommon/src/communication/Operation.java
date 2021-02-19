@@ -17,6 +17,8 @@ public enum Operation implements Serializable{
     SEARCH_AIRPORTS,
     RETURN_AIRPORTS_ALL,
     SEARCH_LINES,
+    LOAD_FLIGHT,
+    LOAD_RESERVATION,
     RETURN_LINES_ALL,
     SEARCH_AIRPLANES,
     RETURN_AIRPLANES_ALL,

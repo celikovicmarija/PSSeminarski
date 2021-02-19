@@ -79,7 +79,6 @@ public class Coupon implements   GenericEntity{
     }
 
 
-
     @Override
     public int hashCode() {
         int hash = 7;
@@ -239,6 +238,11 @@ public class Coupon implements   GenericEntity{
     @Override
     public String returnJoinTableSeven() {
         return "passenger";
+    }
+
+    @Override
+    public String getSelectCondition() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 

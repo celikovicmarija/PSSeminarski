@@ -309,6 +309,11 @@ public class Flight implements GenericEntity {
     public String returnJoinTableSeven() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public String getSelectCondition() {
+        return " flight.flightID="+flightID;
+    }
     
 
     

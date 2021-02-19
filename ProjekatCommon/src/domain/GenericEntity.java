@@ -21,7 +21,7 @@ public interface GenericEntity extends Serializable {
     void setId(Long id);
     
     public List<GenericEntity> getList(ResultSet rs) throws SQLException;
-
+    public String getSelectCondition();
     public String getDeleteCondition();
     public String returnJoinConditionOne();
     public String returnJoinConditionTwo();
