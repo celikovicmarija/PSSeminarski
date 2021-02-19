@@ -103,7 +103,8 @@ public class CreateFlightController {
                         flight.setLine(line);
                         Communication.getInstance().addFlight(flight);
                      JOptionPane.showMessageDialog(frm, "Flight created successfully!", "Create Flight", JOptionPane.INFORMATION_MESSAGE);
-                     MainCoordinator.getInstance().addParam(Constants.PARAM_FLIGHT,flight );
+                     Flight addedFlight=Communication.getInstance().selectFlight(flight);
+                     MainCoordinator.getInstance().addParam(Constants.PARAM_FLIGHT,addedFlight );
                      MainCoordinator.getInstance().openUpdateFlightForm(FormMode.FORM_VIEW);
                     
                     }  catch(CommunicationException e){

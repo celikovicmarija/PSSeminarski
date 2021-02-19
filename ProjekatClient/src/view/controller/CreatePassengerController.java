@@ -80,6 +80,10 @@ public class CreatePassengerController {
                         passenger.setMlb(mlb);
                         Communication.getInstance().addPassenger(passenger);
                         JOptionPane.showMessageDialog(frm, "Passenger created successfully!", "Create Passenger", JOptionPane.INFORMATION_MESSAGE);
+                        passenger.setSearchCriteria(passportNumber);
+                        Passenger addedPassenger=Communication.getInstance().searchPassengers(passenger).get(0);
+                        MainCoordinator.getInstance().addParam(Constants.PARAM_CREATED_PASSENGER, addedPassenger);
+                       JOptionPane.showMessageDialog(frm, "Showing new passenger's data", "Create Passenger", JOptionPane.INFORMATION_MESSAGE);
                         setupForm(FormMode.FORM_VIEW);
                     } catch (CommunicationException e) {
                         closeProgramOnSocketException();

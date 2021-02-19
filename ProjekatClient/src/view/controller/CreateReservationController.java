@@ -217,7 +217,9 @@ public class CreateReservationController {
                         reservation.calculatePrice();
                         Communication.getInstance().addReservation(reservation);
                         JOptionPane.showMessageDialog(frm, "Reservation created successfully!", "Create Reservation", JOptionPane.INFORMATION_MESSAGE);
-                        MainCoordinator.getInstance().addParam(Constants.PARAM_RESERVATION, reservation);
+                        Reservation addedReservation = Communication.getInstance().selectReservation(reservation);
+
+                        MainCoordinator.getInstance().addParam(Constants.PARAM_RESERVATION, addedReservation);
                         MainCoordinator.getInstance().openUpdateResevationForm(FormMode.FORM_VIEW);
 
                     } catch (CommunicationException e) {

@@ -247,6 +247,22 @@ public class Communication {
 
     }
 
+      /*public Passenger selectPassenger(Passenger passenger) throws Exception {
+        Request request = new Request(Operation.LOAD_PASSENGER, passenger);
+        try {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            if (response.getException() == null) {
+
+                return (Passenger) response.getResult();
+            } else {
+                throw response.getException();
+            }
+        } catch (SocketException ex) {
+            throw new CommunicationException("Server got disconnected");
+        }
+
+    }*/
     public void addFlight(Flight flight) throws Exception {
         Request request = new Request(Operation.ADD_FLIGHT, flight);
         try {
