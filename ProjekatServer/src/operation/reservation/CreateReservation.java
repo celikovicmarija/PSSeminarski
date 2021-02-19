@@ -4,7 +4,6 @@ import domain.Reservation;
 import operation.AbstractGenericOperation;
 
 public class CreateReservation extends AbstractGenericOperation {
-//insert
 
     @Override
     protected void preconditions(Object param) throws Exception {
