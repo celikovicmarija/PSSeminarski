@@ -283,6 +283,29 @@ public class RepositoryDBGeneric implements DbRepository<GenericEntity> {
         }
     }
 
+    @Override
+    public List<GenericEntity> returnEightTablesWithConditionPassenger(GenericEntity param) throws Exception {
+                        try {
+            Connection connection = DbConnectionFactory.getInstance().getConnection();
+            String query = "SELECT * FROM " + param.getTableName() + " JOIN "
+                    + param.returnJoinTableOne() + " ON " + param.returnJoinConditionOne() + " JOIN "
+                    + param.returnJoinTableTwo() + " ON " + param.returnJoinConditionTwo() + " JOIN "
+                    + param.returnJoinTableThree() + " ON " + param.returnJoinConditionThree() + " JOIN "
+                    + param.returnJoinTableFour() + " ON " + param.returnJoinConditionFour() + " JOIN "
+                    + param.returnJoinTableFive() + " ON " + param.returnJoinConditionFive() + " JOIN "
+                    + param.returnJoinTableSix() + " ON " + param.returnJoinConditionSix() + " JOIN "
+                    + param.returnJoinTableSeven() + " ON " + param.returnJoinConditionSeven() + " WHERE " + param.getSelectConditionPassenger();
+
+            System.out.println(query);
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            return param.getList(rs);
+
+        } catch (SQLException ex) {
+            throw ex;
+        }
+    }
+
    
 
    

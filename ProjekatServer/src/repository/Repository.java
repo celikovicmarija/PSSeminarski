@@ -22,7 +22,8 @@ public interface Repository<T> {
 
     List<T> returnEightTables(T param) throws Exception;
 
-    List<T> returnEightTablesWithCondition(T param) throws Exception;
+    List<T> returnEightTablesWithCondition(T param) throws Exception;  
+    List<T> returnEightTablesWithConditionPassenger(T param) throws Exception;
 
     void add(T param) throws Exception;
 

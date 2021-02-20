@@ -107,4 +107,9 @@ public class RepositoryDbUser implements DbRepository<User> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public List<User> returnEightTablesWithConditionPassenger(User param) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

@@ -33,6 +33,7 @@ import operation.reservation.GetAllReservations;
 import operation.reservation.LoadReservation;
 import operation.reservation.SaveReservation;
 import operation.reservation.SearchReservations;
+import operation.reservation.SelectSomeReservations;
 import repository.db.impl.RepositoryDBGeneric;
 
 
@@ -146,6 +147,11 @@ public class Controller {
         operation.execute(entity);
         return ((LoadReservation) operation).getResult().get(0);
     }
+       public List<GenericEntity> loadReservationsOnADate(GenericEntity flightOnDate) throws Exception {
+        AbstractGenericOperation operation= new SelectSomeReservations();
+        operation.execute(flightOnDate);
+        return ((SelectSomeReservations) operation).getList();
+    }
     
 
     public void addFlight(GenericEntity entity) throws Exception {
@@ -258,5 +264,7 @@ public class Controller {
         }
         frm.getTblActiveUsers().setModel(model);
     }
+
+   
 
 }

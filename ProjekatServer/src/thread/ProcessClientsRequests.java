@@ -83,6 +83,10 @@ public class ProcessClientsRequests extends Thread {
                         case RETURN_FLIGHTS_ALL:
                             response.setResult(Controller.getInstance().getAllFlights(new Flight()));
                             break;
+                        case RETURN_RESERVATIONS_ON_A_DATE:
+                            GenericEntity reservationsOnDate=(GenericEntity) request.getArgument();
+                            response.setResult(Controller.getInstance().loadReservationsOnADate(reservationsOnDate));
+                        break;
                         case LOAD_FLIGHT:
                             GenericEntity flightLoad=(GenericEntity) request.getArgument();
                             response.setResult(Controller.getInstance().loadFlight(flightLoad));
