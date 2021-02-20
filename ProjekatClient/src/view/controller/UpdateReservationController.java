@@ -35,7 +35,7 @@ public class UpdateReservationController {
 
     public void openForm() {
         prepareForm(mode);
-      JOptionPane.showMessageDialog(frm, "Showing data for the chosen reservation", "Message", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(frm, "Showing data for the chosen reservation", "Message", JOptionPane.INFORMATION_MESSAGE);
         frm.setVisible(true);
 
     }
@@ -199,8 +199,11 @@ public class UpdateReservationController {
                         if (!putnik.getPassportNumber().equals("")) {
                             reservationEdited.setPassenger(putnik);
                         }
-
+                        ReservationTableModel rtm = (ReservationTableModel) MainCoordinator.getInstance().getSearchReservationsController().getFrm().getTbReservations().getModel();
+                        rtm.deleteReservation(reservation);
                         Communication.getInstance().editReservation(reservationEdited);
+                        rtm.addReservation(reservationEdited);
+                        rtm.refresh();
                         JOptionPane.showMessageDialog(frm, "Reservation successfully updated", "Update reservation", JOptionPane.INFORMATION_MESSAGE);
                     } catch (CommunicationException e) {
                         closeProgramOnSocketException();

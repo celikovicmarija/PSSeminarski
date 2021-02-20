@@ -14,7 +14,9 @@ import coordinator.MainCoordinator;
 import constant.Constants;
 import domain.Airplane;
 import domain.Line;
+import domain.Passenger;
 import exception.CommunicationException;
+import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -26,10 +28,12 @@ public class UpdateFlightController {
     FrmUpdateFlight frm;
     Flight flight;
     FormMode mode;
+    List<Passenger> passengers;
 
     public UpdateFlightController(FrmUpdateFlight frm, FormMode mode) {
         this.frm = frm;
         this.mode = mode;
+        passengers= new LinkedList<>();
         this.frm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         addActionListeners();
     }
@@ -40,7 +44,6 @@ public class UpdateFlightController {
 
         frm.setVisible(true);
 
-
     }
 
     private void prepareForm(FormMode mode) {
@@ -50,6 +53,7 @@ public class UpdateFlightController {
 
             fillCbLines();
             fillCbAirplanes();
+            fillCbPassengers();
             populateForm();
             switch (mode) {
                 case FORM_VIEW:
@@ -184,7 +188,12 @@ public class UpdateFlightController {
                         flightEdited.setLine(line);
                         flightEdited.setAirplane(airplane);
                         flightEdited.setAirline(airline);
+                        FlightTableModel ftm = (FlightTableModel) MainCoordinator.getInstance().getSearchFlightsController().getFrm().getTblFlights().getModel();
+                        ftm.deleteFlight(flight);
+
                         Communication.getInstance().editFlight(flightEdited);
+                        ftm.addFlight(flightEdited);
+                        ftm.refresh();
                         JOptionPane.showMessageDialog(frm, "Flight successfully updated", "Update flight", JOptionPane.INFORMATION_MESSAGE);
                     } catch (CommunicationException e) {
                         closeProgramOnSocketException();
@@ -227,5 +236,12 @@ public class UpdateFlightController {
     private void closeProgramOnSocketException() {
         JOptionPane.showMessageDialog(null, "Server closed the connection!\n Program will now exit!", "Error!", JOptionPane.INFORMATION_MESSAGE);
         System.exit(0);
+    }
+
+    private void fillCbPassengers() {
+        frm.getCbPassengers().removeAllItems();
+        passengers=(List<Passenger>)MainCoordinator.getInstance().getParam(Constants.PARAM_PASSENGERS);
+        frm.getCbPassengers().setModel(new DefaultComboBoxModel(passengers.toArray()));
+    
     }
 }

@@ -212,6 +212,22 @@ public class Communication {
         }
 
     }
+        public List<Reservation> getAllReservationsOnDate(Reservation r) throws Exception {
+        Request request = new Request(Operation.RETURN_RESERVATIONS_ON_A_DATE, r);
+        try {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            if (response.getException() == null) {
+                return (List<Reservation>) response.getResult();
+            } else {
+                throw response.getException();
+            }
+        } catch (SocketException ex) {
+            throw new CommunicationException("Server got disconnected");
+        }
+
+    }
+
 
     public Flight selectFlight(Flight flight) throws Exception {
         Request request = new Request(Operation.LOAD_FLIGHT, flight);

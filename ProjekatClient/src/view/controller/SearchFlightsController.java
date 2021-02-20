@@ -4,9 +4,12 @@ import communication.Communication;
 import domain.Flight;
 import constant.Constants;
 import coordinator.MainCoordinator;
+import domain.Passenger;
+import domain.Reservation;
 import exception.CommunicationException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -61,6 +64,16 @@ public class SearchFlightsController {
                         List<Flight> flights = ftc.getFlights();
                         Flight flight = flights.get(row);
                         Flight selectedFlight=Communication.getInstance().selectFlight(flight);
+                        Reservation r= new Reservation();
+                        r.setSearchCriteria(""+flight.getFlightID());
+                        r.setIssueDate(flight.getDate());
+                        List<Passenger> passengers=new LinkedList<Passenger>();
+                        List<Reservation> ress=Communication.getInstance().getAllReservationsOnDate(r);
+                        for (Reservation res : ress) {
+                            passengers.add(res.getPassenger());
+                        }
+                        MainCoordinator.getInstance().addParam(Constants.PARAM_PASSENGERS, passengers);
+
                         MainCoordinator.getInstance().addParam(Constants.PARAM_FLIGHT, selectedFlight);
                         MainCoordinator.getInstance().openUpdateFlightForm(FormMode.FORM_VIEW);
                         ftc.refresh();
