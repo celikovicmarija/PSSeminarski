@@ -23,6 +23,7 @@ public enum Operation implements Serializable{
     SEARCH_AIRPLANES,
     RETURN_AIRPLANES_ALL,
     ADD_FLIGHT,
+    RETURN_RESERVATIONS_ON_A_DATE,
     CHANGE_FLIGHT,
     SEARCH_FLIGHTS,
     DELETE_FLIGHT,

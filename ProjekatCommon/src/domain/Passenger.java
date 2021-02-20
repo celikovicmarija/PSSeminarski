@@ -102,7 +102,7 @@ public class Passenger implements GenericEntity {
 
     @Override
     public String toString() {
-        return "Passenger{" + "passportNumber=" + passportNumber + ", firstName=" + firstName + ", lastName=" + lastName + ", mlb=" + mlb + '}';
+        return "Passenger " +firstName + " " + lastName + " (" + mlb + ')';
     }
 
     @Override
@@ -232,6 +232,11 @@ public class Passenger implements GenericEntity {
 
     @Override
     public String getSelectCondition() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getSelectConditionPassenger() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

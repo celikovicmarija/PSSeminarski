@@ -19,7 +19,6 @@ public interface GenericEntity extends Serializable {
     String getInsertValues();
 
     void setId(Long id);
-    
     public List<GenericEntity> getList(ResultSet rs) throws SQLException;
     public String getSelectCondition();
     public String getDeleteCondition();
@@ -41,6 +40,7 @@ public interface GenericEntity extends Serializable {
     
     public String returnUpdateValues();
     public String returnUpdateCondition();
+    public String getSelectConditionPassenger();
 
     
     

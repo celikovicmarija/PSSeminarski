@@ -367,4 +367,9 @@ public class Reservation implements GenericEntity {
     public String getSelectCondition() {
         return " reservation.reservationID="+reservationID;
     }
+
+    @Override
+    public String getSelectConditionPassenger() {
+        return "reservation.flightID="+searchCriteria;
+    }
 }

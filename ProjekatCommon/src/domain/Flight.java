@@ -314,6 +314,11 @@ public class Flight implements GenericEntity {
     public String getSelectCondition() {
         return " flight.flightID="+flightID;
     }
+
+    @Override
+    public String getSelectConditionPassenger() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 
     
